@@ -10,9 +10,17 @@
 
     <!--Description-->
     
-        <meta name="description" content="Jacobian 矩阵与 Hessian 矩阵第四章数值计算，基于梯度的最优化方法
+        <meta name="description" content="半监督学习及正则化
+Entropy-based Regularization
+Assumption: Low density separation
 
-Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarrow\mathbb{R}^n$，$f$ 的 Jacobian 矩阵 $J\in\mathbb{R}^{n\ti">
+
+Graph-based Regularization
+Assumption: Smothness
+
+
+
+Entropy-based Regulari">
     
 
     <!--Author-->
@@ -22,7 +30,7 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Jacobian and Hessian"/>
+        <meta property="og:title" content="半监督学习"/>
     
 
     <!--Open Graph Site Name-->
@@ -35,7 +43,7 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 
     <!-- Title -->
     
-    <title>Jacobian and Hessian - Hello Autumn</title>
+    <title>半监督学习 - Hello Autumn</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/sass/main.css">
@@ -124,7 +132,7 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
                 <!-- Main Content -->
                 
 
-    <h1>Jacobian and Hessian</h1>
+    <h1>半监督学习</h1>
 
 
 
@@ -132,27 +140,31 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 
 
 <!-- Content -->
-<h2 id="Jacobian-矩阵与-Hessian-矩阵"><a href="#Jacobian-矩阵与-Hessian-矩阵" class="headerlink" title="Jacobian 矩阵与 Hessian 矩阵"></a>Jacobian 矩阵与 Hessian 矩阵</h2><p>第四章数值计算，基于梯度的最优化方法</p>
-<ul>
-<li>Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarrow\mathbb{R}^n$，$f$ 的 Jacobian 矩阵 $J\in\mathbb{R}^{n\times m}$ 定义为 $J_{i, j}=\frac{\partial}{\partial x_j}f(x)_i$。</li>
-<li>Hessian 矩阵定义：若存在一个函数 $f$ : $\mathbb{R}^m\rightarrow\mathbb{R}$，$f$ 的一阶导数（关于 $x_j$ ）关于 $x_i$ 的导数记为 $\frac{\partial^2}{\partial x_i \partial x_j}f$，那么 Hessian 矩阵 $H(f)(x)$ 定义为 $H(f)(x)_{i,j}=\frac{\partial^2}{\partial x_i \partial x_j}f(x)$。</li>
+<h3 id="半监督学习及正则化"><a href="#半监督学习及正则化" class="headerlink" title="半监督学习及正则化"></a>半监督学习及正则化</h3><ul>
+<li>Entropy-based Regularization<ul>
+<li>Assumption: Low density separation</li>
 </ul>
-<p>这里我们可以探讨两个问题，首先 Jacobian 矩阵在深度学习中的应用是什么。因为我们知道 Hessian 矩阵一般应用在牛顿法等涉及二阶导数的最优化算法中，或者是用于极值点的二阶导数测试，但是我不太了解 Jacobian 矩阵在 DL 中到底有什么应用。其次，二阶导数可以视为对曲率的衡量，那我们应该怎样理解这种衡量。</p>
-<h3 id="Jacobian-矩阵的应用"><a href="#Jacobian-矩阵的应用" class="headerlink" title="Jacobian 矩阵的应用"></a>Jacobian 矩阵的应用</h3><p>若 $f(x)$ 为 m 维函数向量，即 $f(x)=[f_1(x), f_2(x), \cdots,f_m(x)]^T$，且其中 $x$ 为 n 维变量向量，那么 $f(x)$ 的 Jacobian 矩阵可以表示为：</p>
-<p>$$<br>\nabla\mathbf f(\mathbf x)=\left[<br> \begin{matrix}<br>   \frac{\partial f_1(\mathbf x)}{\partial x_1} &amp; \frac{\partial f_1(\mathbf x)}{\partial x_2} &amp;  \cdots &amp; \frac{\partial f_1(\mathbf x)}{\partial x_n} \<br>   \frac{\partial f_2(\mathbf x)}{\partial x_1} &amp;  \frac{\partial f_2(\mathbf x)}{\partial x_2}&amp; \cdots &amp; \frac{\partial f_2(\mathbf x)}{\partial x_n}\<br>   \cdots &amp; \cdots &amp;  \cdots&amp; \cdots\<br>   \frac{\partial f_m(\mathbf x)}{\partial x_1} &amp;  \frac{\partial f_m(\mathbf x)}{\partial x_2} &amp; \cdots &amp; \frac{\partial f_m(\mathbf x)}{\partial x_n}<br>  \end{matrix}<br>  \right]_{m \times n} =\begin{bmatrix}g_1(\mathbf{x})^T \ g_2(\mathbf{x})^T \ \cdots \ g_m(\mathbf{x})^T  \end{bmatrix}<br>$$<br>根据目前的了解，Jacobian 矩阵在反向传播中有很广泛的应用。因为深层网络在可以视为一系列的复合函数，而复合函数的求导可以很自然地根据链式法则一层层地求，且形式为偏导运算的累乘。又因为损失函数对每层权重的梯度可以视为一个 Jacobian 矩阵，因此损失函数对某层权重的梯度可以表示为 Jacobian 矩阵的乘积。</p>
-<p>以FCN为例，三层网络的推断可以表示为 $\hat{y}=f(f(x))$，损失函数表示为 $L(\hat{y})$。那么损失函数对预测值的导数为 $\frac{\partial L}{\hat{y}}$，同理第二层与第一层权重的梯度分别为 $\frac{\partial L}{\hat{y}}\,\frac{\partial \hat{y}}{\partial f(x)}$ 和 $\frac{\partial L}{\hat{y}}\,\frac{\partial \hat{y}}{\partial f(x)} \, \frac{\partial f(x)}{\partial x}$。若 $\nabla_{\mathbf{x}}\mathbf{f(x)}$ 表示向量 $\mathbf{f(x)}$ 的 Jacobian 矩阵，那么第二层与第一层的权重梯度分别可以写为 $\nabla_{\mathbf{\hat{y}}}L\ \nabla_{\mathbf{f(x)}}\mathbf{\hat{y}}$ 和 $\nabla_{\mathbf{\hat{y}}}L\ \nabla_{\mathbf{f(x)}}\mathbf{\hat{y}}\ \nabla_{\mathbf{x}}\mathbf{f(x)}$。以第一层权重的梯度为例，它可以表示为 Jacobian 矩阵的乘积，且维度可以表示为：</p>
-<p>$$<br>\nabla_{x}L=\begin{bmatrix} \cdots &amp; \cdots\end{bmatrix} \times \begin{bmatrix} \cdots &amp; \cdots \<br>\cdots &amp; \dots \end{bmatrix} \times \begin{bmatrix} \cdots &amp; \cdots \<br>\cdots &amp; \dots \end{bmatrix}<br>$$</p>
-<p>这种链式矩阵乘法需要确定计算顺序以提高计算效率，这里因为行向量左乘矩阵得行向量，所以直接从左到右计算可以很高效。</p>
-<p>Notes：此外，可以从实践中的 Jacobian 矩阵如何应用到BP算法出发完善内容。例如如何存储到 grad_table，在符号到数值的微分（Caffe）和采用计算图的微分（TF）是否也需要使用 Jacobian 计算，矩阵中的元素如何更新的等。</p>
-<h3 id="Hessian-矩阵"><a href="#Hessian-矩阵" class="headerlink" title="Hessian 矩阵"></a>Hessian 矩阵</h3><p>Hessian 矩阵常用于牛顿法，并提供二阶导数。这一部分讨论为什么二阶导能给梯度方向提供更好的下降方向，以及为什么二阶导可以视为曲率的衡量。</p>
-<p>二阶导提供更好下降方向的原因在DL书中描述得比较明白，我们可以通过泰勒展开式（展开到二阶）预期一个梯度下降步能表现有多好。具体的，若我们在 $x_1$ 点展开展开 $f(x)$ 的二阶泰勒级数：</p>
-<p>$f(x)\approx f(x_1)\ +\ (x-x_1)^Tg\ +\ \frac12(x-x_1)^TH\,(x-x_1)$</p>
-<p>其中 $x$ 与 $x_1$ 都为列向量，$g$ 为梯度向量，$H$ 为 $x_1$ 点的 Hessian 矩阵。若更新的点 $x_2=x_1-\epsilon g$ ，代入可得：</p>
-<p>$f(x_1-\epsilon g)\approx f(x_1)\ -\ \epsilon g^Tg\ +\ \frac12\epsilon^2g^THg$</p>
-<p>其中表达式右边第一项表示函数的原始值，第二项表示函数斜率产生的预期改善，第三项表示函数曲率产生的矫正。按照泰勒展开式的性质，后面展开的项对函数值的贡献越来越小，因此一阶导提供的信息量最大，二阶导提供的信息次之。在梯度下降中，若我们令上式 $f(x)=0$ ，那么二阶导能为估计最优解提供有用的信息，或修正下降方向。</p>
-<p>上式第三项表示函数曲率对估计的矫正，为什么？</p>
-<p>根据高数，曲率的定义是一定转角微分与对应弧长微分的比值，即 $K=|\frac{d\alpha}{ds}|=\frac{|y’’|}{(1+y’^2)^{\frac32}}$。若在给定梯度下，二阶导可以视为曲率的衡量。</p>
-<p>又因为 Hessian 矩阵是实对称的（满足 $H_{i,j}=H_{j,i}$ ），我们可以将其分解为一组实特征值和一组特征向量的正交基。而分解后的特征值表示主曲率的大小，即在该点不同方向的弯曲程度。因为梯度衡量函数在某个点的变化趋势，而二阶导衡量了梯度在某个点的变化趋势，即二阶导或弯曲程度衡量了函数的变化速度。例如在某一点，二阶导大于零说明梯度递增，而梯度大于零只能说明函数递增，若加上梯度递增这一信息，那么函数可以判断将变得更加陡峭或变化快速。</p>
+</li>
+<li>Graph-based Regularization<ul>
+<li>Assumption: Smothness</li>
+</ul>
+</li>
+</ul>
+<h4 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h4><p>这种半监督学习的假设是“Low density separation”，即假定不同类别间有明显的区别，也就是说两个类别间只有很少的样本或类别将的样本密度非常低（类似于SVM这种大间隔分类器找到的类别）。</p>
+<p>因为类别间有明显区别，所以在利用未标注数据进行学习时，我们需要使用“Hard-label”。即若未标注数据被分类于某一类的概率比较大时，我们需要将该数据点分配为这一类别。因为若保留未标注数据点属于各个类别的概率（生成模型使用这种“Soft-label”），那么它对于模型是没有贡献的。为了量化这种想法，我们可以引入信息熵来衡量未标注数据可能类别的集中度。</p>
+<p>在我们使用神经网络的时候，未标注数据的类别应该非常集中，即属于某个类别的概率非常大，而属于其它类别的概率非常小。因此我们引入信息熵衡量类别分布的集中度，且分布越集中，信息熵越小。若我们有样本 $i$ 的信息熵表达式：</p>
+<p>$E(y^i)=-\Sigma_{j=1}^my_j^i\ ln(y_j^i)$ ，其中 m 为可能的类别数。</p>
+<p>我们可以根据上式改写损失函数为：</p>
+<p>$L = \Sigma_{x^i} cross_entropy(y^i, \hat{y}^i)+\lambda\ \Sigma_{x^j} E(y^j)$，其中 $x^i$ 为有标注数据，$x^j$ 为无标注数据。</p>
+<p>我们加入未标注数据的信息熵以希望它越小越好，而 $\lambda$ 衡量了未标注数据对模型的影响。后一项可以看成一种正则项，它与 L2 正则化和 L1 正则化的不同点在于，基于信息熵的正则化使用未标注数据防止模型过拟合。</p>
+<p>这种方法的应用可参考半监督SVM（机器学习, 周志华, P298）</p>
+<h4 id="Graph-based-Method"><a href="#Graph-based-Method" class="headerlink" title="Graph-based Method"></a>Graph-based Method</h4><p>基于图的方法假设类别是“平滑的”。具体来说，若 $X$ 的分布是非均匀的，那么如果 $x^1$ 和 $x^2$ 在高密度区域是相近的（由高密度路径相连接），则 $\hat{y}^1$ 和 $\hat{y}^2$ 就相同。具体来说基于图的方法将所有的数据点表征为一个图，那么在建立图的基础上，高密度路径指的是一个数据点沿着边能走到另一个数据点。</p>
+<p>首先是图的构建，一般我们可以计算数据点 $x^i$ 和 $x^j$ 之间的相似度 $s(x^i,x^j)$ ，然后采用K Nearset Neighbor 或 e-Neighborhood 给数据点之间添加边。K Nearset Neighbor 表示只连接最相似的K个数据点，而 e-Neighborhood表示只有相似度大于e才能产生连接。此外，我们还可以根据数据点之间的相似度给它们之间的边加权而构建整个图（这种方法一般使用 RBF，因为指数项可以保证只有较近的数据点有较强的连接）。</p>
+<p>在半监督学习中，基于图的方法认为与有标注数据直接连接的数据应该也有相同的标注，即标注数据可以影响图中的近邻。且这种影响会随着图的边传递，也就是说标注数据会影响所有有路径相连的未标注数据。</p>
+<p>基于图的方法首先需要定义整个图中，标注的平滑度。一般的计算式可以表示为 $S=\frac12\Sigma_{ij}\ w_{ij}(y^i-y^j)^2$，其中 $w_{ij}$ 代表两个数据点间的连接强度，而 $y^i-y^j$ 则判断两个数据点的标注是否一致。若连接权重越大且标注不一致，那么图就越不平滑。若我们将标注数据的 $y^l$ 与未标注数据的 $y^u$ 结合为向量 $y$，那么上述平滑度可以表示为 $S = y^TLy $ ，其中 L 代表Graph Laplacian 矩阵。</p>
+<p>同样，我们希望图的平滑度越高越好，且S的值取决于神经网络的参数（未标注数据依赖于神经网络的推断）。因此我们可以将损失函数改为：</p>
+<p>$L = \Sigma_{x^i} cross_entropy(y^i, \hat{y}^i)+\lambda\ S$，其中 S 为以上定义的平滑度。</p>
+<p>上式的最后一项同样类似于正则化项，我们不仅需要令预测与标注之间的误差减小，同时还需要令标注数据与未标注数据都符合标注间平滑的假设。（未完）</p>
 
 
 <!-- Tags -->
@@ -160,7 +172,7 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 
 
 <div class="tags">
-    <a href="/tags/Optimization/" class="button small">Optimization</a>
+    <a href="/tags/Semi-supervisied-Learning/" class="button small">Semi-supervisied Learning</a> <a href="/tags/Regularization/" class="button small">Regularization</a>
 </div>
 
 
