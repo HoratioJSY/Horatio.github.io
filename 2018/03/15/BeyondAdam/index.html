@@ -135,15 +135,13 @@
 <p>虽然这些算法能成功地应用于一些实践和开发中，但它们在一些环境下并不会起作用。例如我们通常会观察到有一些小批量数据会提供较大的梯度，虽然这种批量非常少，但这些较大的梯度会提供非常多的下降信息，它们在指数移动均值中会存在和影响很长一段时间，因此也就造成了算法收敛到一个比较差的最优解。</p>
 <p>为了理解和分析这种局限性，Sashank J. Reddi、Satyen Kale 和 Sanjiv Kumar 等人发表了一篇 ICLR 2018 论文《ON THE CONVERGENCE OF ADAM AND BEYOND》。该论文被接收为 ICLR 2018 的 Oral 论文，且最终双盲评分一直在前几名。为了对该论文做一些简要的分析与讨论，我们会从基本的适应性学习率算法开始，然后再进一步讨论它们的局限性与修正方法。</p>
 <p>其实适应性学习率方法早在 80 年代就有学者进行了一定的研究，Delta-bar-delta（Jacobs, 1988）这一启发式方法基于很简单的想法，即如果损失函数对于某个给定模型参数的偏导保持相同的符号，那么学习率应该增加。如果损失函数对于该参数的偏导变换了符号，那么学习率就应该减少。这种学习算法只能适应于全批量梯度下降，而后 AdaGrad（Duchi et al., 2011）第一次将适应性学习率算法的性能提升到顶尖的水平，并广泛应用于带有稀疏梯度的模型。</p>
-<p>###AdaGrad</p>
-<p>AdaGrad 亦称为适应性梯度（Adaptive Gradient），它允许学习率基于参数进行调整，而不需要在学习过程中人为调整学习率。AdaGrad 对具有较大梯度的参数相应地有一个快速下降的过程，而具有小梯度的参数在学习率上有相对较小的下降速度。因此，AdaGrad 成了稀疏数据如图像识别和 NLP 的天然选择。然而 AdaGrad 的最大问题在于，某些案例中的学习率会变得太小，学习率的单调下降也会使得网络停止学习过程。在经典的动量算法和 Nesterov 中，加速梯度参数更新是对所有参数进行的，并且学习过程中的学习率保持不变。在 Adagrad 中，每次迭代中每个参数使用的都是不同的学习率。以下是 AdaGrad 的参数更新式：</p>
+<h3 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h3><p>AdaGrad 亦称为适应性梯度（Adaptive Gradient），它允许学习率基于参数进行调整，而不需要在学习过程中人为调整学习率。AdaGrad 对具有较大梯度的参数相应地有一个快速下降的过程，而具有小梯度的参数在学习率上有相对较小的下降速度。因此，AdaGrad 成了稀疏数据如图像识别和 NLP 的天然选择。然而 AdaGrad 的最大问题在于，某些案例中的学习率会变得太小，学习率的单调下降也会使得网络停止学习过程。在经典的动量算法和 Nesterov 中，加速梯度参数更新是对所有参数进行的，并且学习过程中的学习率保持不变。在 Adagrad 中，每次迭代中每个参数使用的都是不同的学习率。以下是 AdaGrad 的参数更新式：</p>
 <p>$ G _ { i + 1} = G _ { i } + \frac { \partial } { \partial \theta _ { i } } ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right)) $</p>
 <p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { G ^ { k - 1} } + \epsilon } \frac { \partial } { \partial \theta _ { i } }( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right) )$</p>
 <p>如下伪代码所示，AdaGrad 首先抽取 m 个训练样本和对应的样本标注，然后基于这些样本计算损失函数对特定参数的梯度。将该梯度的平方加入历史梯度项 r，然后再以 1/sqrt(r) 缩放学习率，从而根据历史梯度的大小为每个参数定制学习率，其中 δ 是为防止分母为零的常量。</p>
 <p><img src="http://p598yuf6e.bkt.clouddn.com/adagrad.jpg" style="zoom:60%"></p>
 <p>AdaGrad 算法最大的特点是将历史梯度 L2 范数的倒数作为缩放学习率的因子。</p>
-<p>###AdaDelta</p>
-<p>AdaDelta 使用短期历史梯度的信息而缩放学习率，它类似经典的动量算法累积历史的更新而加速学习。AdaDelta 可以有效克服 AdaGrad 的学习率过快减少至零，因为它将累积历史梯度信息的范围限制在固定窗口 w 内，从而不再采用动量算法累积所有历史梯度的做法。在时间 t 计算的 $E[g^2]_t$ 依赖于历史梯度的信息和当前的梯度值。因此，该移动平均的计算可以表示为：</p>
+<h3 id="AdaDelta"><a href="#AdaDelta" class="headerlink" title="AdaDelta"></a>AdaDelta</h3><p>AdaDelta 使用短期历史梯度的信息而缩放学习率，它类似经典的动量算法累积历史的更新而加速学习。AdaDelta 可以有效克服 AdaGrad 的学习率过快减少至零，因为它将累积历史梯度信息的范围限制在固定窗口 w 内，从而不再采用动量算法累积所有历史梯度的做法。在时间 t 计算的 $E[g^2]_t$ 依赖于历史梯度的信息和当前的梯度值。因此，该移动平均的计算可以表示为：</p>
 <p>$ E \left[ g ^ { 2} \right] _ { i + 1} = \gamma E \left[ g ^ { 2} \right] _ { i } + ( 1- \gamma ) g _ { i } ^ { 2} $</p>
 <p>其中 γ 在实践中通常设为 0.9 左右。我们可以将这种移动平均的计算方法与随即梯度下降相结合，SGD 更新的表达式为：</p>
 <p>$ \theta _ { i } = \theta _ { i } - \alpha \frac { \partial } { \partial \theta _ { i } } \text{L} \left( \theta _ { i } : \left( y _ { i } ^ { ( j ) } ,\hat { y } _ { i } ^ { ( j ) } \right) \right) $</p>
@@ -157,8 +155,7 @@
 <p>如上是 AdaDelta 的更新方式及简单的推导。如以下伪代码，其描述了 AdaDelta 的详细计算与更新过程：</p>
 <p><img src="http://p598yuf6e.bkt.clouddn.com/adadelta.jpg" style="zoom:48%"></p>
 <p>我们首先会初始化梯度与超参数，然后计算当前时间步某个参数的梯度，再如上 $E[g^2]$ 所示的移动均值计算式获取短期历史梯度的信息。在利用历史梯度的移动均值情况下，我们可以根据短期梯度信息为每个参数设计学习率。但正如论文 ON THE CONVERGENCE OF ADAM AND BEYOND 所述，这种方法可能在某些情况下只能收敛到次优点。</p>
-<p>###RMSProp</p>
-<p>RMSProp算法（Hinton，2012）修改AdaGrad以在非凸情况下表现更好，它改变梯度累积为指数加权的移动平均值，从而丢弃距离较远的历史梯度信息。RMSProp与Adadelta的移动均值更新方式十分相似：</p>
+<h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p>RMSProp算法（Hinton，2012）修改AdaGrad以在非凸情况下表现更好，它改变梯度累积为指数加权的移动平均值，从而丢弃距离较远的历史梯度信息。RMSProp与Adadelta的移动均值更新方式十分相似：</p>
 <p>$ E \left[ g ^ { 2} \right] _ { i + 1} = 0.9E \left[ g ^ { 2} \right] _ { i } - 0.1g _ { i } ^ { 2} $</p>
 <p>RMSProp的更新规则如下：</p>
 <p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { E \left[ g ^ { 2} \right] _ { i } } + \epsilon } \frac { \partial } { \partial \theta _ { i } } \text{L} ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right))$</p>
@@ -169,8 +166,7 @@
 <p><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp1.jpg" style="zoom:50%"></p>
 <p>如上所示，前面的初始化会多一个动量系数 α。在循环体内，我们抽取一个批量的数据会先计算临时的更新，也就是先在动量方向上更新一步。然后我们需要计算预更新后，该位置的梯度g，并利用梯度g的平方与历史梯度更新新的历史梯度信息。在利用历史梯度信息缩放学习率后，我们就能更新Nesterov动量的速度变量，且利用该变量最终更新参数。</p>
 <p>RMSProp是Hinton在公开课上提出的最优化算法，其实它可以视为AdaDelta的特例。但实践证明RMSProp有非常好的性能，它目前在深度学习中有非常广泛的应用。</p>
-<p>###Adam</p>
-<p>最后一种就是近来非常流行的Adam算法，虽然ON THE CONVERGENCE OF ADAM AND BEYOND重点分析了Adam的收敛性缺点，但仍然不能否认它是目前最高效和“自动化”的最优化方法之一。下面我们会根据Adam的原论文简要介绍该算法。</p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>最后一种就是近来非常流行的Adam算法，虽然ON THE CONVERGENCE OF ADAM AND BEYOND重点分析了Adam的收敛性缺点，但仍然不能否认它是目前最高效和“自动化”的最优化方法之一。下面我们会根据Adam的原论文简要介绍该算法。</p>
 <ul>
 <li>适应性梯度算法（AdaGrad）为每一个参数保留一个学习率以提升在稀疏梯度（即自然语言和计算机视觉问题）上的性能。</li>
 <li>均方根传播（RMSProp）基于权重梯度最近量级的均值为每一个参数适应性地保留学习率。这意味着算法在非稳态和在线问题上有很有优秀的性能。</li>
@@ -193,21 +189,17 @@
 <li>Sashank等人还对该变体进行了初步的实证研究，并表明它在常见机器学习问题中有相似或更优秀的性能。</li>
 </ul>
 <p>以下是详细的论文内容：</p>
-<p>##论文：ON THE CONVERGENCE OF ADAM AND BEYOND</p>
-<p>论文地址：<a href="https://openreview.net/pdf?id=ryQu7f-RZ" target="_blank" rel="noopener">https://openreview.net/pdf?id=ryQu7f-RZ</a></p>
+<h2 id="论文：ON-THE-CONVERGENCE-OF-ADAM-AND-BEYOND"><a href="#论文：ON-THE-CONVERGENCE-OF-ADAM-AND-BEYOND" class="headerlink" title="论文：ON THE CONVERGENCE OF ADAM AND BEYOND"></a>论文：ON THE CONVERGENCE OF ADAM AND BEYOND</h2><p>论文地址：<a href="https://openreview.net/pdf?id=ryQu7f-RZ" target="_blank" rel="noopener">https://openreview.net/pdf?id=ryQu7f-RZ</a></p>
 <p>近来提出的几种随机优化方法已经成功地应用于深度网络的训练，如 RMSPROP、ADAM、ADADELTA 和 NADAM 等方法，它们都是基于使用前面迭代所产生梯度平方的指数滑动平均值，在对该滑动平均值取平方根后用于缩放当前梯度以更新权重。根据经验观察，这些算法有时并不能收敛到最优解（或非凸条件下的临界点）。研究者证明了导致这样问题的一个原因是这些算法中使用了指数滑动平均（exponential moving average）操作。本论文提供了一个简单的凸优化案例，其中 ADAM 方法并不能收敛到最优解。此外，研究者还描述了过去文献中分析 ADAM 算法所存在的精确问题。他们的分析表明，收敛问题可以通过赋予这些算法对前面梯度的「长期记忆」能力而得到解决。因此该论文提出了一种 ADAM 算法的新变体，其不仅解决了收敛问题，同时还提升了经验性能。</p>
 <p>在论文的第二章节中，研究者们重点讨论了一般适应性方法和基于指数移动均值的适应性方法的表述：</p>
-<p>####一般适应性方法</p>
-<p>原作者为适应性方法提供了一个通用性框架，它展示了不同适应性方法之间的区别，并有利于我们理解Adam等方法的缺陷。以下算法1给出了一般适应性框架的伪代码，该算法仍然非常抽象，因为“均值”函数φ_t 和 ψ_t 并没有明确指定。其中φ_t为d维向量，而ψ_t为d<em>d维正定矩阵。为了便于展示，作者将 α_t 设为下降步大小，将 α_t </em> V_t^(-1/2) 设为算法的学习率。此外，作者将算法1封装的适应性方法限制为对角方差矩阵，即V_t = diag(v_t)。我们发现因为φ_t(g_1, . . . , g_t) = g_t 、 ψ_t(g_1, . . . , g_t) = I，标准的随即梯度下降会失效，其中对于所有的t ∈ [T]，α_t = α/sqrt(t)。</p>
+<h4 id="一般适应性方法"><a href="#一般适应性方法" class="headerlink" title="一般适应性方法"></a>一般适应性方法</h4><p>原作者为适应性方法提供了一个通用性框架，它展示了不同适应性方法之间的区别，并有利于我们理解Adam等方法的缺陷。以下算法1给出了一般适应性框架的伪代码，该算法仍然非常抽象，因为“均值”函数φ_t 和 ψ_t 并没有明确指定。其中φ_t为d维向量，而ψ_t为d<em>d维正定矩阵。为了便于展示，作者将 α_t 设为下降步大小，将 α_t </em> V_t^(-1/2) 设为算法的学习率。此外，作者将算法1封装的适应性方法限制为对角方差矩阵，即V_t = diag(v_t)。我们发现因为φ_t(g_1, . . . , g_t) = g_t 、 ψ_t(g_1, . . . , g_t) = I，标准的随即梯度下降会失效，其中对于所有的t ∈ [T]，α_t = α/sqrt(t)。</p>
 <p><img src="http://p598yuf6e.bkt.clouddn.com/adaptivemethod.jpg" style="zoom:50%"></p>
 <p>尽管缩减下降步长是算法收敛的先决条件，但如此暴力的学习率衰减方式会典型地收敛到较差的解，因此它会有较差的经验性能。适应性方法的关键思想是选择适当的均值函数而实现优良的收敛性。例如推动新研究的第一个适应性学习率算法Adagrad（Duchi et al., 2011）使用以下均值的函数：</p>
 <p>$ \phi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = g _ { t } \text{ and } \psi _ { t } \left( g _ { 1} ,\ldots ,g _ { t } \right) = \frac { \operatorname{diag} \left( \sum _ { i = 1} ^ { t } g _ { i } ^ { 2} \right) } { t } $，（AdaGrad）</p>
 <p>这和SGD的α_t = α/sqrt(t) 不一样，Adagrad使用更加优秀的衰减策略，即对于j ∈ [d]，α/sqrt(∑sqre(g^2))。当梯度是稀疏的情况下，算法的收敛性能得到非常大的提升（Duchi et al. 2011），这在一些非稀疏的梯度设定中也能获得很大的提升。</p>
-<p>####基于指数移动均值的适应性方法</p>
-<p>基于指数移动均值的 AdaGrad 变体在深度学习社区中非常流行，RMSProp、Adam、NAdam和AdaDelta都是这种变体的先驱研究。它们和AdaGrad最大的区别就是使用指数移动均值作为函数ψ_t，而不是使用简单的均值函数。Adam是最流行的一种变体，它使用的均值函数如下：</p>
+<h4 id="基于指数移动均值的适应性方法"><a href="#基于指数移动均值的适应性方法" class="headerlink" title="基于指数移动均值的适应性方法"></a>基于指数移动均值的适应性方法</h4><p>基于指数移动均值的 AdaGrad 变体在深度学习社区中非常流行，RMSProp、Adam、NAdam和AdaDelta都是这种变体的先驱研究。它们和AdaGrad最大的区别就是使用指数移动均值作为函数ψ_t，而不是使用简单的均值函数。Adam是最流行的一种变体，它使用的均值函数如下：</p>
 <p>$ \phi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = \left( 1- \beta _ { 1} \right) \sum _ { i = 1} ^ { t } \beta _ { 1} ^ { t - i } g _ { i } \text{ and } \psi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = \left( 1- \beta _ { 2} \right) \operatorname{diag} \left( \sum _ { i = 1} ^ { t } \beta _ { 2} ^ { t - i } g _ { i } ^ { 2} \right) $，（Adam）</p>
-<p>###3 Adam的非收敛性</p>
-<p>根据前面章节的问题设定，我们将在本章节讨论基于指数移动均值的Adam优化算法的基本缺点。该论文的研究者展示了Adam即使在简单的一维凸问题上都有可能不能收敛到最优解。这些不收敛的案例与（Kingma &amp; Ba, 2015）声明的收敛性相矛盾，主要的问题在于以下表达式的数值：</p>
+<h3 id="3-Adam的非收敛性"><a href="#3-Adam的非收敛性" class="headerlink" title="3 Adam的非收敛性"></a>3 Adam的非收敛性</h3><p>根据前面章节的问题设定，我们将在本章节讨论基于指数移动均值的Adam优化算法的基本缺点。该论文的研究者展示了Adam即使在简单的一维凸问题上都有可能不能收敛到最优解。这些不收敛的案例与（Kingma &amp; Ba, 2015）声明的收敛性相矛盾，主要的问题在于以下表达式的数值：</p>
 <p>$ \Gamma _ { t + 1} = \left( \frac { \sqrt { V _ { t + 1} } } { \alpha _ { t + 1} } - \frac { \sqrt { V _ { t } } } { \alpha _ { t } } \right) $</p>
 <p>该数值基本上衡量了自适应学习率的倒数相对于时间的变化趋势。一个关键点是，SGD和AdaGrad对于所有t ∈ [T]都有Γ_t⪰0，这只是从SGD和AdaGrad的更新规则推导而出。特别的，这些算法的更新规则并不会导致学习率的增加，即 “non-increasing” 学习率。然而，这对于其它如Adam和RMSProp等基于指数移动均值的方法是不成立的，即对于t ∈ [T]，Γ_t可能是不确定的。研究者们证明了这种违反正定性的属性将导致Adam和RMSProp出现不期望的收敛情况。若我们考虑以下F = [−1, 1]的简单线性函数序列：</p>
 <p>$ f _ { t } ( x ) = \left{ \begin{array} { l l } { C x ,} &amp; { \text{ for } t \text{ mod } 3= 1} \ { - x ,} &amp; { \text{ otherwise } } \end{array} \right. $</p>
