@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="随机梯度下降是当前训练深度网络的主流方法，该方法通过在小批量数据上计算损失函数的梯度而迭代地更新权重与偏置项。特别的，SGD 的一类变体通过使用历史梯度某种形式的范数而调整学习率取得了很大的成功，因为它们能针对不同的参数采用不同的学习率。一般来说，适应性学习率算法的基本思想是若损失函数对于某个给定模">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Horatio">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="自适应学习算法家族"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hello Autumn"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>自适应学习算法家族 - Hello Autumn</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/sass/main.css">
+
+    <!--[if lt IE 8]>
+        <script src="/js/ie/html5shiv.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" href="/sass/ie8.css">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/sass/ie9.css">
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+<link rel="shortcut icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico" type="image/x-icon"/>
+<link rel="icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="http://p598yuf6e.bkt.clouddn.com/BrainIcon.png" alt="" /></span><span class="title">Hello Autumn</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/">Me</a>
+            </li>
+        
+            <li>
+                <a href="/">Photographer</a>
+            </li>
+        
+            <li>
+                <a href="/">University life</a>
+            </li>
+        
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+        
+            <li>
+                <a href="/">About</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>自适应学习算法家族</h1>
+
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<p>随机梯度下降是当前训练深度网络的主流方法，该方法通过在小批量数据上计算损失函数的梯度而迭代地更新权重与偏置项。特别的，SGD 的一类变体通过使用历史梯度某种形式的范数而调整学习率取得了很大的成功，因为它们能针对不同的参数采用不同的学习率。一般来说，适应性学习率算法的基本思想是若损失函数对于某个给定模型参数的偏导保持相同的符号，那么学习率应该增加。这一类算法第一个比较流行的是 AdaGrad（Duchi et al., 2011; McMahan &amp; Streeter, 2010），该算法要比一般的 SGD 算法在性能上有显著性的提升，尤其是当梯度比较稀疏或比较小的情况下。</p>
+<p>尽管 AdaGrad 在稀疏梯度的情况下工作良好，但由于在更新中使用了所有的历史梯度信息，所以该算法在损失函数非凸和梯度比较密集的情况下会引起学习率的快速衰减。此外，模型的高维空间更进一步加剧了这种缺点，因此 AdaGrad 的性能也会受到很大的影响。为了解决这种问题，目前已经有许多研究者提出了 AdaGrad 方法的变体，如 RMSPROP（Tieleman &amp; Hinton, 2012）、Adam（Kingma &amp; Ba, 2015）、AdaDelta（Zeiler, 2012）和 NAdam（Dozat, 2016）等。它们都使用历史梯度平方的指数移动均值来缓解学习率过快衰减的现象，这基本上就限制更新会更多地依赖于过去几次迭代的梯度信息。</p>
+<p>虽然这些算法能成功地应用于一些实践和开发中，但它们在一些环境下并不会起作用。例如我们通常会观察到有一些小批量数据会提供较大的梯度，虽然这种批量非常少，但这些较大的梯度会提供非常多的下降信息，它们在指数移动均值中会存在和影响很长一段时间，因此也就造成了算法收敛到一个比较差的最优解。</p>
+<p>为了理解和分析这种局限性，Sashank J. Reddi、Satyen Kale 和 Sanjiv Kumar 等人发表了一篇 ICLR 2018 论文《ON THE CONVERGENCE OF ADAM AND BEYOND》。该论文被接收为 ICLR 2018 的 Oral 论文，且最终双盲评分一直在前几名。为了对该论文做一些简要的分析与讨论，我们会从基本的适应性学习率算法开始，然后再进一步讨论它们的局限性与修正方法。</p>
+<p>其实适应性学习率方法早在 80 年代就有学者进行了一定的研究，Delta-bar-delta（Jacobs, 1988）这一启发式方法基于很简单的想法，即如果损失函数对于某个给定模型参数的偏导保持相同的符号，那么学习率应该增加。如果损失函数对于该参数的偏导变换了符号，那么学习率就应该减少。这种学习算法只能适应于全批量梯度下降，而后 AdaGrad（Duchi et al., 2011）第一次将适应性学习率算法的性能提升到顶尖的水平，并广泛应用于带有稀疏梯度的模型。</p>
+<p>###AdaGrad</p>
+<p>AdaGrad 亦称为适应性梯度（Adaptive Gradient），它允许学习率基于参数进行调整，而不需要在学习过程中人为调整学习率。AdaGrad 对具有较大梯度的参数相应地有一个快速下降的过程，而具有小梯度的参数在学习率上有相对较小的下降速度。因此，AdaGrad 成了稀疏数据如图像识别和 NLP 的天然选择。然而 AdaGrad 的最大问题在于，某些案例中的学习率会变得太小，学习率的单调下降也会使得网络停止学习过程。在经典的动量算法和 Nesterov 中，加速梯度参数更新是对所有参数进行的，并且学习过程中的学习率保持不变。在 Adagrad 中，每次迭代中每个参数使用的都是不同的学习率。以下是 AdaGrad 的参数更新式：</p>
+<p>$ G _ { i + 1} = G _ { i } + \frac { \partial } { \partial \theta _ { i } } ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right)) $</p>
+<p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { G ^ { k - 1} } + \epsilon } \frac { \partial } { \partial \theta _ { i } }( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right) )$</p>
+<p>如下伪代码所示，AdaGrad 首先抽取 m 个训练样本和对应的样本标注，然后基于这些样本计算损失函数对特定参数的梯度。将该梯度的平方加入历史梯度项 r，然后再以 1/sqrt(r) 缩放学习率，从而根据历史梯度的大小为每个参数定制学习率，其中 δ 是为防止分母为零的常量。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/adagrad.jpg" style="zoom:60%"></p>
+<p>AdaGrad 算法最大的特点是将历史梯度 L2 范数的倒数作为缩放学习率的因子。</p>
+<p>###AdaDelta</p>
+<p>AdaDelta 使用短期历史梯度的信息而缩放学习率，它类似经典的动量算法累积历史的更新而加速学习。AdaDelta 可以有效克服 AdaGrad 的学习率过快减少至零，因为它将累积历史梯度信息的范围限制在固定窗口 w 内，从而不再采用动量算法累积所有历史梯度的做法。在时间 t 计算的 $E[g^2]_t$ 依赖于历史梯度的信息和当前的梯度值。因此，该移动平均的计算可以表示为：</p>
+<p>$ E \left[ g ^ { 2} \right] _ { i + 1} = \gamma E \left[ g ^ { 2} \right] _ { i } + ( 1- \gamma ) g _ { i } ^ { 2} $</p>
+<p>其中 γ 在实践中通常设为 0.9 左右。我们可以将这种移动平均的计算方法与随即梯度下降相结合，SGD 更新的表达式为：</p>
+<p>$ \theta _ { i } = \theta _ { i } - \alpha \frac { \partial } { \partial \theta _ { i } } \text{L} \left( \theta _ { i } : \left( y _ { i } ^ { ( j ) } ,\hat { y } _ { i } ^ { ( j ) } \right) \right) $</p>
+<p>Adagrad 的更新为：</p>
+<p>$ \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) = - \frac { \alpha } { \sqrt { G _ { i } } + \epsilon } g _ { i } $</p>
+<p>使用历史梯度的信息 $E[g^2]_t$ 替换对角矩阵 G_i，得到：</p>
+<p> $ \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) = - \frac { \eta } { \sqrt { E \left[ g ^ { 2} \right] t } + \epsilon } g _ { t } $ </p>
+<p>其中分母是梯度的平方根误差，用 $ R M S \left[ \frac { \partial } { \partial \theta _ { i } } \text{L} \left( \theta _ { i } : \left( y _ { i } ^ { ( j ) } ,\hat { y } _ { i } ^ { ( j ) } \right) \right)\right] $ 替换先前更新规则中的学习率 α，得到：</p>
+<p>$ \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) = - \frac { R M S \left[ \frac { \partial } { \partial \theta _ { i } } L \left( \theta _ { i } : \left( y _ { i } ^ { ( j ) } ,\hat { y } _ { i } ^ { ( j ) } \right) \right) \right] _ { i } } { R M S [ g ] _ { i } } g _ { i } $</p>
+<p>$ \theta _ { i + 2} = \theta _ { i + 1} + \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) $</p>
+<p>如上是 AdaDelta 的更新方式及简单的推导。如以下伪代码，其描述了 AdaDelta 的详细计算与更新过程：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/adadelta.jpg" style="zoom:48%"></p>
+<p>我们首先会初始化梯度与超参数，然后计算当前时间步某个参数的梯度，再如上 $E[g^2]$ 所示的移动均值计算式获取短期历史梯度的信息。在利用历史梯度的移动均值情况下，我们可以根据短期梯度信息为每个参数设计学习率。但正如论文 ON THE CONVERGENCE OF ADAM AND BEYOND 所述，这种方法可能在某些情况下只能收敛到次优点。</p>
+<p>###RMSProp</p>
+<p>RMSProp算法（Hinton，2012）修改AdaGrad以在非凸情况下表现更好，它改变梯度累积为指数加权的移动平均值，从而丢弃距离较远的历史梯度信息。RMSProp与Adadelta的移动均值更新方式十分相似：</p>
+<p>$ E \left[ g ^ { 2} \right] _ { i + 1} = 0.9E \left[ g ^ { 2} \right] _ { i } - 0.1g _ { i } ^ { 2} $</p>
+<p>RMSProp的更新规则如下：</p>
+<p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { E \left[ g ^ { 2} \right] _ { i } } + \epsilon } \frac { \partial } { \partial \theta _ { i } } \text{L} ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right))$</p>
+<p>在RMSProp中，学习率需要除以梯度平方的指数衰减平均值以为不同的参数缩放学习率。RMSProp的标准式如下所示：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp.jpg" style="zoom:50%"></p>
+<p>如上为 RMSProp 的标准算法，首先我们需要初始化全局学习率和控制移动平均长度范围的超参数 ρ。在算法的循环体中，首先需要采样一个批量的数据，并计算损失函数对所有参数的梯度而作为梯度向量。随后根据超参数 ρ 决定需要遗忘的历史梯度范围，即计算指数移动均值，并储存在变量r中。最后只需要利用历史梯度信息缩放对应的学习率就能完成梯度下降，在这些计算过程中，⊙表示对应元素之间的乘积。</p>
+<p>我们同样可以结合Nesterov动量而提升经典RMSProp算法的效果：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp1.jpg" style="zoom:50%"></p>
+<p>如上所示，前面的初始化会多一个动量系数 α。在循环体内，我们抽取一个批量的数据会先计算临时的更新，也就是先在动量方向上更新一步。然后我们需要计算预更新后，该位置的梯度g，并利用梯度g的平方与历史梯度更新新的历史梯度信息。在利用历史梯度信息缩放学习率后，我们就能更新Nesterov动量的速度变量，且利用该变量最终更新参数。</p>
+<p>RMSProp是Hinton在公开课上提出的最优化算法，其实它可以视为AdaDelta的特例。但实践证明RMSProp有非常好的性能，它目前在深度学习中有非常广泛的应用。</p>
+<p>###Adam</p>
+<p>最后一种就是近来非常流行的Adam算法，虽然ON THE CONVERGENCE OF ADAM AND BEYOND重点分析了Adam的收敛性缺点，但仍然不能否认它是目前最高效和“自动化”的最优化方法之一。下面我们会根据Adam的原论文简要介绍该算法。</p>
+<ul>
+<li>适应性梯度算法（AdaGrad）为每一个参数保留一个学习率以提升在稀疏梯度（即自然语言和计算机视觉问题）上的性能。</li>
+<li>均方根传播（RMSProp）基于权重梯度最近量级的均值为每一个参数适应性地保留学习率。这意味着算法在非稳态和在线问题上有很有优秀的性能。</li>
+</ul>
+<p>Adam算法同时获得了AdaGrad 和 RMSProp算法的优点。Adam 不仅如RMSProp算法那样基于一阶矩均值计算适应性参数学习率，它同时还充分利用了梯度的二阶矩均值（即有偏方差/uncentered variance）。具体来说，算法计算了梯度的指数移动均值（exponential moving average），超参数beta1和beta2控制了这些移动均值的衰减率。</p>
+<p>移动均值的初始值和beta1、beta2值接近于1（推荐值），因此矩估计的偏差接近于0。该偏差通过首先计算带偏差的估计而后计算偏差修正后的估计而得到提升。</p>
+<p>如下伪代码展示了Adam的基本算法：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/Adam.jpg" style="zoom:50%"></p>
+<p>如上算法所述，在确定了参数α、β1、β2 和随机目标函数f(θ)之后，我们需要初始化参数向量、一阶矩向量、二阶矩向量和时间步。然后当参数θ没有收敛时，循环迭代地更新各个部分。即时间步t加1、更新目标函数在该时间步上对参数θ所求的梯度、更新偏差的一阶矩估计和二阶原始矩估计，再计算偏差修正的一阶矩估计和偏差修正的二阶矩估计，然后再用以上计算出来的值更新模型的参数θ。</p>
+<p>该算法的核心是m_t hat 除以 sqrt(v_t hat)，其实它可以看作一种信噪比，即算法对m_t hat是否符合真实梯度方向存在的不确定性。若该比值很小，表示m_t hat符合真实梯度方向有很大的不确定性，从而令有效步长接近于0，令目标函数收敛。</p>
+<p>上图伪代码为展现了Adam算法的基本步骤。假定f(θ)为噪声目标函数：即关于参数θ可微的随机标量函数。我们对怎样减少该函数的期望值比较感兴趣，即对于不同参数θ，f的期望值E[f(θ)]。其中 f1(θ), …, , fT (θ)表示在随后时间步1, …, T上的随机函数值。这里的随机性来源于随机子样本（小批量）上的评估和固有的函数噪声。而 $ g _ { t } = \nabla _ { \theta } f _ { t } ( \theta ) $ 表示 f_t(θ) 关于θ的梯度，即在实践步骤t下ft对θ的偏导数向量。</p>
+<p>该算法更新梯度的指数移动均值（m_t）和平方梯度（v_t），而参数 β_1、β_2 ∈ [0, 1)控制了这些移动均值（moving average）指数衰减率。移动均值本身使用梯度的一阶矩（均值）和二阶原点矩（有偏方差）进行估计。然而因为这些移动均值初始化为0向量，所以矩估计值会偏差向0，特别是在初始时间步中和衰减率非常小（即β接近于1）的情况下是这样的。不过初始化偏差很容易抵消，因此我们可以得到偏差修正（bias-corrected）的估计m_t hat和v_t hat。此外，m_t 和 v_t可以通过数学归纳法求出对应的偏差修正项。</p>
+<p>注意算法的效率可以通过改变计算顺序而得到提升，例如将伪代码最后三行循环语句替代为以下两个：</p>
+<p>$ \alpha _ { t } = \alpha \cdot \sqrt { 1- \beta _ { 2} ^ { t } } / \left( 1- \beta _ { 1} ^ { t } \right) $</p>
+<p>$ \theta _ { t } \leftarrow \theta _ { t - 1} - \alpha _ { t } \cdot m _ { t } / \left( \sqrt { v _ { t } } + \hat { \epsilon } \right) $</p>
+<p>在这篇ICLR 2018的Oral 论文中，研究者分析了这些基于指数移动均值方法的缺点，并严格地证明了少数较大梯度会影响收敛的效果。限制更新只依赖于少数历史梯度确实会引起显著的收敛性问题，该论文的作者也明确表明他们该论文的主要贡献为：</p>
+<ul>
+<li>通过提供一个简单的凸优化问题作为案例来说明RMSPROP 和 ADAM 中的指数移动均值会如何导致算法不收敛，即RMSPROP 和 ADAM在该案例中不会如同动量法那样收敛到相对最优解。该分析很容易扩展到其它使用指数移动均值的最优化方法，如AdaDelta 和NAdam。实际上，该分析足够灵活以扩展到更一般的情况，即那些根据固定窗口大小而采用平均梯度的算法，这些算法一般会采用窗口范围内的梯度信息而抛弃窗口外的梯度信息。但是该论文并没有讨论这些扩展情况，因而分析将变得更加明晰。</li>
+<li>本论文的分析结果表明，为了保证收敛性，优化算法必须具有历史梯度的“长期记忆”。具体而言，作者们指出了Kingma &amp; Ba (2015) 关于Adam算法收敛性证明的一个问题。为了解决这个问题，他们提出了一个Adam的新变体，它依赖于历史梯度的长期记忆，且和原Adam算法有相同的计算时和空间要求。Sashank等人最后基于Kingma &amp; Ba (2015)的分析展示了该新变体的收敛性分析。</li>
+<li>Sashank等人还对该变体进行了初步的实证研究，并表明它在常见机器学习问题中有相似或更优秀的性能。</li>
+</ul>
+<p>以下是详细的论文内容：</p>
+<p>##论文：ON THE CONVERGENCE OF ADAM AND BEYOND</p>
+<p>论文地址：<a href="https://openreview.net/pdf?id=ryQu7f-RZ" target="_blank" rel="noopener">https://openreview.net/pdf?id=ryQu7f-RZ</a></p>
+<p>近来提出的几种随机优化方法已经成功地应用于深度网络的训练，如 RMSPROP、ADAM、ADADELTA 和 NADAM 等方法，它们都是基于使用前面迭代所产生梯度平方的指数滑动平均值，在对该滑动平均值取平方根后用于缩放当前梯度以更新权重。根据经验观察，这些算法有时并不能收敛到最优解（或非凸条件下的临界点）。研究者证明了导致这样问题的一个原因是这些算法中使用了指数滑动平均（exponential moving average）操作。本论文提供了一个简单的凸优化案例，其中 ADAM 方法并不能收敛到最优解。此外，研究者还描述了过去文献中分析 ADAM 算法所存在的精确问题。他们的分析表明，收敛问题可以通过赋予这些算法对前面梯度的「长期记忆」能力而得到解决。因此该论文提出了一种 ADAM 算法的新变体，其不仅解决了收敛问题，同时还提升了经验性能。</p>
+<p>在论文的第二章节中，研究者们重点讨论了一般适应性方法和基于指数移动均值的适应性方法的表述：</p>
+<p>####一般适应性方法</p>
+<p>原作者为适应性方法提供了一个通用性框架，它展示了不同适应性方法之间的区别，并有利于我们理解Adam等方法的缺陷。以下算法1给出了一般适应性框架的伪代码，该算法仍然非常抽象，因为“均值”函数φ_t 和 ψ_t 并没有明确指定。其中φ_t为d维向量，而ψ_t为d<em>d维正定矩阵。为了便于展示，作者将 α_t 设为下降步大小，将 α_t </em> V_t^(-1/2) 设为算法的学习率。此外，作者将算法1封装的适应性方法限制为对角方差矩阵，即V_t = diag(v_t)。我们发现因为φ_t(g_1, . . . , g_t) = g_t 、 ψ_t(g_1, . . . , g_t) = I，标准的随即梯度下降会失效，其中对于所有的t ∈ [T]，α_t = α/sqrt(t)。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/adaptivemethod.jpg" style="zoom:50%"></p>
+<p>尽管缩减下降步长是算法收敛的先决条件，但如此暴力的学习率衰减方式会典型地收敛到较差的解，因此它会有较差的经验性能。适应性方法的关键思想是选择适当的均值函数而实现优良的收敛性。例如推动新研究的第一个适应性学习率算法Adagrad（Duchi et al., 2011）使用以下均值的函数：</p>
+<p>$ \phi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = g _ { t } \text{ and } \psi _ { t } \left( g _ { 1} ,\ldots ,g _ { t } \right) = \frac { \operatorname{diag} \left( \sum _ { i = 1} ^ { t } g _ { i } ^ { 2} \right) } { t } $，（AdaGrad）</p>
+<p>这和SGD的α_t = α/sqrt(t) 不一样，Adagrad使用更加优秀的衰减策略，即对于j ∈ [d]，α/sqrt(∑sqre(g^2))。当梯度是稀疏的情况下，算法的收敛性能得到非常大的提升（Duchi et al. 2011），这在一些非稀疏的梯度设定中也能获得很大的提升。</p>
+<p>####基于指数移动均值的适应性方法</p>
+<p>基于指数移动均值的 AdaGrad 变体在深度学习社区中非常流行，RMSProp、Adam、NAdam和AdaDelta都是这种变体的先驱研究。它们和AdaGrad最大的区别就是使用指数移动均值作为函数ψ_t，而不是使用简单的均值函数。Adam是最流行的一种变体，它使用的均值函数如下：</p>
+<p>$ \phi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = \left( 1- \beta _ { 1} \right) \sum _ { i = 1} ^ { t } \beta _ { 1} ^ { t - i } g _ { i } \text{ and } \psi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = \left( 1- \beta _ { 2} \right) \operatorname{diag} \left( \sum _ { i = 1} ^ { t } \beta _ { 2} ^ { t - i } g _ { i } ^ { 2} \right) $，（Adam）</p>
+<p>###3 Adam的非收敛性</p>
+<p>根据前面章节的问题设定，我们将在本章节讨论基于指数移动均值的Adam优化算法的基本缺点。该论文的研究者展示了Adam即使在简单的一维凸问题上都有可能不能收敛到最优解。这些不收敛的案例与（Kingma &amp; Ba, 2015）声明的收敛性相矛盾，主要的问题在于以下表达式的数值：</p>
+<p>$ \Gamma _ { t + 1} = \left( \frac { \sqrt { V _ { t + 1} } } { \alpha _ { t + 1} } - \frac { \sqrt { V _ { t } } } { \alpha _ { t } } \right) $</p>
+<p>该数值基本上衡量了自适应学习率的倒数相对于时间的变化趋势。一个关键点是，SGD和AdaGrad对于所有t ∈ [T]都有Γ_t⪰0，这只是从SGD和AdaGrad的更新规则推导而出。特别的，这些算法的更新规则并不会导致学习率的增加，即 “non-increasing” 学习率。然而，这对于其它如Adam和RMSProp等基于指数移动均值的方法是不成立的，即对于t ∈ [T]，Γ_t可能是不确定的。研究者们证明了这种违反正定性的属性将导致Adam和RMSProp出现不期望的收敛情况。若我们考虑以下F = [−1, 1]的简单线性函数序列：</p>
+<p>$ f _ { t } ( x ) = \left{ \begin{array} { l l } { C x ,} &amp; { \text{ for } t \text{ mod } 3= 1} \ { - x ,} &amp; { \text{ otherwise } } \end{array} \right. $</p>
+<p>其中C&gt;2。对于这个函数序列，我们很容易了解到x=-1提供了最小的回退。以下结果表明，当 β_1 = 0 和 β_2 = 1/(1 + C 2 )时，Adam收敛于x = +1的高度次优解。直观上的推理如下，该算法每三步会获取一个较大的梯度C，其它两步则会观察到梯度-1而导致错误的方向。较大的梯度C不能抵消这种影响，因为对于给定的 β_2 值，x几乎只会以常量C来缩小，因此算法只能收敛到1而不是-1。</p>
+<p>在该章节的后面部分和附录中，研究者对这一非收敛现象进行了更形式化和细致地分析。</p>
+<h3 id="4-一种新型指数移动均值方法：AMSGRAD"><a href="#4-一种新型指数移动均值方法：AMSGRAD" class="headerlink" title="4 一种新型指数移动均值方法：AMSGRAD"></a>4 一种新型指数移动均值方法：AMSGRAD</h3><p>在这一章节中，Sashank等研究者开发了一种新型指数移动均值变体，并提供了它的收敛性分析。他们的目标是设计一种保证收敛性的新策略，且能同时保留Adam和AMSProp的优势。为了更好地理解这种算法，我们需要重新审视表达式（2）中的Γ_t。对于Adam和RMSProp，该变量的数值仍然可能为负。Adam原论文错误地假设Γ_t为半正定，这一错误在该论文的附录D有详细讨论。首先，研究者会修正这些算法以满足额外的约束。随后，我们会探索新的方法以令Γ_t在给定随时间t而改变β_1 和 β_2的情况下为半正定。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/AMSGrad.jpg" style="zoom:50%"></p>
+<p>与Adam相比，AMSGrad使用较小的学习率，但只要Γ_t为半正定，那么它就保留了缓慢减弱历史梯度对学习率的影响这一直观属性。算法2展示了AMSGrad的伪代码，它与Adam的关键不同点就是它会保留所有v_t的最大值到当前时间步，并使用该最大值归一化梯度的移动均值，而不是使用Adam中的v_t。通过这样的修正，AMSGrad可以保持非递增的下降步大小，并避免了Adam和RMSProp的缺陷，即对于常数 β_2 和所有 t ∈ [T]都有Γ_t⪰0。此外在算法2中，实践上会典型地使用常数β_1t，而实际证明要求一个递减的方案来保证收敛性。</p>
+<p>实验：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com/adamexper.jpg" style="zoom:50%"></p>
+<p>图2：ADAM和AMSGRAD算法在Logistic回归、前馈神经网络和CIFARNET上的性能对比。第一行的左图与中图表示ADAM和AMSGRAD算法在Logistic回归的性能，第一行右图表示它们在一层前馈神经网络和MNIST数据集的训练损失。第二行表示两种优化方法在CIFARNET的训练损失与测试损失。</p>
+
+
+<!-- Tags -->
+
+
+
+<div class="tags">
+    <a href="/tags/Optimization/" class="button small">Optimization</a>
+</div>
+
+
+
+<!-- Comments -->
+<div>
+    
+    <hr />
+    <h3>Kommentare:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                If you are also interesting in Machine Learning, contact me with email：horatio.j.s.y@gmail.com.
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                    <li><a href="https://twitter.com/Horatio_JSY" class="icon style2 fa-twitter" target="_blank" ><span class="label">Twitter</span></a></li>
+                
+                
+                    <li><a href="https://www.facebook.com/horatio.jsy.3" class="icon style2 fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://github.com/HoratioJSY" class="icon style2 fa-github" target="_blank" ><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://500px.com/siyuan" class="icon style2 fa-500px" target="_blank" ><span class="label">500px</span></a></li>
+                
+                
+                    <li><a href="horatio.j.s.y@gmail.com" class="icon style2 fa-envelope-o" target="_blank" ><span class="label">Email</span></a></li>
+                
+                
+                    <li><a href="\#" class="icon style2 fa-rss" target="_blank" ><span class="label">RSS</span></a></li>
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li>&copy; Siyuan All rights reserved</li>
+            <li>Design: Horatio</li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    <script type="text/javascript"
+color="139,129,80" opacity='0.4' zIndex="-2" count="60" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- skel -->
+<script src="/js/skel.min.js"></script>
+
+<!-- Custom Code -->
+<script src="/js/util.js"></script>
+
+<!--[if lte IE 8]>
+<script src="/js/ie/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom Code -->
+<script src="/js/main.js"></script>
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'Autum';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+</body>
+
+</html>
