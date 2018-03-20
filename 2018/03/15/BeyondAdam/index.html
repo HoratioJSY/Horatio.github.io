@@ -139,7 +139,8 @@
 <p>$ G _ { i + 1} = G _ { i } + \frac { \partial } { \partial \theta _ { i } } ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right)) $</p>
 <p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { G ^ { k - 1} } + \epsilon } \frac { \partial } { \partial \theta _ { i } }( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right) )$</p>
 <p>如下伪代码所示，AdaGrad 首先抽取 m 个训练样本和对应的样本标注，然后基于这些样本计算损失函数对特定参数的梯度。将该梯度的平方加入历史梯度项 r，然后再以 1/sqrt(r) 缩放学习率，从而根据历史梯度的大小为每个参数定制学习率，其中 δ 是为防止分母为零的常量。</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/adagrad.jpg" style="zoom:60%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/adagrad.jpg" style="zoom:55%"></div>
+
 <p>AdaGrad 算法最大的特点是将历史梯度 L2 范数的倒数作为缩放学习率的因子。</p>
 <h3 id="AdaDelta"><a href="#AdaDelta" class="headerlink" title="AdaDelta"></a>AdaDelta</h3><p>AdaDelta 使用短期历史梯度的信息而缩放学习率，它类似经典的动量算法累积历史的更新而加速学习。AdaDelta 可以有效克服 AdaGrad 的学习率过快减少至零，因为它将累积历史梯度信息的范围限制在固定窗口 w 内，从而不再采用动量算法累积所有历史梯度的做法。在时间 t 计算的 $E[g^2]_t$ 依赖于历史梯度的信息和当前的梯度值。因此，该移动平均的计算可以表示为：</p>
 <p>$ E \left[ g ^ { 2} \right] _ { i + 1} = \gamma E \left[ g ^ { 2} \right] _ { i } + ( 1- \gamma ) g _ { i } ^ { 2} $</p>
@@ -153,17 +154,20 @@
 <p>$ \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) = - \frac { R M S \left[ \frac { \partial } { \partial \theta _ { i } } L \left( \theta _ { i } : \left( y _ { i } ^ { ( j ) } ,\hat { y } _ { i } ^ { ( j ) } \right) \right) \right] _ { i } } { R M S [ g ] _ { i } } g _ { i } $</p>
 <p>$ \theta _ { i + 2} = \theta _ { i + 1} + \frac { \partial } { \partial \theta _ { i + 1} } \text{L} \left( \theta _ { i + 1} : \left( y _ { i + 1} ^ { ( j ) } ,\hat { y } _ { i + 1} ^ { ( j ) } \right) \right) $</p>
 <p>如上是 AdaDelta 的更新方式及简单的推导。如以下伪代码，其描述了 AdaDelta 的详细计算与更新过程：</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/adadelta.jpg" style="zoom:52%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/adadelta.jpg" style="zoom:47%"></div>
+
 <p>我们首先会初始化梯度与超参数，然后计算当前时间步某个参数的梯度，再如上 $E[g^2]$ 所示的移动均值计算式获取短期历史梯度的信息。在利用历史梯度的移动均值情况下，我们可以根据短期梯度信息为每个参数设计学习率。但正如论文 ON THE CONVERGENCE OF ADAM AND BEYOND 所述，这种方法可能在某些情况下只能收敛到次优点。</p>
 <h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p>RMSProp算法（Hinton，2012）修改AdaGrad以在非凸情况下表现更好，它改变梯度累积为指数加权的移动平均值，从而丢弃距离较远的历史梯度信息。RMSProp与Adadelta的移动均值更新方式十分相似：</p>
 <p>$ E \left[ g ^ { 2} \right] _ { i + 1} = 0.9E \left[ g ^ { 2} \right] _ { i } - 0.1g _ { i } ^ { 2} $</p>
 <p>RMSProp的更新规则如下：</p>
 <p>$ \theta _ { i + 1} = \theta _ { i } - \frac { \alpha } { \sqrt { E \left[ g ^ { 2} \right] _ { i } } + \epsilon } \frac { \partial } { \partial \theta _ { i } } \text{L} ( \theta _ { i } : \left( y _ { i } ,\hat { y } _ { i } \right))$</p>
 <p>在RMSProp中，学习率需要除以梯度平方的指数衰减平均值以为不同的参数缩放学习率。RMSProp的标准式如下所示：</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp.jpg" style="zoom:48%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp.jpg" style="zoom:43%"></div>
+
 <p>如上为 RMSProp 的标准算法，首先我们需要初始化全局学习率和控制移动平均长度范围的超参数 ρ。在算法的循环体中，首先需要采样一个批量的数据，并计算损失函数对所有参数的梯度而作为梯度向量。随后根据超参数 ρ 决定需要遗忘的历史梯度范围，即计算指数移动均值，并储存在变量r中。最后只需要利用历史梯度信息缩放对应的学习率就能完成梯度下降，在这些计算过程中，⊙表示对应元素之间的乘积。</p>
 <p>我们同样可以结合Nesterov动量而提升经典RMSProp算法的效果：</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp1.jpg" style="zoom:46%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/RMSProp1.jpg" style="zoom:41%"></div>
+
 <p>如上所示，前面的初始化会多一个动量系数 α。在循环体内，我们抽取一个批量的数据会先计算临时的更新，也就是先在动量方向上更新一步。然后我们需要计算预更新后，该位置的梯度g，并利用梯度g的平方与历史梯度更新新的历史梯度信息。在利用历史梯度信息缩放学习率后，我们就能更新Nesterov动量的速度变量，且利用该变量最终更新参数。</p>
 <p>RMSProp是Hinton在公开课上提出的最优化算法，其实它可以视为AdaDelta的特例。但实践证明RMSProp有非常好的性能，它目前在深度学习中有非常广泛的应用。</p>
 <h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>最后一种就是近来非常流行的Adam算法，虽然ON THE CONVERGENCE OF ADAM AND BEYOND重点分析了Adam的收敛性缺点，但仍然不能否认它是目前最高效和“自动化”的最优化方法之一。下面我们会根据Adam的原论文简要介绍该算法。</p>
@@ -174,7 +178,8 @@
 <p>Adam算法同时获得了AdaGrad 和 RMSProp算法的优点。Adam 不仅如RMSProp算法那样基于一阶矩均值计算适应性参数学习率，它同时还充分利用了梯度的二阶矩均值（即有偏方差/uncentered variance）。具体来说，算法计算了梯度的指数移动均值（exponential moving average），超参数beta1和beta2控制了这些移动均值的衰减率。</p>
 <p>移动均值的初始值和beta1、beta2值接近于1（推荐值），因此矩估计的偏差接近于0。该偏差通过首先计算带偏差的估计而后计算偏差修正后的估计而得到提升。</p>
 <p>如下伪代码展示了Adam的基本算法：</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/Adam.jpg" style="zoom:40%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/Adam.jpg" style="zoom:35%"></div>
+
 <p>如上算法所述，在确定了参数α、β1、β2 和随机目标函数f(θ)之后，我们需要初始化参数向量、一阶矩向量、二阶矩向量和时间步。然后当参数θ没有收敛时，循环迭代地更新各个部分。即时间步t加1、更新目标函数在该时间步上对参数θ所求的梯度、更新偏差的一阶矩估计和二阶原始矩估计，再计算偏差修正的一阶矩估计和偏差修正的二阶矩估计，然后再用以上计算出来的值更新模型的参数θ。</p>
 <p>该算法的核心是m_t hat 除以 sqrt(v_t hat)，其实它可以看作一种信噪比，即算法对m_t hat是否符合真实梯度方向存在的不确定性。若该比值很小，表示m_t hat符合真实梯度方向有很大的不确定性，从而令有效步长接近于0，令目标函数收敛。</p>
 <p>上图伪代码为展现了Adam算法的基本步骤。假定f(θ)为噪声目标函数：即关于参数θ可微的随机标量函数。我们对怎样减少该函数的期望值比较感兴趣，即对于不同参数θ，f的期望值E[f(θ)]。其中 f1(θ), …, , fT (θ)表示在随后时间步1, …, T上的随机函数值。这里的随机性来源于随机子样本（小批量）上的评估和固有的函数噪声。而 $ g _ { t } = \nabla _ { \theta } f _ { t } ( \theta ) $ 表示 f_t(θ) 关于θ的梯度，即在实践步骤t下ft对θ的偏导数向量。</p>
@@ -193,7 +198,8 @@
 <p>近来提出的几种随机优化方法已经成功地应用于深度网络的训练，如 RMSPROP、ADAM、ADADELTA 和 NADAM 等方法，它们都是基于使用前面迭代所产生梯度平方的指数滑动平均值，在对该滑动平均值取平方根后用于缩放当前梯度以更新权重。根据经验观察，这些算法有时并不能收敛到最优解（或非凸条件下的临界点）。研究者证明了导致这样问题的一个原因是这些算法中使用了指数滑动平均（exponential moving average）操作。本论文提供了一个简单的凸优化案例，其中 ADAM 方法并不能收敛到最优解。此外，研究者还描述了过去文献中分析 ADAM 算法所存在的精确问题。他们的分析表明，收敛问题可以通过赋予这些算法对前面梯度的「长期记忆」能力而得到解决。因此该论文提出了一种 ADAM 算法的新变体，其不仅解决了收敛问题，同时还提升了经验性能。</p>
 <p>在论文的第二章节中，研究者们重点讨论了一般适应性方法和基于指数移动均值的适应性方法的表述：</p>
 <h4 id="一般适应性方法"><a href="#一般适应性方法" class="headerlink" title="一般适应性方法"></a>一般适应性方法</h4><p>原作者为适应性方法提供了一个通用性框架，它展示了不同适应性方法之间的区别，并有利于我们理解Adam等方法的缺陷。以下算法1给出了一般适应性框架的伪代码，该算法仍然非常抽象，因为“均值”函数φ_t 和 ψ_t 并没有明确指定。其中φ_t为d维向量，而ψ_t为d<em>d维正定矩阵。为了便于展示，作者将 α_t 设为下降步大小，将 α_t </em> V_t^(-1/2) 设为算法的学习率。此外，作者将算法1封装的适应性方法限制为对角方差矩阵，即V_t = diag(v_t)。我们发现因为φ_t(g_1, . . . , g_t) = g_t 、 ψ_t(g_1, . . . , g_t) = I，标准的随即梯度下降会失效，其中对于所有的t ∈ [T]，α_t = α/sqrt(t)。</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/adaptivemethod.jpg" style="zoom:50%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/adaptivemethod.jpg" style="zoom:45%"></div>
+
 <p>尽管缩减下降步长是算法收敛的先决条件，但如此暴力的学习率衰减方式会典型地收敛到较差的解，因此它会有较差的经验性能。适应性方法的关键思想是选择适当的均值函数而实现优良的收敛性。例如推动新研究的第一个适应性学习率算法Adagrad（Duchi et al., 2011）使用以下均值的函数：</p>
 <p>$ \phi _ { t } \left( g _ { 1} ,\dots ,g _ { t } \right) = g _ { t } \text{ and } \psi _ { t } \left( g _ { 1} ,\ldots ,g _ { t } \right) = \frac { \operatorname{diag} \left( \sum _ { i = 1} ^ { t } g _ { i } ^ { 2} \right) } { t } $，（AdaGrad）</p>
 <p>这和SGD的α_t = α/sqrt(t) 不一样，Adagrad使用更加优秀的衰减策略，即对于j ∈ [d]，α/sqrt(∑sqre(g^2))。当梯度是稀疏的情况下，算法的收敛性能得到非常大的提升（Duchi et al. 2011），这在一些非稀疏的梯度设定中也能获得很大的提升。</p>
@@ -206,10 +212,12 @@
 <p>其中 C&gt;2。对于这个函数序列，我们很容易了解到x=-1提供了最小的回退。以下结果表明，当 β_1 = 0 和 β_2 = 1/(1 + C 2 ) 时，Adam收敛于 x = +1的高度次优解。直观上的推理如下，该算法每三步会获取一个较大的梯度C，其它两步则会观察到梯度-1而导致错误的方向。较大的梯度 C 不能抵消这种影响，因为对于给定的 β_2 值，x几乎只会以常量C来缩小，因此算法只能收敛到1而不是 -1。</p>
 <p>在该章节的后面部分和附录中，研究者对这一非收敛现象进行了更形式化和细致地分析。</p>
 <h3 id="4-一种新型指数移动均值方法：AMSGRAD"><a href="#4-一种新型指数移动均值方法：AMSGRAD" class="headerlink" title="4 一种新型指数移动均值方法：AMSGRAD"></a>4 一种新型指数移动均值方法：AMSGRAD</h3><p>在这一章节中，Sashank等研究者开发了一种新型指数移动均值变体，并提供了它的收敛性分析。他们的目标是设计一种保证收敛性的新策略，且能同时保留Adam和AMSProp的优势。为了更好地理解这种算法，我们需要重新审视表达式（2）中的Γ_t。对于Adam和RMSProp，该变量的数值仍然可能为负。Adam原论文错误地假设Γ_t为半正定，这一错误在该论文的附录D有详细讨论。首先，研究者会修正这些算法以满足额外的约束。随后，我们会探索新的方法以令Γ_t在给定随时间t而改变β_1 和 β_2的情况下为半正定。</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/AMSGrad.jpg" style="zoom:40%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/AMSGrad.jpg" style="zoom:35%"></div>
+
 <p>与Adam相比，AMSGrad使用较小的学习率，但只要Γ_t为半正定，那么它就保留了缓慢减弱历史梯度对学习率的影响这一直观属性。算法2展示了AMSGrad的伪代码，它与Adam的关键不同点就是它会保留所有v_t的最大值到当前时间步，并使用该最大值归一化梯度的移动均值，而不是使用Adam中的v_t。通过这样的修正，AMSGrad可以保持非递增的下降步大小，并避免了Adam和RMSProp的缺陷，即对于常数 β_2 和所有 t ∈ [T]都有Γ_t⪰0。此外在算法2中，实践上会典型地使用常数β_1t，而实际证明要求一个递减的方案来保证收敛性。</p>
 <p>实验：</p>
-<p><img src="http://p598yuf6e.bkt.clouddn.com/adamexper.jpg" style="zoom:50%"></p>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/adamexper.jpg" style="zoom:45%"></div>
+
 <p>图2：ADAM和AMSGRAD算法在Logistic回归、前馈神经网络和CIFARNET上的性能对比。第一行的左图与中图表示ADAM和AMSGRAD算法在Logistic回归的性能，第一行右图表示它们在一层前馈神经网络和MNIST数据集的训练损失。第二行表示两种优化方法在CIFARNET的训练损失与测试损失。</p>
 
 
