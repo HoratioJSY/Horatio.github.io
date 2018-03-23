@@ -153,6 +153,12 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 <p>上式第三项表示函数曲率对估计的矫正，为什么？</p>
 <p>根据高数，曲率的定义是一定转角微分与对应弧长微分的比值，即 $K=|\frac{d\alpha}{ds}|=\frac{|y’’|}{(1+y’^2)^{\frac32}}$。若在给定梯度下，二阶导可以视为曲率的衡量。</p>
 <p>又因为 Hessian 矩阵是实对称的（满足 $H_{i,j}=H_{j,i}$ ），我们可以将其分解为一组实特征值和一组特征向量的正交基。而分解后的特征值表示主曲率的大小，即在该点不同方向的弯曲程度。因为梯度衡量函数在某个点的变化趋势，而二阶导衡量了梯度在某个点的变化趋势，即二阶导或弯曲程度衡量了函数的变化速度。例如在某一点，二阶导大于零说明梯度递增，而梯度大于零只能说明函数递增，若加上梯度递增这一信息，那么函数可以判断将变得更加陡峭或变化快速。（未完）</p>
+<p>$\sigma(b_i+U_ix^t+W_ih^{t-1})$</p>
+<p>$g_i^t=\sigma(b_i^g+U_i^gx^t+W_i^gh^{t-1})$</p>
+<p>$f_i^t=\sigma(b_i^f+U_i^fx^t+W_i^fh^{t-1})$</p>
+<p>$q_i^t=\sigma(b_i^o+U_i^ox^t+W_i^oh^{t-1})$</p>
+<p>$s_i^t=f_i^ts_i^{t-1}+g_i^t\sigma(b_i+U_ix^t+W_ih^{t-1})$</p>
+<p>$h_i^t=tanh(s_i^t)q_i^t$</p>
 
 
 <!-- Tags -->
@@ -169,7 +175,7 @@ Jacobian 矩阵定义：如果我们有一个函数 $f$ : $\mathbb{R}^m\rightarr
 <div>
     
     <hr />
-    <h3>Kommentare:</h3>
+    <h3>Comments:</h3>
     <div id="disqus_thread">
         <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
