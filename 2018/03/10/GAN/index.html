@@ -255,7 +255,7 @@
 <p>以上是学习判别器 D 的过程。因为学习 D 的过程是计算 JS 散度的过程，并且我们希望能最大化价值函数，所以该步骤会重复 k 次。</p>
 <ul>
 <li>从先验分布 P_prior(z) 中抽取另外 m 个噪声样本 {z^1,…,z^m}</li>
-<li>通过极小化 V^tilde 而更新生成器参数θ_g，即极大化 $ \tilde { V } = \frac { 1} { m } \sum _ { i = 1} ^ { m } \log \left( 1- D \left( G \left( z ^ { i } \right) \right) \right) $，且生成器参数的更新迭代式为 $ \theta _ { g } \leftrightarrow \theta _ { g } - \eta \nabla \tilde { V } \left( \theta _ { g } \right) $。</li>
+<li>通过极小化 V^tilde 而更新生成器参数θ_g，即极小化 $ \tilde { V } = \frac { 1} { m } \sum _ { i = 1} ^ { m } \log \left( 1- D \left( G \left( z ^ { i } \right) \right) \right) $，且生成器参数的更新迭代式为 $ \theta _ { g } \leftrightarrow \theta _ { g } - \eta \nabla \tilde { V } \left( \theta _ { g } \right) $。</li>
 </ul>
 <p>以上是学习生成器参数的过程，这一过程在一次迭代中只会进行一次，因此可以避免更新太多而令 JS 散度上升。</p>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>我们首先提供的是 GAN 实现代码与注释，随后我们会将以上的理论分析与实现代码相结合并展示在 Jupyter Notebook 中。前面的实现使用的是比较简单的高级 API（Keras），后面补充了使用 TensorFlow 构建 GAN 的代码与注释。</p>
