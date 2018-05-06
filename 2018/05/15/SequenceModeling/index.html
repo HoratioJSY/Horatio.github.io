@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="综述序列模型，建模自然语言的核心问题本文讨论并实现了用于序列模型的基本深度方法，其中循环神经网络主要介绍了传统的 LSTM 与 GRU，而卷积神经网络主要介绍了最近 CMU 研究者提出的时间卷积网络与实证研究。相比于我们熟知的经典循环网络方法，用 CNN 实现序列建模可能会更有意思，因此本文的实现部">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Horatio">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="自然语言深度建模"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hello Autumn"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>自然语言深度建模 - Hello Autumn</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/sass/main.css">
+
+    <!--[if lt IE 8]>
+        <script src="/js/ie/html5shiv.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" href="/sass/ie8.css">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/sass/ie9.css">
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+<link rel="shortcut icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico" type="image/x-icon"/>
+<link rel="icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://p598yuf6e.bkt.clouddn.com/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="http://p598yuf6e.bkt.clouddn.com/BrainIcon.png" alt="" /></span><span class="title">Hello Autumn</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/me/">Me</a>
+            </li>
+        
+            <li>
+                <a href="/">Photographer</a>
+            </li>
+        
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+        
+            <li>
+                <a href="/">About</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>自然语言深度建模</h1>
+
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<h1 id="综述序列模型，建模自然语言的核心问题"><a href="#综述序列模型，建模自然语言的核心问题" class="headerlink" title="综述序列模型，建模自然语言的核心问题"></a>综述序列模型，建模自然语言的核心问题</h1><p>本文讨论并实现了用于序列模型的基本深度方法，其中循环神经网络主要介绍了传统的 LSTM 与 GRU，而卷积神经网络主要介绍了最近 CMU 研究者提出的时间卷积网络与实证研究。相比于我们熟知的经典循环网络方法，用 CNN 实现序列建模可能会更有意思，因此本文的实现部分重点介绍了时间卷积网络的实现。</p>
+<p><strong>文章结构：</strong></p>
+<ul>
+<li>序列建模</li>
+</ul>
+<ul>
+<li>循环神经网络<ul>
+<li>表达式</li>
+<li>计算图</li>
+<li>LSTM</li>
+<li>GRU</li>
+</ul>
+</li>
+<li>卷积与时间卷积网络<ul>
+<li>全卷积与因果卷积</li>
+<li>空洞卷积</li>
+<li>高速公路网络与残差模块</li>
+</ul>
+</li>
+<li>实现<ul>
+<li>LSTM的语言建模</li>
+<li>时间卷积网络的语言建模</li>
+</ul>
+</li>
+</ul>
+<p>序列建模广泛存在于自然语言处理、语音识别和计算机视觉等领域，这种任务通常需要将输入序列转换为输出序列，例如将输入的英文语句转换为输出的中文语句。从实践经验上来说，一般我们都将循环神经网络视为序列建模的默认配置。甚至 Ian Goodfellow 在《深度学习》一书中使用「序列建模：循环和递归网络」作为章节名，这些都表明序列建模与循环架构有非常紧密的联系。</p>
+<p>因此本文在前一部分主要介绍了循环网络的概念、表达式和计算图，并着重描述了 LSTM 与 GRU 两种流行的变体。在实现部分，我们将基于 TensorFlow 在语言建模任务中实现 LSTM 与 GRU。</p>
+<p>但序列建模不仅仅只有 RNN，一个关键的想法是在一维时间序列上使用一维卷积运算。此外，最近的研究表明一些卷积架构能在音频合成、语言建模和机器翻译任务中达到顶尖的准确度。因此，我们是否能找到像 LSTM 那样的一般架构处理时序问题就显得十分重要。</p>
+<p>为了了解这种用于序列建模的卷积网络，我们将解读最近 Shaojie Bai 等人完成的架构与实验，包括构建时间卷积网络的因果卷积、空洞卷积和残差连接等。后面我们同样会根据他们提出的 TCN 测试语言建模任务，并尽量保证参数数量和 LSTM 与 GRU 处于同一量级。</p>
+<h3 id="序列建模"><a href="#序列建模" class="headerlink" title="序列建模"></a>序列建模</h3><p>序列建模即将一个输入或观测序列映射到一个输出或标记序列，李航在《统计学习方法》中也将其称为标注问题。他表明标注问题是分类问题的推广，又是更复杂的结构预测问题的简单形式。标注问题或序列建模的目的在于学习一个模型，从而能对观测序列给出标记序列作为预测，即最大化概率 $P（y_1，y_2，…，y_n | x_1，x_2，…，x_n）$。在传统机器学习方法中，序列建模常用的方法有隐马尔可夫模型和条件随机场等，但近来 RNN 等深度方法凭借强大的表征能力在序列建模问题上有非常突出的表现。</p>
+<p>但根据 Shaojie Bai 等人的定义，序列建模应该是在给定时间步 t 的情况下，只使用 x_0 到 x_t 的序列信息预测输出 y_t。当然这只是一般化的定义，具体问题还需要具体分析，例如机器翻译最好可以使用双向 RNN 获取整个句子的信息再转化为译文。因此一般序列建模的形式化表述如下：</p>
+<p>序列建模为任意满足因果约束的映射函数 $f: X^T+1 → Y^T +1$，它仅依赖于 $x_1，x_2，…，x_t$ 而不使用 $x_t，x_t+1，…，x_T$ 的信息预测 $y_t$。</p>
+<h3 id="循环网络"><a href="#循环网络" class="headerlink" title="循环网络"></a>循环网络</h3><p>循环神经网络是一类用于处理序列问题的神经网络，循环网络可以扩展到更长的序列。循环网络相比经典的全连接网络有非常大的提升，例如参数共享和构建长期依赖关系等。对于语句的序列建模，全连接网络会给每个输入特征分配一个单独的参数，所以它需要分别学习句子每个位置的所有语言规则。而循环神经网络会在多个时间步内共享相同的参数，因此不必学习句子每个位置的所有语言规则。此外，循环网络会有一个记忆机制为当前时间步的预测提供前面时间步的信息。</p>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><p>其实循环神经网络的基本原理可使用非常优美的表达式展示，若考虑动态系统的经典形式：</p>
+<p>$ s ^ { ( t ) } = f \left( s ^ { ( t - 1) } ; \theta \right) $</p>
+<p>它其实也可以视为一个循环神经网络，因为本质上任何涉及循环的函数都可以视为一个循环神经网络。以上 $s^t $可视为系统在第 t 步的状态，因此后一步的系统状态会取决于前一步的系统状态。我们注意到每一个系统状态的计算都会使用相同的函数与参数，这样循环地向后计算就能构建一个循环系统。如下第三个时间步的系统状态可以表示为：</p>
+<p>$ s ^ { ( 3) } = f \left( s ^ { ( 2) } ; \theta \right) = f \left( f \left( s ^ { ( 1) } ; \theta \right) ; \theta \right) $</p>
+<p>这样的表达式其实就展示了循环网络的本质。若我们具体考虑循环网络每一个时间步都存在输入，且使用变量 h 表示循环网络的隐藏状态（代替上述系统的状态），那么我们可以将一般的循环神经网络抽象为以下表达式：</p>
+<p>$ h ^ { ( t ) } = f \left( h ^ { ( t - 1) } ,x ^ { ( t ) } ; \theta \right) $</p>
+<p>其中 x^t 表示第 t 个时间步上的输入，当前时间步的隐藏状态取决于前一时间步的隐藏状态、当前时间步和所有时间步都有相同的参数θ。我们同样可以将该表达式展开，例如 $h^3 = f(h^2, x^3; θ) = f(f(h^1, x^2; θ), x^3; θ)$。</p>
+<p>该 RNN 的抽象表达式也说明了它只会利用过去时间步的信息来预测当前的状态。此外，循环神经网络连续使用相同的函数 f 与参数 θ 来计算不同时间步的状态，这种方式在多个时间步上共享了相同的参数而降低了模型规模。</p>
+<p>循环神经网络与全连接网络的区别可以很直观地从抽象表达式中看出来，因为有无权重共享机制是它们最重要的属性。最基本的全连接网络可以抽象为一个简单的复合函数，因为每一层全连接网络其实都可以看作一个函数逼近器。</p>
+<p>以下展示了三层全连接网络的抽象表示，其中 $f^1$ 表示第一层或输入层，将第一层的值作为输入并计算第二层的激活值 $f^2$，然后将第二层的激活值作为输入计算第三层的激活值。这种复合函数展示了全连接网络的前馈传播过程，而将复合函数的链式求导法则作为反向传播算法也就显得十分自然。</p>
+<p>$ f ( x ) = f ^ { ( 3) } \left( f ^ { ( 2) } \left( f ^ { ( 1) } ( x ) \right) \right) $</p>
+<p>根据上面的全连接表达式，我们清楚地了解到循环网络复合的函数都是一样的，而全连接网络复合的函数是不一样的，这也是循环体权重共享的特点。当然我们描述循环网络的表达式只是循环体的抽象，典型的循环网络会增加额外的架构特性，例如读取状态信息 h 进行预测的输出层或导师驱动过程等。而很多循环网络的修正都集中在改进循环体以关注长期依赖关系，例如 LSTM 和 GRU 等。</p>
+<p>以上只是从概念上解释循环网络，我们并没有具体学习循环网络的架构与模块，下一部分我们将以计算图的形式具体展示循环网络的结构，包括常见的展开式与不同的变体架构等。</p>
+<h4 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h4><p>上一节的抽象表达式展示了循环体的本质，而它们可以直观地用计算图表示出来。计算图是形式化一组计算结构的方式，一般情况下，我们看到的循环网络展开结构都是这种计算图，这一章节展示的计算图参考自《深度学习》。例如上一节中隐藏状态 $h^t = f(h^t-1, x^t； θ)$ 的计算图可以表示为：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq1.png" style="zoom:90%"></p>
+<p>该计算图展示了一个不带输出单元的循环网络架构，它只使用前一个时间步的隐藏单元信息和当前时间步的输入信息，并利用相同的函数计算下一个隐藏单元的值。此外，上图从左到右分别为循环图和展开图，循环图非常简洁，但展开图详细描述了计算过程与信息流动路径。</p>
+<p>上述的计算图其实只描述了循环体，它缺少了输出映射与输出单元。一般循环神经网络根据输出单元和循环结构可以分为三种，即 Elman Network 类、Jordan Network 类和 N 到 1 的网络。以下分别是这三种网络的计算图，它们基本上构成了循环神经网络架构（双向 RNN 可以是它们的反向叠加）。</p>
+<p>Elman Network 代表了一类循环网络，它的每一个时间步都有一个输入与输出，且循环连接发生在隐藏单元与隐藏单元之间。我们通过累积每一个预测 $\hat{y}$ 与 $y$ 之间的误差来确定损失函数 L，并执行沿时间的反向传播训练整个网络。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq2.png" style="zoom:90%"></p>
+<p>以上展示了这种循环连接发生在隐藏层之间的网络，其中 x 和 y 分别代表数据点与对应的标注，h 为隐藏单元或循环体，L 是预测值与标注值之间的距离与损失。一般在第 t 个时间步，我们会输入数据 $x^t$，并计算隐藏状态 $h^t = tanh（W<em>h^{t-1}+U</em>x^t）$，随后 $h^t$ 将传入下一个时间步与当前时间步输出的对数概率 $o^t = c + V*h^t$。最后我们就能根据输出与标注值计算模型损失。</p>
+<p>这种网络架构是非常经典的结构，我们可以将隐藏单元视为记忆的累积，即将过去的信息传递到未来时间步。这种架构也非常容易扩展到深度架构，例如我们在 h 和 o 之间再加一个循环单元 h’ 或在循环体中额外添加全连接结构等。如下展示了上述循环架构的计算式：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq3.png" style="zoom:90%"></p>
+<p>其中在第 t 个时间步上的输入 $x^t$ 可以是一个词嵌入向量或简单地使用 One-hot 编码。一般权重矩阵 U 的维度为 [词嵌入长度 * 隐藏层的单元数]，偏置向量 b 的维度等于隐藏层单元数。隐藏层输出的向量（每一个元素为隐藏单元的激活值），我们在将隐藏层向量执行仿射变换后，可将 o 视为未归一化的对数概率，并计算 softmax 以和标注的词嵌入向量进行对比。</p>
+<p>Jordan Network 代表了一类循环网络，它的每一个时间步都有一个输入与输出，但循环连接只存在当前时间步的输出和下一个时间步的隐藏单元之间。因为该架构在隐藏单元之间没有循环连接，因此它没有一个记忆机制来捕捉所有用于预测未来时间步的历史信息。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq4.png" style="zoom:90%"></p>
+<p>这种架构虽然在能力上并没有那么强大，但它的优势在于训练过程中的解耦合与并行过程。因为既然我们使用 $o^t$ 作为传递到后一步的信息，那么为什么我们就不能使用标注 $y^t $ 替换 $o^t$ 而作为传递到后面的信息呢？通过使用 $y^t $替换 $o^t$，网络不再需要先计算前一时间步的隐藏状态，再计算后一步的隐藏状态，因此所有计算都能并行化。</p>
+<p>Jordan Network 类的架构在推断时还是会使用前一时间步的输出值 o 来计算后一时间步的隐藏状态。这种网络的一大缺点是，训练过程中观察到的数据与测试时看到的数据会有较大的不同。</p>
+<p>最后一种架构会先读取整个序列，然后再产生单个输出，循环连接存在于隐藏单元之间。这种架构常用于阅读理解等序列模型。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq5.png" style="zoom:90%"></p>
+<p>这种架构只在最后一个隐藏单元输出观察值并给出预测，它可以概括序列并产生用于进一步运算的向量，例如在编码器解码器架构中，它可用于编码整个序列并抽取上下文向量。</p>
+<p>以上是循环神经网络抽象概念与基本的架构表示，它们非常有助于我们理解「循环」这个概念。但在实际建模中，RNN 经常出现梯度爆炸或梯度消失等问题，因此我们一般使用长短期记忆单元或门控循环单元代替基本的 RNN 循环体。它们引入了门控机制以遗忘或保留特定的信息而加强模型对长期依赖关系的捕捉，它们同时也大大缓解了梯度爆炸或梯度消失的问题。</p>
+<p>下面我们将简要介绍这两种非常流行的 RNN 变体，它们同样希望生成通过时间的路径，且导数既不会消失也不会爆炸。</p>
+<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>如前所示，循环网络的每一个隐藏层都有多个循环单元，隐藏层 $h^{t-1}$ 的向量储存了所有该层神经元在 t-1 步的激活值。一般标准的循环网络会将该向量通过一个仿射变换并添加到下一层的输入中，即 $W<em>h^{t-1}+U</em>x^t$。而这个简单的计算过程由于重复使用 W 和 U 而会造成梯度爆炸或梯度消失。因此我们可以使用门控机制控制前一时间步隐藏层保留的信息和当前时间步输入的信息，并选择性地输出一些值而作为该单元的激活值。</p>
+<p>一般而言，我们可以使用长短期记忆单元代替原版循环网络中的隐藏层单元而构建门控循环神经网络。以下两张图分别介绍了 LSTM 的基本概念和详细的计算过程。</p>
+<p>以下是 LSTM 单元的简要结构，其中 Z 为输入部分，$Z_i$、$Z_o$ 和 $Z_f$ 分别为控制三个门的值，即它们会通过激活函数 f 对输入信息进行筛选。一般激活函数可以选择为 Sigmoid 函数，因为它的输出值为 0 到 1，即表示这三个门被打开的程度。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq6.png" style="zoom:90%"></p>
+<p>若我们输入 Z，那么该输入向量通过激活函数得到的 g(Z) 和输入门 f(Z_i ) 的乘积 g(Z)f(Z_i ) 就表示输入数据经筛选后所保留的信息。Z_f 控制的遗忘门将控制以前记忆的信息到底需要保留多少，保留的记忆可以用方程 c*f（z_f）表示。以前保留的信息加上当前输入有意义的信息将会保留至下一个 LSTM 单元，即我们可以用 c’ = g(Z)f(Z_i) + cf(z_f) 表示更新的记忆，更新的记忆 c’ 也表示前面与当前所保留的全部有用信息。我们再取这一更新记忆的激活值 h(c’) 作为可能的输出，一般可以选择 tanh 激活函数。最后剩下的就是由 Z_o 所控制的输出门，它决定当前记忆所激活的输出到底哪些是有用的。因此最终 LSTM 的输出就可以表示为 a = h(c’)f(Z_o)。</p>
+<p>上图非常形象地展示了 LSTM 单元的工作原理，我们修改了《深度学习》一书中的结构图，以更详细地解释该单元的计算过程。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq7.jpg" style="zoom:90%"></p>
+<p>上图详细描述了 LSTM 单元的计算过程，其中 $x^t$ 表示第 t 个时间步的输入向量，一般可以是词嵌入向量。$h^t-1 $为上一个时间步隐藏单元的输出向量，该向量的元素个数等于该层神经元或 LSTM 单元的数量。U 和 W 分别是输入数据和前一时间步隐藏单元输出值的权重矩阵，一个 LSTM 单元因为不同的门控与输入，需要 8 个不同的权重矩阵。此外，$s^t$ 为第 t 个时间步的内部状态或记忆，它会记住所有对于预测相关的信息。最后，b 代表了各个门控和输入的偏置项。</p>
+<p>首先我们会向输入门、遗忘门和输出门馈送当前时间步的输入 $x^t$ 与前一步的隐藏单元 $h^t-1$，在对它们进行线性变换后，利用 Sigmoid 函数压缩到区间（0, 1）以作为门控。这三个门控的计算式如上图所示分别为 $g^t$、$f^t$ 和 $q^t$，其中 i 表示该层级中的第 i 个 LSTM 单元。</p>
+<p>我们将输入与输入门对应元素相乘，这就代表了当前时间步需要添加到记忆 s^t 的信息。而前一时间步的记忆 $s^t-1$ 与遗忘门 $f^t$ 对应元素相乘就表示了需要保留或遗忘的历史信息是多少，最后将这两部分的信息相加在一起就更新了记忆 $s^t$，这一过程见上图 $s^t$ 的计算式。最后我们将记忆 s^t 的激活值与输出门 q^t 对应元素相乘，就能计算出当前时间步的 LSTM 单元输出值，这一计算过程如上图 h^t 所示。</p>
+<p>Goodfellow 表示记忆 $s^t-1$ 也可以用作门控单元的额外输入（如上图所示），但一般 LSTM 的门控单元只使用前一时间步的输出 $h^t-1$ 作为输入，因此我们也不太确定怎样才能使用 $s^t-1$ 作为门控单元的额外输入。</p>
+<h4 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h4><p>GRU 背后的原理与 LSTM 非常相似，即用门控机制控制输入、记忆等信息而在当前时间步做出预测。GRU 有两个有两个门，即一个重置门（reset gate）和一个更新门（update gate）。这两个门控机制的特殊之处在于，它们能够保存长期序列中的信息，且不会随时间而清除或因为与预测不相关而移除。</p>
+<p>从直观上来说，重置门决定了如何将新的输入信息与前面的记忆相结合，更新门定义了前面记忆保存到当前时间步的量。如果我们将重置门设置为 1，更新门设置为 0，那么我们将再次获得标准 RNN 模型。使用门控机制学习长期依赖关系的基本思想和 LSTM 一致，但还是有一些关键区别：</p>
+<ul>
+<li>GRU 有两个门（重置门与更新门），而 LSTM 有三个门（输入门、遗忘门和输出门）。</li>
+<li>GRU 并不会控制并保留内部记忆（c_t），且没有 LSTM 中的输出门。</li>
+<li>LSTM 中的输入与遗忘门对应于 GRU 的更新门，重置门直接作用于前面的隐藏状态。</li>
+</ul>
+<p>在 Kyunghyun Cho 等人第一次提出 GRU 的论文中，他们用下图展示了门控循环单元的结构：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq8.png" style="zoom:90%"></p>
+<p>上图的更新 z 将选择隐藏状态 h 是否更新为新的 h tilde。重置门 r 将决定前面的隐藏状态是否需要遗忘。下面我们将具体解释这两个门控与隐藏状态。</p>
+<p>以下将描述第 j 个隐藏单元激活值的计算方式。首先重置门 r_j 的计算式可以表示为：</p>
+<p>$ r _ { j } = \sigma \left( \left[ \mathbf { W } _ { r } \mathbf { x } \right] _ { j } + \left[ \mathbf { U } _ { r } \mathbf { h } _ { ( t - 1) } \right] _ { j } \right) $</p>
+<p>其中 σ 为 Sigmoid 函数，$[*]<em>j$ 向量中的第 j 个元素，x 和 $h</em>{t-1}$ 分别为当前输入和前面层级的隐藏状态，$W_r$ 和 $U_r$ 分别为更新门的权重矩阵。这个门控将当前输入与前面隐藏状态分别执行一个线性变换，再将结果压缩至 0 到 1 以决定到底有多少过去的信息需要遗忘。同样，更新门的计算式可以表示为：</p>
+<p>$ z _ { j } = \sigma \left( \left[ \mathbf { W } _ { z } \mathbf { x } \right] _ { j } + \left[ \mathbf { U } _ { z } \mathbf { h } _ { ( t - 1) } \right] _ { j } \right) $</p>
+<p>更新门控制了前面时间步的记忆信息和当前时间步所记的信息，并传递到当前时间步最终记忆的信息，这一点在以下两个计算式中有非常明确的展示。</p>
+<p>首先我们需要确定当前时间步需要记忆的信息，即前面隐藏层的信息到底需要保留多少以作为这一步的记忆。如下所示重置门 r 通过 Hadamard 乘积确定需要遗忘的历史信息，如果门控 r 为 0，那么该时间步记忆的内容就仅从输入获取，如果门控 r 为 1，那么就将利用所有的历史信息作为该时间步的记忆。注意我们将 $ \tilde{h}$ 理解为该时间步的记忆，如果我们将它和前面时间步的记忆 $h_{t-1}$ 组合，那么就能得出当前时间步的最终记忆。</p>
+<p>$ \tilde { h } _ { j } ^ { ( t ) } = \phi \left( [ \mathbf { W } \mathbf { x } ] _ { j } + \left[ \mathbf { U } \left( \mathbf { r } \odot \mathbf { h } _ { ( t - 1) } \right) \right] _ { j } \right) $</p>
+<p>其中 Φ 为激活函数，一般我们可以选择 tanh。在计算 h tilde 后，我们可以根据下式组合它与前面时间步的隐藏状态，而最终得到当前时间步下该单元的激活值或隐藏状态：</p>
+<p>$ h _ { j } ^ { \langle t \rangle } = z _ { j } h _ { j } ^ { \langle t - 1\rangle } + \left( 1- z _ { j } \right) \tilde { h } _ { j } ^ { \langle t \rangle } $</p>
+<p>上式将使用更新门 z 权衡前面时间步的记忆和这一时间步的记忆，并得出当前时间步的最终记忆或激活值。</p>
+<p>因此，重置门其实强制隐藏状态遗忘一些历史信息，并利用当前输入的信息。这可以令隐藏状态遗忘任何在未来发现与预测不相关的信息，同时也允许构建更加紧致的表征。而更新门将控制前面隐藏状态的信息有多少会传递到当前隐藏状态，这与 LSTM 网络中的记忆单元非常相似，它可以帮助 RNN 记住长期信息。</p>
+<p>由于每个单元都有独立的重置门与更新门，每个隐藏单元将学习不同尺度上的依赖关系。那些学习捕捉短期依赖关系的单元将趋向于激活重置门，而那些捕获长期依赖关系的单元将常常激活更新门。</p>
+<h3 id="卷积与时间卷积网络"><a href="#卷积与时间卷积网络" class="headerlink" title="卷积与时间卷积网络"></a>卷积与时间卷积网络</h3><p>卷积神经网络，即至少在一层上使用卷积运算来代替一般的矩阵乘法运算的神经网络，一般我们认为卷积网络擅长处理「网格结构的数据」，例如图像就是二维的像素网格。但其实时序数据同样可以认为是在时间轴上有规律地采样而形成的一维网格，根据 Shaojie Bai 等人的实验结果，一般的时间卷积网络甚至比 LSTM 或 GRU 有更好的性能。</p>
+<p>卷积的基本概念其实已经有非常多的入门教程，因此这里只简要说明一般的卷积运算与一维卷积。在卷积运算中，卷积核会在输入图像上滑动以计算出对应的特征图。卷积层试图将神经网络中的每一小块进行更加深入的分析，从而得出抽象程度更高的特征。一般来说通过卷积层处理的神经元结点矩阵会变得更深，即神经元的组织在第三个维度上会增加。</p>
+<p>一般来说，卷积运算主要通过稀疏权重、参数共享和平移等变性等特性加强了机器学习系统。稀疏权重即卷积核大小会远小于输入图像的大小，这允许卷积网络存储更少的参数和使用更少的计算而实现高效的性能。参数共享也是非常优秀的属性，因为我们假设数据拥有局部结构，那么只需要在小范围神经元中使用不同的参数，而大范围内的神经元可共享参数。最后的平移不变性也建立在参数共享的基础上，它可以直观理解为若移动输入中对象，那么输出中的表示也会移动同样的量。</p>
+<p>以下展示了简单的一维卷积，适用于序列建模的卷积网络一般就是采用的这种架构。从一维卷积的连接方式可以清晰地了解权重共享的方式，图中每个卷积层使用了一个大小为 3 的卷积核，即 k1、k2 和 k3 和 f1、f2 和 f3。下层每一个神经元只会和上层神经元部分连接，例如 $h_3$ 只能由下层的局部神经元 $x_2$、$x_3$ 和 $x_4$ 计算得出。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq9.png" style="zoom:90%"></p>
+<p>在序列建模任务中，最下层的 x 可视为句子等输入序列，最上层的 g 可视为输出序列，中间的 h 即隐藏层。当然，这种一维卷积并没有限制为只能查看当前时间步以及之前信息的因果卷积。越上层的神经元拥有越广感受野，因此高层的卷积单元将有能力构建长期依赖关系。如上所示，g_3 可以观察到输入序列的所有信息。</p>
+<p>一维卷积从直观上确实能实现序列建模，但我们经常使用的还是循环网络，尤其是 LSTM 或 GRU。不过在论文 An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling 中，作者表明他们所提出的时间卷积网络可作为一般的序列建模框架，且拥有非常好的效果。本文后面将介绍这种网络，并在 PTB 数据集上分别使用 RNN 与 TCN 构建语言模型。</p>
+<p>时间卷积也是从一般的卷积运算中延伸得出，下面简要介绍了卷积序列预测的一般架构。我们的目标是将卷积网络的最佳实践经验精炼为一个简单的架构，它能便捷地处理时序建模问题。这种时间卷积网络（TCN）的显著的特点有如下几点，首先架构中的卷积存在因果关系，这意味着从未来到过去不会存在信息「泄漏」。其次卷积架构可以将任意长度的序列映射到固定长度的序列。除此之外，TCN 还强调利用残差模块和空洞卷积来构建长期依赖关系。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq10.png" style="zoom:90%"></p>
+<p>TCN 论文图 1：TCN 架构的组成元素。（a）为空洞系数 d=1, 2, 4、卷积核大小 k=3 的空洞因果卷积，感受野能覆盖输入序列中的所有值。（b）为 TCN 残差块，当残差输入和输出有不同的维度，我们会添加一个 1x1 的卷积。（c）为 TCN 中的残差连接示例，其中蓝线为残差函数中的卷积核，绿线为恒等映射。</p>
+<h4 id="全卷积与因果卷积"><a href="#全卷积与因果卷积" class="headerlink" title="全卷积与因果卷积"></a>全卷积与因果卷积</h4><p>为了使用卷积运算处理时序数据，TCN 结合了一维全卷积与因果卷积两种结构。通过使用一维全卷积网络，TCN 可以产生和输入序列等长的输出序列，且每一个隐藏层通过使用 Padding 可以保持和输出层等长。而通过使用因果卷积，TCN 可以保证前面时间步的预测不会使用未来的信息，因为时间步 t 的输出只会根据 t-1 及之前时间步上的卷积运算得出。因此总的来说时间卷积网络简单地组合一维全卷积和因果卷积而转化为适合序列数据的模型。</p>
+<p>全卷积网络最开始在论文 Fully Convolutional Networks for Semantic Segmentation（2015）中提出，它将传统卷积神经网络最后几个全连接层替换为卷积层。一般卷积网络会使用全连接层将特征图映射为固定长度的向量，且每一个元素代表一个类别。这种结构相当于将卷积抽取的高级特征实现线性组合而最终预测类别，但它的局限性体现在只能对整张图像或整段序列做分类处理。</p>
+<p>因此引入全卷积的意义在于它能实现密集型的预测，即在二维卷积下对图像实现像素级的分类，在一维卷积下对序列实现元素级的预测。此外，由于低层的卷积运算感受野较小，对于特征的位置变化不敏感，而高层的卷积网络感受野非常大，对特征的变化也非常敏感。因此 TCN 用一维卷积替代最后几个全连接层有助于感受整个输入序列的信息，这对于构建长期记忆非常有帮助。以下展示了带全连接层的卷积网络和全卷积网络的区别：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq11.png" style="zoom:90%"></p>
+<p>如上所示，全卷积网络将预测类别概率（上）转化为像素级的预测（下）。</p>
+<p>因果卷积首次是在 WaveNet（van den Oord et al., 2016）论文中提出，从直观上来说，它类似于将卷积运算「劈」去一半，令其只能对过去时间步的输入进行运算。对于 TCN 所使用的一维卷积来说，因果卷积可以简单将一般卷积的输出移动几个时间步而实现。在训练过程中，所有过去时间步的卷积预测可以并行化，因为它们的输入和标注真值都是已知的，所以这相对于循环网络在训练上有非常大的优势。因果卷积的结构将结合空洞卷积一起展示。</p>
+<h4 id="空洞卷积（Dilated-Convolutions）"><a href="#空洞卷积（Dilated-Convolutions）" class="headerlink" title="空洞卷积（Dilated Convolutions）"></a>空洞卷积（Dilated Convolutions）</h4><p>因果卷积其实还有一个问题，它需要非常多的层级数或较大的卷积核来扩宽感受野，而较大的感受野正式构建长期记忆所必须的。因此，如果我们不希望通过前面两种会增加计算量的方法扩展感受野，那我们就需要使用空洞卷积（或称扩张卷积）增加数个量级的感受野。</p>
+<p>空洞卷积最大的特性就是扩张感受野，它不是在像素间插入空白像素，而是略过一些已有的像素。当然，我们也可以理解为保持输入不变，并向卷积核中添加一些值为零的权重，从而在计算量基本不变的情况下增加网络观察到的图像范围或序列长度。此外，如果我们将一般卷积运算的步幅增大，那同样也能起到增加感受野的效果，但卷积步幅大于 1 就会起到降采样的效果，输出的序列长度会减小。如下展示了因果卷积结合空洞卷积的效果：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq12.png" style="zoom:90%"></p>
+<p>如上所示，一维卷积的卷积核大小为 2，第一层使用的 dilation 为 1，即常规的卷积运算。而后面层级的空洞大小依次加大，常规卷积只能从右到左观察到 5 个输入数据，而空洞卷积可以观察到所有 16 个输入数据。</p>
+<p>形式上，对于 1 维的输入序列 x ∈ R^n 和卷积核 f : {0, . . . , k − 1} → R，空洞卷积运算 F 可以定义为：</p>
+<p>$ F ( s ) = \left( \mathbf { x } * _ { d } f \right) ( s ) = \sum _ { i = 0} ^ { k - 1} f ( i ) \cdot \mathbf { x } _ { s - d \cdot i } $</p>
+<p>其中 d 为扩张系数、k 为卷积核大小，s − d · i 计算了采用上层哪一个单元。扩张系数控制了每两个卷积核间会插入多少零值，当 d=1 时，空洞卷积就会退化为一般的卷积运算。使用较大的扩张系数允许输出端的神经元表征更大范围的输入序列，因此能有效扩张感受野。</p>
+<p>一般在使用空洞卷积时，我们将随着网络深度 i 的增加而指数级地增大 d，即 d=O(2^i)。这确保了卷积核在有效历史信息中覆盖了所有的输入，同样也确保了使用深度网络能产生极其长的有效历史信息。</p>
+<h4 id="高速公路网络与残差连接"><a href="#高速公路网络与残差连接" class="headerlink" title="高速公路网络与残差连接"></a>高速公路网络与残差连接</h4><p>残差网络在计算机视觉中有非常强大的表达能力，它因为解决了深层网络的训练问题而可以大大增加网络的层数。但要理解残差网络与残差连接，我们需要先理解高速公路网络（Highway Networks）。</p>
+<p>高速公路网络受到 LSTM 的启发，它通过门控令信息在多个神经网络层级中可以高效流动，从而能使用传统基于梯度的方法快速训练深度网络。一般而言，若每一层的卷积运算可以用隐藏函数 H 表示，那么给定该层的输入 x 与权重矩阵 W_H，输出可以表示为 y = H(x, W_H)。在高速公路网络中，传入后一层的信息不仅是当前层的计算结果，同时还包含了前面层级的计算结果。高速公路网络会使用门控机制控制每一层向后传递的信息：</p>
+<p>$ \mathbf { y } = H \left( \mathbf { x } ,\mathbf { W } _ { \text{H} } \right) \cdot T \left( \mathbf { x } ,\mathbf { W } _ { \text{T} } \right) + \mathbf { x } \cdot C \left( \mathbf { x } ,\mathbf { W } _ { C } \right) $</p>
+<p>其中 H(x, W_H) 表示当前层传统卷积运算的结果，而非线性函数 T(x, W_T) 表示转换门，它控制了当前层的卷积运算结果对当前层输出的贡献大小。C(x,W_C) 表示携带门，它控制了当前层的输入信息最终不经过计算直接传到输出端的大小。高速公路网络一般采用 1-T(x, W_T) 代替 C(x,W_C) 而减少门控的数量，且门控通过 Sigmoid 函数实现。</p>
+<p>由于增加了复原输入信息的可能性，模型会更加灵活，且当 T=1 而 C=0 时，高速公路网络就退化为了常规的卷积网络。而残差网络与残差连接正是这种架构的特例，如果我们令上式的 T 和 C 都等于 1，那么它就代表了一个残差模块，即 y = H(x, W_H) + x。因为我们要学的是卷积核的权重 W_H，因此经过简单的变形可得 H(x, W_H) = y-x。由此可知，我们实际需要学习的函数 H 是由残差项 y-x 而得出，这也就是我们称之为残差网络的原因。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq13.png" style="zoom:90%"></p>
+<p>上图为原论文中的残差块结构，其中 F(x) 和前面 H(x, W_H) 表示相同的过程。残差块的输出结合了输入信息与内部卷积运算的输出信息，这种残差连接或恒等映射表示深层模型至少不能低于浅层网络的准确度。</p>
+<p>原论文展示了实践中的两种残差块，下图左边是一种采用堆叠两个 3×3 的卷积运算方法，它在深层网络中表现并不是很好。右边为一种瓶颈残差网络，第一个 1×1 的卷积可以视为对输入进行降维处理，因此中间的 3×3 卷积层将有更少的计算量，而后面的 1×1 卷积可以升维或恢复所有的信息。瓶颈残差网络有更高的计算效率，因此在非常深的网络中能大量减小计算量。</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq14.png" style="zoom:90%"></p>
+<p>由于 TCN 的感受野取决于网络深度 n、卷积核大小 k 和空洞卷积中的扩张系数 d，因此更深的 TCN 有更强的稳定性要求。例如在预测依赖于 2^12 历史时间步和高维输入空间下，网络需要达到 12 层。且每一层需要多个卷积核执行特征抽取，在 TCN 论文作者设计的模型中，它使用了残差模块来加深卷积网络。</p>
+<p>在 TCN 的残差模块内，有两层空洞卷积和 ReLU 非线性函数，且卷积核的权重都经过了权重归一化。此外，TCN 在残差模块内的每个空洞卷积后都添加了 Dropout 以实现正则化。</p>
+<p>然而在标准的 ResNet 中，输入可以直接加上残差函数的输出向量。而在 TCN 中，输入与输出有不同的维度，因此我们需要使用额外的 1×1 卷积来确保 F(x) 与 x 间对应像素相加有相同的维度。</p>
+<p>然而，在标准 ResNet 中，输入直接添加到残余函数的输出中，在 TCN 中（通常是 ConvNets），输入和输出可以有不同的宽度。为了解决输入输出宽度的差异，我们使用额外的 1x1 卷积来确保元素相加⊕接收相同形状的张量。</p>
+<p>最后，时间卷积网络即结合了一维因果卷积和空洞卷积作为标准卷积层，而每两个这样的卷积层与恒等映射可以封装为一个残差模块。这样由残差模块堆叠起一个深度网络，并在最后几层使用卷积层代替全连接层而构建完整的全卷积网络。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>这一部分简单地实现了 LSTM 网络与 TCN 模型，我们在 PTB 数据集上使用这两种结构构建了语言模型。本文在这里只会简要地分析这两个语言模型的核心代码，完整的实现可查看 GitHub 项目地址。</p>
+<p>基于 LSTM 的语言模型使用 TensorFlow 实现，它使用两层 LSTM 网络，且每层有 200 个隐藏单元。我们在训练中截断的输入序列长度为 32，且使用 Dropout 和梯度截断等方法控制模型的过拟合与梯度爆炸等问题。我们在简单地训练 3 个 Epoch 后，测试复杂度（Perplexity）降低到了 179。</p>
+<p>基于 TCN 的语言模型使用 PyTorch 实现，且模型修改自原论文作者 Shaojie Bai 等人的 GitHub 实现。该模型使用论文中介绍的因果卷积与空洞卷积，并采用残差连接的结构完成构建。</p>
+<p>这两个模型实现的都是语言模型，即给定一句话的前面词预测下一个词，因此也可以视为计算语句的出现概率。衡量一个语言模型好坏的方法一般可以用复杂度（Perplexity），它刻画了估计下一句话出现的概率。复杂度的概念其实就是平均分支系数，即模型预测下一个词是的平均可选择数量。我们实现的两个模型并不能成为严格的性能对比，只能帮助读者了解它们的实现过程。但至少，我们可以发现 TCN 确实有能匹敌 LSTM 的性能。</p>
+<h4 id="LSTM-语言建模"><a href="#LSTM-语言建模" class="headerlink" title="LSTM 语言建模"></a>LSTM 语言建模</h4><p>使用 LSTM 的语言建模非常简单，现在也有非常多的教程，因此我们也不重点介绍它的实现。以下是使用 LSTM 构建语言模型的部分代码，它定义了整个 LSTM 网络的架构。此外，该模型的数据读取、超参数、验证与测试过程请查看 GitHub，我们也给出了必要的代码注释。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过ptbmodel 的类描述模型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PTBModel</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, is_training, batch_size, num_steps)</span>:</span></span><br><span class="line">        <span class="comment"># 记录使用的Batch大小和截断长度</span></span><br><span class="line">        self.batch_size = batch_size</span><br><span class="line">        self.num_steps = num_steps</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义输入层，维度为批量大小×截断长度</span></span><br><span class="line">        self.input_data = tf.placeholder(tf.int32, [batch_size, num_steps])</span><br><span class="line">        <span class="comment"># 定义预期输出</span></span><br><span class="line">        self.targets = tf.placeholder(tf.int32, [batch_size, num_steps])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义使用LSTM结构为循环体，带Dropout的深度RNN</span></span><br><span class="line">        lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(hidden_size)</span><br><span class="line">        <span class="keyword">if</span> is_training:</span><br><span class="line">            lstm_cell = tf.nn.rnn_cell.DropoutWrapper(lstm_cell, output_keep_prob=keep_prob)</span><br><span class="line">        cell = tf.nn.rnn_cell.MultiRNNCell([lstm_cell] * num_layers)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化状态为0</span></span><br><span class="line">        self.initial_state = cell.zero_state(batch_size, tf.float32)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将单词ID转换为单词向量，embedding的维度为vocab_size*hidden_size</span></span><br><span class="line">        embedding = tf.get_variable(<span class="string">'embedding'</span>, [vocab_size, hidden_size])</span><br><span class="line">        <span class="comment"># 将一个批量内的单词ID转化为词向量，转化后的输入维度为批量大小×截断长度×隐藏单元数</span></span><br><span class="line">        inputs = tf.nn.embedding_lookup(embedding, self.input_data)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 只在训练时使用Dropout</span></span><br><span class="line">        <span class="keyword">if</span> is_training: inputs = tf.nn.dropout(inputs, keep_prob)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义输出列表，这里先将不同时刻LSTM的输出收集起来，再通过全连接层得到最终输出</span></span><br><span class="line">        outputs = []</span><br><span class="line">        <span class="comment"># state 储存不同批量中LSTM的状态，初始为0</span></span><br><span class="line">        state = self.initial_state</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">'RNN'</span>):</span><br><span class="line">            <span class="keyword">for</span> time_step <span class="keyword">in</span> range(num_steps):</span><br><span class="line">                <span class="keyword">if</span> time_step &gt; <span class="number">0</span>: tf.get_variable_scope().reuse_variables()</span><br><span class="line">                <span class="comment"># 从输入数据获取当前时间步的输入与前一时间步的状态，并传入LSTM结构</span></span><br><span class="line">                cell_output, state = cell(inputs[:, time_step, :], state)</span><br><span class="line">                <span class="comment"># 将当前输出加入输出队列</span></span><br><span class="line">                outputs.append(cell_output)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将输出队列展开成[batch,hidden*num_step]的形状，再reshape为[batch*num_step, hidden]</span></span><br><span class="line">        output = tf.reshape(tf.concat(outputs, <span class="number">1</span>), [<span class="number">-1</span>, hidden_size])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将LSTM的输出传入全连接层以生成最后的预测结果。最后结果在每时刻上都是长度为vocab_size的张量</span></span><br><span class="line">        <span class="comment"># 且经过softmax层后表示下一个位置不同词的概率</span></span><br><span class="line">        weight = tf.get_variable(<span class="string">'weight'</span>, [hidden_size, vocab_size])</span><br><span class="line">        bias = tf.get_variable(<span class="string">'bias'</span>, [vocab_size])</span><br><span class="line">        logits = tf.matmul(output, weight) + bias</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义交叉熵损失函数，一个序列的交叉熵之和</span></span><br><span class="line">        loss = tf.contrib.legacy_seq2seq.sequence_loss_by_example(</span><br><span class="line">            [logits],  <span class="comment"># 预测的结果</span></span><br><span class="line">            [tf.reshape(self.targets, [<span class="number">-1</span>])],  <span class="comment"># 期望正确的结果，这里将[batch_size, num_steps]压缩为一维张量</span></span><br><span class="line">            [tf.ones([batch_size * num_steps], dtype=tf.float32)])  <span class="comment"># 损失的权重，所有为1表明不同批量和时刻的重要程度一样</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算每个批量的平均损失</span></span><br><span class="line">        self.cost = tf.reduce_sum(loss) / batch_size</span><br><span class="line">        self.final_state = state</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 只在训练模型时定义反向传播操作</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_training: <span class="keyword">return</span></span><br><span class="line">        trainable_variable = tf.trainable_variables()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 控制梯度爆炸问题</span></span><br><span class="line">        grads, _ = tf.clip_by_global_norm(tf.gradients(self.cost, trainable_variable), max_grad_norm)</span><br><span class="line">        optimizer = tf.train.GradientDescentOptimizer(learning_rate)</span><br><span class="line">        <span class="comment"># 定义训练步骤</span></span><br><span class="line">        self.train_op = optimizer.apply_gradients(zip(grads, trainable_variable))</span><br></pre></td></tr></table></figure>
+<p>如上所示，我们首先需要定义输入与输出的维度占位符，其中 num_steps 表示截断的输入序列长度，也就是输入句子的长度。然后定义单个层级的 LSTM 网络，这里定义的隐藏单元数是 200。此外，定义的 LSTM 循环体在训练过程中还要加一个 Dropout 层以实现正则化和类似集成方法的效果。将这样的 LSTM 层级堆叠在一起就构建成了多层循环神经网络，这也是非常简单的。</p>
+<p>定义输入后，按时间步来读取输入序列中的中的词向量，并将前一时间步的隐藏状态同时传入 LSTM 单元，以得到当前时间步的预测和隐藏状态。最后将循环体的输出结果传入一般的全连接层就能完成最终的词预测，这里会常规地使用 Softmax 函数归一化预测不同词的概率。当然，后面还需要定义损失函数和梯度截断等方法，这里需要将输入语句所有词的误差都累积起来，且计算一个批量内（多条语句）的平均损失作为最终的损失。</p>
+<p><strong>TCN 语言建模</strong></p>
+<p>这一部分的实现主要采用 TCN 原论文的官方实现，我们修改了一些内容以在 Notebook 上直接运行。本文主要介绍了构建 TCN 整体架构的代码和整体模型的结构，更多如评估过和训练等过程请查看 GitHub 项目。</p>
+<ul>
+<li>GitHub 项目地址：<a href="https://github.com/jiqizhixin/ML-Tutorial-Experiment" target="_blank" rel="noopener">https://github.com/jiqizhixin/ML-Tutorial-Experiment</a></li>
+<li>原论文实现地址：<a href="https://github.com/locuslab/TCN" target="_blank" rel="noopener">https://github.com/locuslab/TCN</a></li>
+</ul>
+<p>原论文 tcn.py 文件中实现了 TCN 的残差模块与整体网络架构，以下将依次解释该网络的各个模块。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn.utils <span class="keyword">import</span> weight_norm</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义实现因果卷积的类（继承自类nn.Module），其中super(Chomp1d, self).__init__()表示对继承自父类的属性进行初始化。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chomp1d</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, chomp_size)</span>:</span></span><br><span class="line">        super(Chomp1d, self).__init__()</span><br><span class="line">        self.chomp_size = chomp_size</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通过增加Padding的方式并对卷积后的张量做切片而实现因果卷积</span></span><br><span class="line">    <span class="comment"># tensor.contiguous()会返回有连续内存的相同张量</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x[:, :, :-self.chomp_size].contiguous()</span><br></pre></td></tr></table></figure>
+<p>如上所示，首先类 Chomp1d 定义了通过 Padding 实现因果卷积的方法。其中 chomp_size 等于 padding=(kernel_size-1) * dilation_size，x 为一般一维空洞卷积后的结果。张量 x 的第一维是批量大小，第二维是通道数量而第三维就是序列长度。如果我们删除卷积后的倒数 padding 个激活值，就相当于将卷积输出向左移动 padding 个位置而实现因果卷积。</p>
+<p>以下实现了 TCN 中的残差模块，它由两个空洞卷积和恒等映射（或一个逐元素的卷积）组成，并使用 torch.nn.Sequential 简单地将这些卷积层和 Dropout 等运算结合在一起。</p>
+<p>首先 TemporalBlock 类会定义第一个空洞卷积层，dilation 控制了扩展系数，即在卷积核权重值之间需要添加多少零。卷积后的结果调用上面定义的 Chomp1d 类实现因果卷积。然后再依次添加 ReLU 非线性激活函数和训练中的 dropout 正则化方法，得出激活值后可作为输入传入相同结构的第二个卷积层。</p>
+<p>因为残差模块可以表示为 y = H(x, W_H) + x，所以将这两个卷积结果再加上恒等映射 f(x)=x 就能完成残差模块。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义残差块，即两个一维卷积与恒等映射</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemporalBlock</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n_inputs, n_outputs, kernel_size, stride, dilation, padding, dropout=<span class="number">0.2</span>)</span>:</span></span><br><span class="line">        super(TemporalBlock, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment">#定义第一个空洞卷积层</span></span><br><span class="line">        self.conv1 = weight_norm(nn.Conv1d(n_inputs, n_outputs, kernel_size,</span><br><span class="line">                                           stride=stride, padding=padding, dilation=dilation))</span><br><span class="line">        <span class="comment"># 根据第一个卷积层的输出与padding大小实现因果卷积</span></span><br><span class="line">        self.chomp1 = Chomp1d(padding)</span><br><span class="line">        <span class="comment">#添加激活函数与dropout正则化方法完成第一个卷积</span></span><br><span class="line">        self.relu1 = nn.ReLU()</span><br><span class="line">        self.dropout1 = nn.Dropout2d(dropout)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#堆叠同样结构的第二个卷积层</span></span><br><span class="line">        self.conv2 = weight_norm(nn.Conv1d(n_outputs, n_outputs, kernel_size,</span><br><span class="line">                                           stride=stride, padding=padding, dilation=dilation))</span><br><span class="line">        self.chomp2 = Chomp1d(padding)</span><br><span class="line">        self.relu2 = nn.ReLU()</span><br><span class="line">        self.dropout2 = nn.Dropout2d(dropout)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将卷积模块的所有组建通过Sequential方法依次堆叠在一起</span></span><br><span class="line">        self.net = nn.Sequential(self.conv1, self.chomp1, self.relu1, self.dropout1,</span><br><span class="line">                                 self.conv2, self.chomp2, self.relu2, self.dropout2)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># padding保证了输入序列与输出序列的长度相等，但卷积前的通道数与卷积后的通道数不一定一样。</span></span><br><span class="line">        <span class="comment"># 如果通道数不一样，那么需要对输入x做一个逐元素的一维卷积以使得它的纬度与前面两个卷积相等。</span></span><br><span class="line">        self.downsample = nn.Conv1d(n_inputs, n_outputs, <span class="number">1</span>) <span class="keyword">if</span> n_inputs != n_outputs <span class="keyword">else</span> <span class="keyword">None</span></span><br><span class="line">        self.relu = nn.ReLU()</span><br><span class="line">        self.init_weights()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化为从均值为0，标准差为0.01的正态分布中采样的随机值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_weights</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.conv1.weight.data.normal_(<span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line">        self.conv2.weight.data.normal_(<span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line">        <span class="keyword">if</span> self.downsample <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            self.downsample.weight.data.normal_(<span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 结合卷积与输入的恒等映射（或输入的逐元素卷积），并投入ReLU 激活函数完成残差模块</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        out = self.net(x)</span><br><span class="line">        res = x <span class="keyword">if</span> self.downsample <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> self.downsample(x)</span><br><span class="line">        <span class="keyword">return</span> self.relu(out + res)</span><br></pre></td></tr></table></figure>
+<p>但 TCN 的残差模块还有一个需要注意的地方，即它有可能会对 x 执行一个逐元素的卷积而不是直接添加 x。这主要是因为卷积结果的通道数与输入 x 的通道数可能不同，那么我们就需要使用 n_outputs 个卷积核将输入采样至与卷积输出相同的通道数。最后，定义前向传播以结合两部分输出而完成残差模块的构建。</p>
+<p>下面定义了 TCN 的整体架构，简单而言即根据层级数将残差模块叠加起来。其中 num_channels 储存了所有层级（残差模块）的通道数，它的长度即表示一共有多少个残差模块。这里每一个空洞卷积层的扩张系数随着层级数成指数增加，这确保了卷积核在有效历史信息中覆盖了所有的输入，同样也确保了使用深度网络能产生极其长的有效历史信息。</p>
+<p>在从 num_channels 列表中抽取当前残差模块的输入与输出通道数后，就能定义这一层的残差模块。将不同层级的残差模块使用 Sequential 堆叠起来就能构建整个网络架构。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义时间卷积网络的架构</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemporalConvNet</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_inputs, num_channels, kernel_size=<span class="number">2</span>, dropout=<span class="number">0.2</span>)</span>:</span></span><br><span class="line">        super(TemporalConvNet, self).__init__()</span><br><span class="line">        layers = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># num_channels为各层卷积运算的输出通道数或卷积核数量，它的长度即需要执行的卷积层数量</span></span><br><span class="line">        num_levels = len(num_channels)</span><br><span class="line">        <span class="comment"># 空洞卷积的扩张系数若随着网络层级的增加而成指数级增加，则可以增大感受野并不丢弃任何输入序列的元素</span></span><br><span class="line">        <span class="comment"># dilation_size根据层级数成指数增加，并从num_channels中抽取每一个残差模块的输入通道数与输出通道数</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_levels):</span><br><span class="line">            dilation_size = <span class="number">2</span> ** i</span><br><span class="line">            in_channels = num_inputs <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">else</span> num_channels[i<span class="number">-1</span>]</span><br><span class="line">            out_channels = num_channels[i]</span><br><span class="line">            layers += [TemporalBlock(in_channels, out_channels, kernel_size, stride=<span class="number">1</span>, dilation=dilation_size,</span><br><span class="line">                                     padding=(kernel_size<span class="number">-1</span>) * dilation_size, dropout=dropout)]</span><br><span class="line">        <span class="comment"># 将所有残差模块堆叠起来组成一个深度卷积网络</span></span><br><span class="line">        self.network = nn.Sequential(*layers)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.network(x)</span><br></pre></td></tr></table></figure>
+<p>以上的三个类都在定义在 tcn.py 文件中，它适用于所有的测试任务。在语言建模中，还有另一部分定义模型过程的类比较重要，它会将输入序列馈送到网络以完成整个推断过程。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TCN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_size, output_size, num_channels,</span></span></span><br><span class="line"><span class="function"><span class="params">                 kernel_size=<span class="number">2</span>, dropout=<span class="number">0.3</span>, emb_dropout=<span class="number">0.1</span>, tied_weights=False)</span>:</span></span><br><span class="line">        super(TCN, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将一个批量的输入数据（one-hot encoding）送入编码器中成为一个批量的词嵌入向量</span></span><br><span class="line">        <span class="comment"># 其中output_size为词汇量，input_size为一个词向量的长度</span></span><br><span class="line">        self.encoder = nn.Embedding(output_size, input_size)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 构建网络</span></span><br><span class="line">        self.tcn = TemporalConvNet(input_size, num_channels, kernel_size, dropout=dropout)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义最后线性变换的纬度，即最后一个卷积层的通道数（类似2D卷积中的特征图数）到所有词汇的映射</span></span><br><span class="line">        self.decoder = nn.Linear(num_channels[<span class="number">-1</span>], output_size)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 是否共享编码器与解码器的权重，默认是共享。共享的话需要保持隐藏单元数等于词嵌入长度，这样预测的向量才可以视为词嵌入向量</span></span><br><span class="line">        <span class="keyword">if</span> tied_weights:</span><br><span class="line">            <span class="keyword">if</span> num_channels[<span class="number">-1</span>] != input_size:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'When using the tied flag, nhid must be equal to emsize'</span>)</span><br><span class="line">            self.decoder.weight = self.encoder.weight</span><br><span class="line">            print(<span class="string">"Weight tied"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对输入词嵌入执行Dropout 表示随机从句子中舍弃词，迫使模型不依赖于单个词完成任务</span></span><br><span class="line">        self.drop = nn.Dropout(emb_dropout)</span><br><span class="line">        self.emb_dropout = emb_dropout</span><br><span class="line">        self.init_weights()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_weights</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.encoder.weight.data.normal_(<span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line">        self.decoder.bias.data.fill_(<span class="number">0</span>)</span><br><span class="line">        self.decoder.weight.data.normal_(<span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#先编码，训练中再随机丢弃词，输入到网络实现推断，最后将推断结果解码为词</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        <span class="string">"""Input ought to have dimension (N, C_in, L_in), where L_in is the seq_len; here the input is (N, L, C)"""</span></span><br><span class="line">        emb = self.drop(self.encoder(input))</span><br><span class="line">        y = self.tcn(emb.transpose(<span class="number">1</span>, <span class="number">2</span>)).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">        y = self.decoder(y)</span><br><span class="line">        <span class="keyword">return</span> y.contiguous()</span><br></pre></td></tr></table></figure>
+<p>如上所示，模型的主要过程即先将输入的向量编码为词嵌入向量，再作为输入投入到时间卷积网络中。该网络的输出为 y，它的第一个纬度表示批量大小，第二个纬度是通道数量，而第三个纬度代表序列长度。全卷积主要体现在解码的过程，我们不需要再向量化卷积结果而进行仿射变换，而是直接将不同的序列通道映射到全部的词汇中以确定预测的词。</p>
+<p>如果读者安装了 PyTorch，那么 TCN 的测试就可以使用 Git 复制原论文官方实践，然后转到 word_cnn 目录下就能直接在 PyCharm 等 IDE 中运行 word_cnn_test.py 文件，当然我们也可以使用命令行运行。此外，为了让更多的入门读者可以运行该模型，我们会修正这个实现语言建模的 TCN，并放到谷歌 Colaboratory 中，这样读者就能使用免费的 GPU 资源进行训练。这一部分还在修正中，稍后我们会上传至机器之心 GitHub 项目。</p>
+<p>最后，Shaojie Bai 等研究者还在很多序列建模任务上测试了 TCN 与传统循环网络的性能：</p>
+<p><img src="http://p598yuf6e.bkt.clouddn.com//seqmodeling/seq15.png" style="zoom:90%"></p>
+<p>上表展示了 TCN 和循环架构在合成压力测试、复调音乐建模、字符级语言建模和单词级语言建模任务上的评估结果。一般 TCN 架构在全部任务和数据集上都比经典循环网络性能优秀，上标 h 代表数值越高越好，l 代表数值越低越好。</p>
+<p>从经典的隐马尔科夫模型到现在基于循环神经网络与卷积神经网络的深度方法，序列建模已经走过了很长一段旅程，它对于自然语言处理与语音识别等都非常重要。本文只是简单的介绍了基础的序列建模深度方法，它还有很多地方需要探索与讨论，那么让我们真真切切地去了解它吧。</p>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li>《Deep Learning》，Ian Goodfellow，2016</li>
+<li>An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling：<a href="https://arxiv.org/abs/1803.01271" target="_blank" rel="noopener">https://arxiv.org/abs/1803.01271</a></li>
+<li>TCN 实现地址：<a href="https://github.com/locuslab/TCN" target="_blank" rel="noopener">https://github.com/locuslab/TCN</a></li>
+<li>Deep Residual Learning for Image Recognition：<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">https://arxiv.org/abs/1512.03385</a></li>
+<li>Fully Convolutional Networks for Semantic Segmentation：<a href="https://arxiv.org/pdf/1605.06211.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1605.06211.pdf</a></li>
+<li>WAVENET: A GENERATIVE MODEL FOR RAW AUDIO：<a href="https://arxiv.org/pdf/1609.03499.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1609.03499.pdf</a></li>
+</ul>
+
+
+<!-- Tags -->
+
+
+
+<div class="tags">
+    <a href="/tags/卷积神经网络/" class="button small">卷积神经网络</a> <a href="/tags/循环神经网络/" class="button small">循环神经网络</a> <a href="/tags/序列建模/" class="button small">序列建模</a>
+</div>
+
+
+
+<!-- Comments -->
+<div>
+    
+    <hr />
+    <h3>Kommentare:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                If you are also interesting in Machine Learning, contact me with email：horatio.j.s.y@gmail.com.
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                    <li><a href="https://twitter.com/Horatio_JSY" class="icon style2 fa-twitter" target="_blank" ><span class="label">Twitter</span></a></li>
+                
+                
+                    <li><a href="https://www.facebook.com/horatio.jsy.3" class="icon style2 fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://github.com/HoratioJSY" class="icon style2 fa-github" target="_blank" ><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://500px.com/siyuan" class="icon style2 fa-500px" target="_blank" ><span class="label">500px</span></a></li>
+                
+                
+                    <li><a href="horatio.j.s.y@gmail.com" class="icon style2 fa-envelope-o" target="_blank" ><span class="label">Email</span></a></li>
+                
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li>&copy; Siyuan All rights reserved</li>
+            <li>Design: Horatio</li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    <script type="text/javascript"
+color="139,129,80" opacity='0.4' zIndex="-2" count="60" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- skel -->
+<script src="/js/skel.min.js"></script>
+
+<!-- Custom Code -->
+<script src="/js/util.js"></script>
+
+<!--[if lte IE 8]>
+<script src="/js/ie/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom Code -->
+<script src="/js/main.js"></script>
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'Autum';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+
+<!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+
+</html>
