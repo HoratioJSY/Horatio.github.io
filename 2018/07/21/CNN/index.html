@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索
-卷积神经网络架构一直是计算机视觉领域的研究重点，很多分类、检测和分割等任务都依赖于基本架构提供更好的性能。本文先概览了经典的卷积网络架构及它们的优缺点，其次重点分析了CVPR 去年的最佳论文 DenseNet与今年北大等研究机构提">
+        <meta name="description" content="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索卷积神经网络架构一直是计算机视觉领域的研究重点，很多分类、检测和分割等任务都依赖于基本架构提供更好的性能。本文先概览了经典的卷积网络架构及它们的优缺点，其次重点分析了CVPR 去年的最佳论文 DenseNet与今年北大等研究机构提出">
     
 
     <!--Author-->
@@ -127,19 +126,10 @@
 
 
 <!-- Content -->
-<h3 id="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索"><a href="#从DensNet到CliqueNet，近来在卷积神经网络架构上的探索" class="headerlink" title="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索"></a>从DensNet到CliqueNet，近来在卷积神经网络架构上的探索</h3><blockquote>
-<p>卷积神经网络架构一直是计算机视觉领域的研究重点，很多分类、检测和分割等任务都依赖于基本架构提供更好的性能。本文先概览了经典的卷积网络架构及它们的优缺点，其次重点分析了CVPR 去年的最佳论文 DenseNet与今年北大等研究机构提出的 CliqueNet，这篇论文接收为CVPR 2018的Orals/Spotlights。</p>
-</blockquote>
+<h3 id="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索"><a href="#从DensNet到CliqueNet，近来在卷积神经网络架构上的探索" class="headerlink" title="从DensNet到CliqueNet，近来在卷积神经网络架构上的探索"></a>从DensNet到CliqueNet，近来在卷积神经网络架构上的探索</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">卷积神经网络架构一直是计算机视觉领域的研究重点，很多分类、检测和分割等任务都依赖于基本架构提供更好的性能。本文先概览了经典的卷积网络架构及它们的优缺点，其次重点分析了CVPR 去年的最佳论文 DenseNet与今年北大等研究机构提出的 CliqueNet，这篇论文接收为CVPR 2018的Orals/Spotlights。</span><br></pre></td></tr></table></figure>
 <p>在微软亚洲研究院主办的CVPR 2018中国论文分享会中，我们发现了一篇非常有意思的论文，它介绍了一种新型卷积网络架构，并且相比于DenseNet能抽取更加精炼的特征。这种CliqueNet不仅有前向的密集型连接，同时还有反向的密集型连接来提炼前面层级的信息。</p>
 <h3 id="卷积架构"><a href="#卷积架构" class="headerlink" title="卷积架构"></a>卷积架构</h3><p>其实我们已经对各种卷积架构都非常熟悉了，因此这一部分只简要介绍具有代表性的卷积结构与方法。首先第一种当然是Yann LeCun在1998年提出的LeNet-5，它奠定了整个卷积神经网络的基础。正如LeCun在LeNet-5原论文中所说，卷积网络结合了三种关键性思想来确保模型对图像的平移、缩放和扭曲具有一定程度的不变性，这三种关键思想即局部感受野、权重共享和空间/时间子采样。其中局部感受野表示卷积核只关注图像的局部特征，而权重共享表示一个卷积核在整张图像上都使用相同的权值，最后的子采样即我们常用的池化操作，它可以精炼抽取的特征。</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/1.png" style="zoom:45%"></div>
-
-<blockquote>
-<p>原论文：GradientBased Learning Applied to Document Recognition</p>
-</blockquote>
-<p>上图是LeNet-5架构，它叠加了两个卷积层与池化层来抽取图像特征，然后再将抽取的特征传入两个全连接层以组合所有特征并识别图像类别。虽然LeNet-5很早就提出来了，且架构和现在很多简单的卷积网络非常相似，但当时可能限于计算资源和数据集等条件并没有得到广泛应用。</p>
-<p>第一个得到广泛关注与应用的卷积神经网络是2012年提出来的AlexNet，它相比于LeNet-5最大的特点是使用更深的卷积网络和GPU进行并行运算。如下所示，AlexNet有5个卷积层和3个最大池化层，它可分为上下两个完全相同的分支，这两个分支在第三个卷积层和全连接层上可以相互交换信息。AlexNet将卷积分为两个分支主要是因为需要在两块老式GTX580 GPU上加速训练，且单块GPU无法为深度网络提供足够的内存，因此研究者将网络分割为两部分，并馈送到两块GPU中。</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/2.png" style="zoom:45%"></div>
+<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/1.png" style="zoom:45%"></div><br>$$<br>原论文：GradientBased Learning Applied to Document Recognition<br>$$<br>上图是LeNet-5架构，它叠加了两个卷积层与池化层来抽取图像特征，然后再将抽取的特征传入两个全连接层以组合所有特征并识别图像类别。虽然LeNet-5很早就提出来了，且架构和现在很多简单的卷积网络非常相似，但当时可能限于计算资源和数据集等条件并没有得到广泛应用。<br><br>第一个得到广泛关注与应用的卷积神经网络是2012年提出来的AlexNet，它相比于LeNet-5最大的特点是使用更深的卷积网络和GPU进行并行运算。如下所示，AlexNet有5个卷积层和3个最大池化层，它可分为上下两个完全相同的分支，这两个分支在第三个卷积层和全连接层上可以相互交换信息。AlexNet将卷积分为两个分支主要是因为需要在两块老式GTX580 GPU上加速训练，且单块GPU无法为深度网络提供足够的内存，因此研究者将网络分割为两部分，并馈送到两块GPU中。<br><br><div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/2.png" style="zoom:45%"></div>
 
 <blockquote>
 <p>原论文：ImageNet Classification with Deep Convolutional Neural Networks</p>
