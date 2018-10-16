@@ -283,8 +283,8 @@
 <p><strong>TCN 语言建模</strong></p>
 <p>这一部分的实现主要采用 TCN 原论文的官方实现，我们修改了一些内容以在 Notebook 上直接运行。本文主要介绍了构建 TCN 整体架构的代码和整体模型的结构，更多如评估过和训练等过程请查看 GitHub 项目。</p>
 <ul>
-<li>GitHub 项目地址：<a href="https://github.com/jiqizhixin/ML-Tutorial-Experiment" target="_blank" rel="noopener">https://github.com/jiqizhixin/ML-Tutorial-Experiment</a></li>
-<li>原论文实现地址：<a href="https://github.com/locuslab/TCN" target="_blank" rel="noopener">https://github.com/locuslab/TCN</a></li>
+<li>GitHub 项目地址：<a href="https://github.com/jiqizhixin/ML-Tutorial-Experiment">https://github.com/jiqizhixin/ML-Tutorial-Experiment</a></li>
+<li>原论文实现地址：<a href="https://github.com/locuslab/TCN">https://github.com/locuslab/TCN</a></li>
 </ul>
 <p>原论文 tcn.py 文件中实现了 TCN 的残差模块与整体网络架构，以下将依次解释该网络的各个模块。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn.utils <span class="keyword">import</span> weight_norm</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义实现因果卷积的类（继承自类nn.Module），其中super(Chomp1d, self).__init__()表示对继承自父类的属性进行初始化。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chomp1d</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, chomp_size)</span>:</span></span><br><span class="line">        super(Chomp1d, self).__init__()</span><br><span class="line">        self.chomp_size = chomp_size</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通过增加Padding的方式并对卷积后的张量做切片而实现因果卷积</span></span><br><span class="line">    <span class="comment"># tensor.contiguous()会返回有连续内存的相同张量</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x[:, :, :-self.chomp_size].contiguous()</span><br></pre></td></tr></table></figure>
@@ -310,7 +310,7 @@
 <ul>
 <li>《Deep Learning》，Ian Goodfellow，2016</li>
 <li>An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling：<a href="https://arxiv.org/abs/1803.01271" target="_blank" rel="noopener">https://arxiv.org/abs/1803.01271</a></li>
-<li>TCN 实现地址：<a href="https://github.com/locuslab/TCN" target="_blank" rel="noopener">https://github.com/locuslab/TCN</a></li>
+<li>TCN 实现地址：<a href="https://github.com/locuslab/TCN">https://github.com/locuslab/TCN</a></li>
 <li>Deep Residual Learning for Image Recognition：<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">https://arxiv.org/abs/1512.03385</a></li>
 <li>Fully Convolutional Networks for Semantic Segmentation：<a href="https://arxiv.org/pdf/1605.06211.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1605.06211.pdf</a></li>
 <li>WAVENET: A GENERATIVE MODEL FOR RAW AUDIO：<a href="https://arxiv.org/pdf/1609.03499.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1609.03499.pdf</a></li>

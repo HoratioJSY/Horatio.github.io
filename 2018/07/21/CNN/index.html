@@ -193,7 +193,7 @@
 <ul>
 <li>论文：Convolutional Neural Networks with Alternately Updated Clique</li>
 <li>论文地址：<a href="https://arxiv.org/abs/1802.10419" target="_blank" rel="noopener">https://arxiv.org/abs/1802.10419</a></li>
-<li>实现地址：<a href="https://github.com/iboing/CliqueNet" target="_blank" rel="noopener">https://github.com/iboing/CliqueNet</a></li>
+<li>实现地址：<a href="https://github.com/iboing/CliqueNet">https://github.com/iboing/CliqueNet</a></li>
 </ul>
 <p>CliqueNet的每一个模块可分为两个阶段，第一个阶段如同DenseNet那样传播，这可以视为预训练过程。而第二个阶段如下图所示每一个卷积运算的输入不仅包括前面所有层的输出特征图，同样还包括后面层级的输出特征图。第二阶段中的循环反馈结构会利用高级视觉信息提炼前面层级的卷积核，因而能实现空间注意力的效果。此外，这两个阶段也可以视为对卷积核权重的交替更新，即先如同常规网络更新一次卷积核，再利用高层抽象信息更新一次卷积核。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/9.png" style="zoom:45%"></div>
