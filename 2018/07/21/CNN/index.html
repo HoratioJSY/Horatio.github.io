@@ -132,6 +132,8 @@
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/1.png" style="zoom:45%"></div>
 
 <p><em>原论文：GradientBased Learning Applied to Document Recognition</em></p>
+<!--11121-->
+<p>~adsdasfqcfasc~</p>
 <p>上图是LeNet-5架构，它叠加了两个卷积层与池化层来抽取图像特征，然后再将抽取的特征传入两个全连接层以组合所有特征并识别图像类别。虽然LeNet-5很早就提出来了，且架构和现在很多简单的卷积网络非常相似，但当时可能限于计算资源和数据集等条件并没有得到广泛应用。</p>
 <p>第一个得到广泛关注与应用的卷积神经网络是2012年提出来的AlexNet，它相比于LeNet-5最大的特点是使用更深的卷积网络和GPU进行并行运算。如下所示，AlexNet有5个卷积层和3个最大池化层，它可分为上下两个完全相同的分支，这两个分支在第三个卷积层和全连接层上可以相互交换信息。AlexNet将卷积分为两个分支主要是因为需要在两块老式GTX580 GPU上加速训练，且单块GPU无法为深度网络提供足够的内存，因此研究者将网络分割为两部分，并馈送到两块GPU中。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/2.png" style="zoom:45%"></div>
