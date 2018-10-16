@@ -131,9 +131,7 @@
 <h3 id="卷积架构"><a href="#卷积架构" class="headerlink" title="卷积架构"></a>卷积架构</h3><p>其实我们已经对各种卷积架构都非常熟悉了，因此这一部分只简要介绍具有代表性的卷积结构与方法。首先第一种当然是 Yann LeCun 在 1998 年提出的 LeNet-5，它奠定了整个卷积神经网络的基础。正如LeCun在LeNet-5原论文中所说，卷积网络结合了三种关键性思想来确保模型对图像的平移、缩放和扭曲具有一定程度的不变性，这三种关键思想即局部感受野、权重共享和空间/时间子采样。其中局部感受野表示卷积核只关注图像的局部特征，而权重共享表示一个卷积核在整张图像上都使用相同的权值，最后的子采样即我们常用的池化操作，它可以精炼抽取的特征。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/1.png" style="zoom:45%"></div>
 
-<blockquote>
-<p>原论文：GradientBased Learning Applied to Document Recognition</p>
-</blockquote>
+<p><em>原论文：GradientBased Learning Applied to Document Recognition</em></p>
 <p>上图是LeNet-5架构，它叠加了两个卷积层与池化层来抽取图像特征，然后再将抽取的特征传入两个全连接层以组合所有特征并识别图像类别。虽然LeNet-5很早就提出来了，且架构和现在很多简单的卷积网络非常相似，但当时可能限于计算资源和数据集等条件并没有得到广泛应用。</p>
 <p>第一个得到广泛关注与应用的卷积神经网络是2012年提出来的AlexNet，它相比于LeNet-5最大的特点是使用更深的卷积网络和GPU进行并行运算。如下所示，AlexNet有5个卷积层和3个最大池化层，它可分为上下两个完全相同的分支，这两个分支在第三个卷积层和全连接层上可以相互交换信息。AlexNet将卷积分为两个分支主要是因为需要在两块老式GTX580 GPU上加速训练，且单块GPU无法为深度网络提供足够的内存，因此研究者将网络分割为两部分，并馈送到两块GPU中。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/2.png" style="zoom:45%"></div>
