@@ -138,12 +138,12 @@
 
 <p><em>原论文：ImageNet Classification with Deep Convolutional Neural Networks</em></p>
 <p>AlexNet 还应用了非常多的方法来提升模型性能，包括第一次使用ReLU非线性激活函数、第一次使用Dropout以及大量数据增强实现网络的正则化。除此之外，AlexNet还使用了带动量的随机梯度下降、L2权重衰减以及CNN的集成方法，这些方法现在都成为了卷积网络不可缺少的模块。</p>
-<p>到了2014年，牛津大学提出了另一种深度卷积网络VGG-Net，它相比于AlexNet有更小的卷积核和更深的层级。AlexNet前面几层用了11<em>11和5</em>5的卷积核以在图像上获取更大的感受野，而VGG采用更小的卷积核与更深的网络提升参数效率。一般而言，叠加几个小的卷积核可以获得与大卷积核相同的感受野，而叠加小卷积核使用的参数明显要少于一个大卷积核。此外，叠加小卷积核因为加深了卷积网络，能引入更强的非线性。</p>
+<p>到了2014年，牛津大学提出了另一种深度卷积网络VGG-Net，它相比于AlexNet有更小的卷积核和更深的层级。AlexNet前面几层用了11$\star$11和 5$\star$5 的卷积核以在图像上获取更大的感受野，而VGG采用更小的卷积核与更深的网络提升参数效率。一般而言，叠加几个小的卷积核可以获得与大卷积核相同的感受野，而叠加小卷积核使用的参数明显要少于一个大卷积核。此外，叠加小卷积核因为加深了卷积网络，能引入更强的非线性。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/3.png" style="zoom:35%"></div>
 
 <p><em>原论文：VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION</em></p>
 <p>VGG-Net 的泛化性能较好，常用于图像特征的抽取目标检测候选框生成等。VGG最大的问题就在于参数数量，VGG-19基本上是参数量最多的卷积网络架构。VGG-Net的参数主要出现在后面两个全连接层，每一层都有4096个神经元，可想而至这之间的参数会有多么庞大。</p>
-<p>同样在2014年，谷歌提出了 GoogLeNet（或Inception-v1）。该网络共有22层，且包含了非常高效的Inception模块，它同样没有如同VGG-Net那样大量使用全连接网络，因此参数量非常小。GoogLeNet最大的特点就是使用了Inception模块，它的目的是设计一种具有优良局部拓扑结构的网络，即对输入图像并行地执行多个卷积运算或池化操作，并将所有输出结果拼接为一个非常深的特征图。因为1<em>1、3</em>3或5*5等不同的卷积运算与池化操作可以获得输入图像的不同信息，并行处理这些运算并结合所有结果将获得更好的图像表征。</p>
+<p>同样在2014年，谷歌提出了 GoogLeNet（或Inception-v1）。该网络共有22层，且包含了非常高效的Inception模块，它同样没有如同VGG-Net那样大量使用全连接网络，因此参数量非常小。GoogLeNet最大的特点就是使用了Inception模块，它的目的是设计一种具有优良局部拓扑结构的网络，即对输入图像并行地执行多个卷积运算或池化操作，并将所有输出结果拼接为一个非常深的特征图。因为1$\star$1、3$\star$3或5*5等不同的卷积运算与池化操作可以获得输入图像的不同信息，并行处理这些运算并结合所有结果将获得更好的图像表征。</p>
 <div align="center"><img src="http://p598yuf6e.bkt.clouddn.com//LeNet_to_CliqueNet/4.jpg" style="zoom:35%"></div>
 
 <p><em>原论文：Going Deeper with Convolutions</em></p>
