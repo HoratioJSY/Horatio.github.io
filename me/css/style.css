@@ -85,7 +85,7 @@ input[type="submit"],.w3l_banner_info_left_grid_left h3 a,.w3agile_footer_copy p
 /*-- //header --*/
 /*-- banner --*/
 .banner{
-    background: url(http://p598yuf6e.bkt.clouddn.com/IMG_6487.jpg) no-repeat 0px -85px;
+    background: url(http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/IMG_6487.jpg) no-repeat 0px -85px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -452,7 +452,7 @@ input[type="submit"],.w3l_banner_info_left_grid_left h3 a,.w3agile_footer_copy p
 /*-- //services --*/
 /*-- team --*/
 .team{
-	background:url(http://p598yuf6e.bkt.clouddn.com/gaussp2.jpg) no-repeat 0px 0px;
+	background:url(http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/me/gaussp2.jpg) no-repeat 0px 0px;
 	background-size:cover;
 }
 .jarallax {
@@ -902,7 +902,7 @@ button.btn1:hover {
 /*-- responsive --*/
 @media(max-width:1440px){
 	.banner {
-		background: url(http://p598yuf6e.bkt.clouddn.com/IMG_6487.jpg) no-repeat 0px 0px;
+		background: url(http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/IMG_6487.jpg) no-repeat 0px 0px;
 		background-size: cover;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
@@ -1034,7 +1034,7 @@ button.btn1:hover {
 		font-size: 3em;
 	}
 	.banner {
-		background: url(http://p598yuf6e.bkt.clouddn.com/IMG_6487.jpg) no-repeat -167px 0px;
+		background: url(http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/IMG_6487.jpg) no-repeat -167px 0px;
 		background-size: cover;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;

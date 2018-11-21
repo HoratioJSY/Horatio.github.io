@@ -134,7 +134,7 @@
 <p>当模型都为多层感知机时，对抗性建模框架可以最直接地应用。为了学习到生成器在数据 x 上的分布 $P_g$，我们先定义一个先验的输入噪声变量 $P_z(z)$，然后根据 $G(z;θ_g)$ 将其映射到数据空间中，其中 G 为多层感知机所表征的可微函数。我们同样需要定义第二个多层感知机 $D(s;θ_d)$，它的输出为单个标量。D(x) 表示 x 来源于真实数据而不是 $P_g$ 的概率。我们训练 D 以最大化正确区分真实样本和生成样本的概率，然后再通过最小化 log(1-D(G(z))) 而同时训练 G。也就是说判别器 D 和生成器对价值函数 V(G,D) 进行了极小极大化博弈：</p>
 <p>$\min _ { G } \max _ { D } V ( D ,G ) = \mathbb { E } _ { x \sim p _ { \operatorname{data} } ( x ) } ( \log D ( x ) ] + \mathbb { E } _ { z \sim p _ { z } ( z ) } [ \log ( 1- D ( G ( z ) ) ) ]$</p>
 <p>我们后一部分会对对抗网络进行理论上的分析，该理论分析本质上可以表明如果 G 和 D 的模型复杂度足够（即在非参数限制下），那么对抗网络就能生成数据分布。此外，Goodfellow 等人在论文中使用如下案例为我们简要介绍了基本概念。</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/gan1.jpg" style="zoom:25%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/gan/gan1.jpg" style="zoom:25%"></div>
 
 <p>如上图所示，生成对抗网络会训练并更新判别分布（即 D，蓝色的虚线），更新判别器后就能将数据真实分布（黑点组成的线）从生成分布 $P_g(G)$（绿色实线）中判别出来。下方的水平线代表采样域 Z，其中等距线表示 Z 中的样本为均匀分布，上方的水平线代表真实数据 X 中的一部分。向上的箭头表示映射 x=G(z) 如何对噪声样本（均匀采样）施加一个不均匀的分布 $P_g$。（a）考虑在收敛点附近的对抗训练：$P_g$ 和 $P_{data}$ 已经十分相似，D 是一个局部准确的分类器。（b）在算法内部循环中训练 D 以从数据中判别出真实样本，该循环最终会收敛到 $D(x) =P_{data}(x) /(P_{data}(x)+P_g(x))$。（c）随后固定判别器并训练生成器，在更新 G 之后，D 的梯度会引导 G(z) 流向更可能被 D 分类为真实数据的方向。（d）经过若干次训练后，如果 G 和 D 有足够的复杂度，那么它们就会到达一个均衡点。这个时候 $P_g=P_{data}$，即生成器的概率密度函数等于真实数据的概率密度函数，也即生成的数据和真实数据是一样的。在均衡点上 D 和 G 都不能得到进一步提升，并且判别器无法判断数据到底是来自真实样本还是伪造的数据，即 D（x）= 1/2。</p>
 <p>上面是比较精简地介绍了生成对抗网络的基本概念，下一节将会把这些概念形式化，并描述优化的大致过程。</p>
@@ -169,7 +169,7 @@
 <p>$ L = \prod _ { i = 1} ^ { m } P _ { G } \left( x ^ { i } ; \theta \right) $</p>
 <p>其中「∏」代表累乘、$P_G(x^i;θ)$ 代表第 i 个样本在生成分布出现的概率。从该似然函数可知，我们抽取的 m 个真实样本在 $P_G(x;θ)$ 分布中全部出现的概率值可以表达为 L。又因为若 $P_G(x;θ)$ 分布和 $P_{data}(x)$ 分布相似，那么真实数据很可能就会出现在 $P_G(x;θ)$ 分布中，因此 m 个样本都出现在 $P_G(x;θ)$ 分布中的概率就会十分大。</p>
 <p>下面我们就可以最大化似然函数 L 而求得离真实分布最近的生成分布（即最优的参数θ）：</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/gan2.png" style="zoom:40%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/gan/gan2.png" style="zoom:40%"></div>
 
 <p>在上面的推导中，我们希望最大化似然函数 L。若对似然函数取对数，那么累乘 ∏ 就能转化为累加 ∑，并且这一过程并不会改变最优化的结果。因此我们可以将极大似然估计化为求令 log[P_G(x;θ)] 期望最大化的θ，而期望 E[logP_G(x;θ)] 可以展开为在 x 上的积分形式：∫P_data(x)logP_G(x;θ)dx。又因为该最优化过程是针对θ的，所以我们添加一项不含θ的积分并不影响最优化效果，即可添加 -∫P_data(x)logP_data(x)dx。添加该积分后，我们可以合并这两个积分并构建类似 KL 散度的形式。该过程如下：</p>
 <p>$ \int _ { x } P _ { \operatorname{data} } ( x ) \log P _ { G } ( x ,\theta ) - P _ { d a t a } ( x ) \log P _ { d a t a } ( x ) d x = \int _ { x } P _ { d a t a } ( x ) \log \frac { P _ { G } ( x ,\theta ) } { P _ { d a t a } ( x ) } $</p>
@@ -183,7 +183,7 @@
 <h4 id="最优判别器"><a href="#最优判别器" class="headerlink" title="最优判别器"></a>最优判别器</h4><p>在极小极大博弈的第一步中，给定生成器 G，最大化 V(D,G) 而得出最优判别器 D。其中，最大化 V(D,G) 评估了 $P_G$ 和 $P_{data}$ 之间的差异或距离。因为在原论文中价值函数可写为在 x 上的积分，即将数学期望展开为积分形式：</p>
 <p>$ V ( G ,D ) = \int _ { x } p _ { data} ( x ) \log ( D ( x ) ) + p _ { g } ( x ) \log ( 1- D ( x ) ) d x $</p>
 <p>其实求积分的最大值可以转化为求被积函数的最大值。而求被积函数的最大值是为了求得最优判别器 D，因此不涉及判别器的项都可以看作为常数项。如下所示，$P_{data}(x)$ 和 $P_G(x)$ 都为标量，因此被积函数可表示为 a<em>D(x)+b</em>log(1-D(x))。</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/gan3.png" style="zoom:45%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/gan/gan3.png" style="zoom:45%"></div>
 
 
 
@@ -248,7 +248,7 @@
 <p>若现在给定生成器 G，并希望计算 max V(G,D) 以求得判别器 D，那么我们首先需要从 $P_{data}(x)$ 采样 m 个样本 ${𝑥^1,𝑥^2,…,𝑥^𝑚}$，从生成器 $P_G(x)$ 采样 m 个样本 ${\tilde{x}^1,\tilde{x}^2, \dots,\tilde{x}^m}$ 。因此最大化价值函数 V(G,D) 就可以使用以下表达式近似替代：</p>
 <p>$Maximize\ \ \tilde { V } = \frac { 1} { m } \sum _ { i = 1} ^ { m } \log D \left( x ^ { i } \right) + \frac { 1} { m } \sum _ { i = 1} ^ { m } \log \left( 1- D \left( \tilde { x } ^ { i } \right) \right) $</p>
 <p>若我们需要计算上述的极大化过程，可以采用等价形式的训练方法。若我们有一个二元分类器 D（参数为θ_d），当然该分类器可以是深度神经网络，那么极大化过程的输出就为该分类器 D(x)。现在我们从 P_data(x) 抽取样本作为正样本，从 P_G(x) 抽取样本作为负样本，同时将逼近负 V(G,D) 的函数作为损失函数，因此我们就将其表述为一个标准的二元分类器的训练过程：</p>
-<div align="center"><img src="http://p598yuf6e.bkt.clouddn.com/gan4.png" style="zoom:40%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/gan/gan4.png" style="zoom:40%"></div>
 
 <p>在实践中，我们必须使用迭代和数值计算的方法实现极小极大化博弈过程。在训练的内部循环中完整地优化 D 在计算上是不允许的，并且有限的数据集也会导致过拟合。因此我们可以在 k 个优化 D 的步骤和一个优化 G 的步骤间交替进行。那么我们只需慢慢地更新 G，D 就会一直处于最优解的附近，这种策略类似于 SML/PCD 训练的方式。</p>
 <p>综上，我们可以描述整个训练过程，对于每一次迭代：</p>
@@ -399,7 +399,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax -->
+<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 <!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
@@ -417,7 +417,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- End: Injected MathJax -->
 </body>
 
 </html>
