@@ -146,19 +146,23 @@
 <h4 id="BERT-官方预训练模型"><a href="#BERT-官方预训练模型" class="headerlink" title="BERT 官方预训练模型"></a>BERT 官方预训练模型</h4><p>在众多研究者的关注下，谷歌发布了 BERT 的实现代码与预训练模型。其中代码比较简单，基本上是标准的 Transformer 实现，但是发布的预训练模型非常重要，因为它需要的计算力太多。总体而言，谷歌开放了预训练的 BERT-Base 和 BERT-Large 模型，且每一种模型都有 Uncased 和 Cased 两种版本。</p>
 <p>其中 Uncased 在使用 WordPiece 分词之前都转换为小写格式，并剔除所有 Accent Marker，而 Cased 会保留它们。项目作者表示一般使用 Uncased 模型就可以了，除非大小写对于任务很重要才会使用 Cased 版本。所有预训练模型及其地址如下：</p>
 <ul>
-<li>BERT-Base, Uncased：12-layer, 768-hidden, 12-heads, 110M parameters</li>
+<li><p>BERT-Base, Uncased：12-layer, 768-hidden, 12-heads, 110M parameters</p>
+<ul>
 <li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip</a></li>
 </ul>
+</li>
+<li><p>BERT-Large, Uncased：24-layer, 1024-hidden, 16-heads, 340M parameters</p>
 <ul>
-<li>BERT-Large, Uncased：24-layer, 1024-hidden, 16-heads, 340M parameters</li>
 <li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip</a></li>
 </ul>
+</li>
+<li><p>BERT-Base, Cased：12-layer, 768-hidden, 12-heads , 110M parameters</p>
 <ul>
-<li>BERT-Base, Cased：12-layer, 768-hidden, 12-heads , 110M parameters</li>
 <li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip</a></li>
 </ul>
-<ul>
-<li>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters（目前无法使用，需要重新生成）。</li>
+</li>
+<li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters（目前无法使用，需要重新生成）。</p>
+</li>
 </ul>
 <p>每一个 ZIP 文件都包含了三部分，即保存预训练模型与权重的 ckpt 文件、将 WordPiece 映射到单词 id 的 vocab 文件，以及指定模型超参数的 json 文件。除此之外，谷歌还发布了原论文中将预训练模型应用于各种 NLP 任务的源代码，感兴趣的读者可以查看 GitHub 项目复现论文结果。</p>
 <p>BERT 官方项目地址：<a href="https://github.com/google-research/bert" target="_blank" rel="noopener">https://github.com/google-research/bert</a></p>
@@ -167,7 +171,7 @@
 <h3 id="2-Transformer-概览"><a href="#2-Transformer-概览" class="headerlink" title="2 Transformer 概览"></a>2 Transformer 概览</h3><p>在整个 Transformer 架构中，它只使用了注意力机制和全连接层来处理文本，因此 Transformer 确实没使用循环神经网络或卷积神经网络实现「特征抽取」这一功能。此外，Transformer 中最重要的就是自注意力机制，这种在序列内部执行 Attention 的方法可以视为搜索序列内部的隐藏关系，这种内部关系对于翻译以及序列任务的性能有显著提升。</p>
 <p>如 Seq2Seq 一样，原版 Transformer 也采用了编码器-解码器框架，但它们会使用多个 Multi-Head Attention、前馈网络、层级归一化和残差连接等。下图从左到右展示了原论文所提出的 Transformer 架构、Multi-Head Attention 和点乘注意力。</p>
 <p>其中点乘注意力是注意力机制的一般表达形式，将多个点乘注意力叠加在一起可以组成 Transformer 中最重要的 Multi-Head Attention 模块，多个 Multi-Head Attention 模块堆叠在一起就组成了 Transformer 的主体结构，并借此抽取文本中的信息。</p>
-<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/bert/bert1.jpg" style="zoom:45%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/bert/bert1.jpg" style="zoom:30%"></div>
 
 <p><em>改编自论文《Attention is all your need》</em></p>
 <p>上图右边的点乘注意力其实就是标准 Seq2Seq 模型中的注意力机制。其中 Query 向量与 Value 向量在 NMT 中相当于目标语输入序列与源语输入序列，Query 与 Key 向量的点乘相当于余弦相似性，经过 SoftMax 函数后可得出一组归一化的概率。这些概率相当于给源语输入序列做加权平均，即表示在生成一个目标语单词时源语序列中哪些词是重要的。</p>
@@ -238,12 +242,6 @@
 <!-- Comments -->
 <div>
     
-    <hr />
-    <h3>留言:</h3>
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
 
 
 </div>
@@ -317,18 +315,6 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
 <!-- Disqus Comments -->
-
-<script type="text/javascript">
-    var disqus_shortname = 'Autum';
-
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
 
 
 
