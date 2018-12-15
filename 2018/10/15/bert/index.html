@@ -162,6 +162,17 @@
 </ul>
 </li>
 <li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters（目前无法使用，需要重新生成）。</p>
+<ul>
+<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip</a></li>
+</ul>
+</li>
+<li>BERT-Base, Multilingual Cased (New, recommended): 104 languages, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
+<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip</a></li>
+</ul>
+</li>
+<li>BERT-Base, Chinese: Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
+<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip</a></li>
+</ul>
 </li>
 </ul>
 <p>每一个 ZIP 文件都包含了三部分，即保存预训练模型与权重的 ckpt 文件、将 WordPiece 映射到单词 id 的 vocab 文件，以及指定模型超参数的 json 文件。除此之外，谷歌还发布了原论文中将预训练模型应用于各种 NLP 任务的源代码，感兴趣的读者可以查看 GitHub 项目复现论文结果。</p>
