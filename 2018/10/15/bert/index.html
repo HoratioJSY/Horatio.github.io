@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="预训练语言模型的巅峰：BERT最近谷歌发布了基于双向 Transformer 的大规模预训练语言模型，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。如果这种预训练方式能经得起实践的检验，那么各种 NLP 任务只需要少量">
+        <meta name="description" content="BERT最近谷歌发布了基于双向 Transformer 的大规模预训练语言模型，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。如果这种预训练方式能经得起实践的检验，那么各种 NLP 任务只需要少量数据进行微调就能实现非">
     
 
     <!--Author-->
@@ -126,7 +126,7 @@
 
 
 <!-- Content -->
-<h2 id="预训练语言模型的巅峰：BERT"><a href="#预训练语言模型的巅峰：BERT" class="headerlink" title="预训练语言模型的巅峰：BERT"></a>预训练语言模型的巅峰：BERT</h2><p>最近谷歌发布了基于双向 Transformer 的大规模预训练语言模型，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。如果这种预训练方式能经得起实践的检验，那么各种 NLP 任务只需要少量数据进行微调就能实现非常好的效果，BERT 也将成为一种名副其实的骨干网络。</p>
+<h2 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h2><p>最近谷歌发布了基于双向 Transformer 的大规模预训练语言模型，该预训练模型能高效抽取文本信息并应用于各种 NLP 任务，该研究凭借预训练模型刷新了 11 项 NLP 任务的当前最优性能记录。如果这种预训练方式能经得起实践的检验，那么各种 NLP 任务只需要少量数据进行微调就能实现非常好的效果，BERT 也将成为一种名副其实的骨干网络。</p>
 <p>1 简介</p>
 <p>2 Transformer 概览</p>
 <p>3 BERT 论文解读</p>
@@ -148,41 +148,40 @@
 <ul>
 <li><p>BERT-Base, Uncased：12-layer, 768-hidden, 12-heads, 110M parameters</p>
 <ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
 <li><p>BERT-Large, Uncased：24-layer, 1024-hidden, 16-heads, 340M parameters</p>
 <ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
 <li><p>BERT-Base, Cased：12-layer, 768-hidden, 12-heads , 110M parameters</p>
 <ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
-<li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters（目前无法使用，需要重新生成）。</p>
+<li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters</p>
 <ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
 <li>BERT-Base, Multilingual Cased (New, recommended): 104 languages, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
 <li>BERT-Base, Chinese: Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
-<li>地址：<a href="https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip" target="_blank" rel="noopener">https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip</a></li>
+<li><a href="https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
 </ul>
 <p>每一个 ZIP 文件都包含了三部分，即保存预训练模型与权重的 ckpt 文件、将 WordPiece 映射到单词 id 的 vocab 文件，以及指定模型超参数的 json 文件。除此之外，谷歌还发布了原论文中将预训练模型应用于各种 NLP 任务的源代码，感兴趣的读者可以查看 GitHub 项目复现论文结果。</p>
 <p>BERT 官方项目地址：<a href="https://github.com/google-research/bert" target="_blank" rel="noopener">https://github.com/google-research/bert</a></p>
-<p>最后，这个项目可以在 CPU、GPU 和 TPU 上运行，但是在有 12GB 到 16GB 显存的 GPU 上，很可能模型会发生显存不足的问题。因此读者也可以在 Colab 先试着使用 BERT，如下展示了在 Colab 上使用免费 TPU 微调 BERT 的 Notebook：</p>
-<p>BERT Colab 地址：<a href="https://colab.sandbox.google.com/github/tensorflow/tpu/blob/master/tools/colab/bert_finetuning_with_cloud_tpus.ipynb" target="_blank" rel="noopener">https://colab.sandbox.google.com/github/tensorflow/tpu/blob/master/tools/colab/bert_finetuning_with_cloud_tpus.ipynb</a></p>
+<p>最后，这个项目可以在 CPU、GPU 和 TPU 上运行，但是在有 12GB 到 16GB 显存的 GPU 上，很可能模型会发生显存不足的问题。因此读者也可以在 Colab 先试着使用 BERT，例如了在 Colab 上使用免费 TPU 微调 BERT 的 Notebook：<a href="https://colab.sandbox.google.com/github/tensorflow/tpu/blob/master/tools/colab/bert_finetuning_with_cloud_tpus.ipynb" target="_blank" rel="noopener">BERT Colab 地址</a></p>
 <h3 id="2-Transformer-概览"><a href="#2-Transformer-概览" class="headerlink" title="2 Transformer 概览"></a>2 Transformer 概览</h3><p>在整个 Transformer 架构中，它只使用了注意力机制和全连接层来处理文本，因此 Transformer 确实没使用循环神经网络或卷积神经网络实现「特征抽取」这一功能。此外，Transformer 中最重要的就是自注意力机制，这种在序列内部执行 Attention 的方法可以视为搜索序列内部的隐藏关系，这种内部关系对于翻译以及序列任务的性能有显著提升。</p>
 <p>如 Seq2Seq 一样，原版 Transformer 也采用了编码器-解码器框架，但它们会使用多个 Multi-Head Attention、前馈网络、层级归一化和残差连接等。下图从左到右展示了原论文所提出的 Transformer 架构、Multi-Head Attention 和点乘注意力。</p>
 <p>其中点乘注意力是注意力机制的一般表达形式，将多个点乘注意力叠加在一起可以组成 Transformer 中最重要的 Multi-Head Attention 模块，多个 Multi-Head Attention 模块堆叠在一起就组成了 Transformer 的主体结构，并借此抽取文本中的信息。</p>
-<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/bert/bert1.jpg" style="zoom:30%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/bert/bert1.jpg" style="zoom:27%"></div>
 
 <p><em>改编自论文《Attention is all your need》</em></p>
 <p>上图右边的点乘注意力其实就是标准 Seq2Seq 模型中的注意力机制。其中 Query 向量与 Value 向量在 NMT 中相当于目标语输入序列与源语输入序列，Query 与 Key 向量的点乘相当于余弦相似性，经过 SoftMax 函数后可得出一组归一化的概率。这些概率相当于给源语输入序列做加权平均，即表示在生成一个目标语单词时源语序列中哪些词是重要的。</p>
