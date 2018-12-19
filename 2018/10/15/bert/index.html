@@ -146,34 +146,19 @@
 <h4 id="BERT-官方预训练模型"><a href="#BERT-官方预训练模型" class="headerlink" title="BERT 官方预训练模型"></a>BERT 官方预训练模型</h4><p>在众多研究者的关注下，谷歌发布了 BERT 的实现代码与预训练模型。其中代码比较简单，基本上是标准的 Transformer 实现，但是发布的预训练模型非常重要，因为它需要的计算力太多。总体而言，谷歌开放了预训练的 BERT-Base 和 BERT-Large 模型，且每一种模型都有 Uncased 和 Cased 两种版本。</p>
 <p>其中 Uncased 在使用 WordPiece 分词之前都转换为小写格式，并剔除所有 Accent Marker，而 Cased 会保留它们。项目作者表示一般使用 Uncased 模型就可以了，除非大小写对于任务很重要才会使用 Cased 版本。所有预训练模型及其地址如下：</p>
 <ul>
-<li><p>BERT-Base, Uncased：12-layer, 768-hidden, 12-heads, 110M parameters</p>
-<ul>
-<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
-</ul>
+<li><p>BERT-Base, Uncased：12-layer, 768-hidden, 12-heads, 110M parameters，<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></p>
 </li>
-<li><p>BERT-Large, Uncased：24-layer, 1024-hidden, 16-heads, 340M parameters</p>
-<ul>
-<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></li>
-</ul>
+<li><p>BERT-Large, Uncased：24-layer, 1024-hidden, 16-heads, 340M parameters，<a href="https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></p>
 </li>
 <li><p>BERT-Base, Cased：12-layer, 768-hidden, 12-heads , 110M parameters</p>
 <ul>
 <li><a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 </li>
-<li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters</p>
-<ul>
-<li><a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></li>
-</ul>
+<li><p>BERT-Large, Cased：24-layer, 1024-hidden, 16-heads, 340M parameters，<a href="https://storage.googleapis.com/bert_models/2018_10_18/cased_L-24_H-1024_A-16.zip" target="_blank" rel="noopener">地址</a></p>
 </li>
-<li>BERT-Base, Multilingual Cased (New, recommended): 104 languages, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
-<li><a href="https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
-</ul>
-</li>
-<li>BERT-Base, Chinese: Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters<ul>
-<li><a href="https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
-</ul>
-</li>
+<li>BERT-Base, Multilingual Cased (New, recommended): 104 languages, 12-layer, 768-hidden, 12-heads, 110M parameters，<a href="https://storage.googleapis.com/bert_models/2018_11_23/multi_cased_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
+<li>BERT-Base, Chinese: Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters，<a href="https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip" target="_blank" rel="noopener">地址</a></li>
 </ul>
 <p>每一个 ZIP 文件都包含了三部分，即保存预训练模型与权重的 ckpt 文件、将 WordPiece 映射到单词 id 的 vocab 文件，以及指定模型超参数的 json 文件。除此之外，谷歌还发布了原论文中将预训练模型应用于各种 NLP 任务的源代码，感兴趣的读者可以查看 GitHub 项目复现论文结果。</p>
 <p>BERT 官方项目地址：<a href="https://github.com/google-research/bert" target="_blank" rel="noopener">https://github.com/google-research/bert</a></p>
@@ -225,18 +210,18 @@
 <p>项目地址：<a href="https://github.com/google-research/bert" target="_blank" rel="noopener">https://github.com/google-research/bert</a></p>
 <h4 id="微调预训练-BERT"><a href="#微调预训练-BERT" class="headerlink" title="微调预训练 BERT"></a>微调预训练 BERT</h4><p>该项目表示原论文中 11 项 NLP 任务的微调都是在单块 Cloud TPU（64GB RAM）上进行的，目前无法使用 12GB - 16GB 内存的 GPU 复现论文中 BERT-Large 模型的大部分结果，因为内存匹配的最大批大小仍然太小。但是基于给定的超参数，BERT-Base 模型在不同任务上的微调应该能够在一块 GPU（显存至少 12GB）上运行。</p>
 <p>这里主要介绍如何在句子级的分类任务以及标准问答数据集（SQuAD）微调 BERT-Base 模型，其中微调过程主要使用一块 GPU。而 BERT-Large 模型的微调读者可以参考原项目。</p>
-<p>以下为原项目中展示的句子级分类任务的微调，在运行该示例之前，你必须运行一个脚本下载GLUE data，并将它放置到目录\$GLUE_DIR。然后，下载预训练BERT-Base模型，解压缩后存储到目录​\$BERT_BASE_DIR。</p>
+<p>以下为原项目中展示的句子级分类任务的微调，在运行该示例之前，你必须运行一个脚本下载GLUE data，并将它放置到目录 \$GLUE_DIR。然后，下载预训练 BERT-Base 模型，解压缩后存储到目录​ \$BERT_BASE_DIR。</p>
 <p>GLUE data 脚本地址：<a href="https://gist.github.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e" target="_blank" rel="noopener">https://gist.github.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e</a></p>
-<p>该示例代码在Microsoft Research Paraphrase Corpus（MRPC）上对BERT-Base进行微调，该语料库仅包含3600个样本，在大多数GPU上该微调过程仅需几分钟。</p>
+<p>该示例代码在 Microsoft Research Paraphrase Corpus（MRPC）上对 BERT-Base 进行微调，该语料库仅包含3600个样本，在大多数GPU上该微调过程仅需几分钟。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> BERT_BASE_DIR=/path/to/bert/uncased_L-12_H-768_A-12export GLUE_DIR=/path/to/glue</span><br><span class="line"></span><br><span class="line">python run_classifier.py \</span><br><span class="line">  --task_name=MRPC \</span><br><span class="line">  --do_train=<span class="literal">true</span> \</span><br><span class="line">  --do_eval=<span class="literal">true</span> \</span><br><span class="line">  --data_dir=<span class="variable">$GLUE_DIR</span>/MRPC \</span><br><span class="line">  --vocab_file=<span class="variable">$BERT_BASE_DIR</span>/vocab.txt \</span><br><span class="line">  --bert_config_file=<span class="variable">$BERT_BASE_DIR</span>/bert_config.json \</span><br><span class="line">  --init_checkpoint=<span class="variable">$BERT_BASE_DIR</span>/bert_model.ckpt \</span><br><span class="line">  --max_seq_length=128 \</span><br><span class="line">  --train_batch_size=32 \</span><br><span class="line">  --learning_rate=2e-5 \</span><br><span class="line">  --num_train_epochs=3.0 \</span><br><span class="line">  --output_dir=/tmp/mrpc_output/</span><br></pre></td></tr></table></figure>
 <p>输出如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">***** Eval results *****</span><br><span class="line">  eval_accuracy = 0.845588</span><br><span class="line">  eval_loss = 0.505248</span><br><span class="line">  global_step = 343</span><br><span class="line">  loss = 0.505248</span><br></pre></td></tr></table></figure>
 <p>可以看到，开发集准确率是84.55%。类似MRPC这样的较小数据集在开发集准确率上方差较高，即使是从同样的预训练检查点开始运行。如果你重新运行多次（确保使用不同的output_dir），结果将在84%和88%之间。注意：你或许会看到信息“Running train on CPU.”这只是表示模型不是运行在Cloud TPU上而已。</p>
-<h4 id="通过预训练BERT抽取语义特征"><a href="#通过预训练BERT抽取语义特征" class="headerlink" title="通过预训练BERT抽取语义特征"></a>通过预训练BERT抽取语义特征</h4><p>对于原论文11项任务之外的试验，我们也可以通过预训练BERT抽取定长的语义特征向量。因为在特定案例中，与其端到端微调整个预训练模型，直接获取预训练上下文嵌入向量会更有效果，并且也可以缓解大多数内存不足问题。在这个过程中，每个输入token的上下文嵌入向量指预训练模型隐藏层生成的定长上下文表征。</p>
-<p>例如，我们可以使用脚本extract_features.py 抽取语义特征：</p>
+<h4 id="通过预训练BERT抽取语义特征"><a href="#通过预训练BERT抽取语义特征" class="headerlink" title="通过预训练BERT抽取语义特征"></a>通过预训练BERT抽取语义特征</h4><p>对于原论文11项任务之外的试验，我们也可以通过预训练BERT抽取定长的语义特征向量。因为在特定案例中，与其端到端微调整个预训练模型，直接获取预训练上下文嵌入向量会更有效果，并且也可以缓解大多数内存不足问题。在这个过程中，每个输入 token 的上下文嵌入向量指预训练模型隐藏层生成的定长上下文表征。</p>
+<p>例如，我们可以使用脚本 extract_features.py 抽取语义特征：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sentence A and Sentence B are separated by the ||| delimiter.# For single sentence inputs, don't use the delimiter.echo 'Who was Jim Henson ? ||| Jim Henson was a puppeteer' &gt; /tmp/input.txt</span></span><br><span class="line"></span><br><span class="line">python extract_features.py \</span><br><span class="line">  --input_file=/tmp/input.txt \</span><br><span class="line">  --output_file=/tmp/output.jsonl \</span><br><span class="line">  --vocab_file=<span class="variable">$BERT_BASE_DIR</span>/vocab.txt \</span><br><span class="line">  --bert_config_file=<span class="variable">$BERT_BASE_DIR</span>/bert_config.json \</span><br><span class="line">  --init_checkpoint=<span class="variable">$BERT_BASE_DIR</span>/bert_model.ckpt \</span><br><span class="line">  --layers=-1,-2,-3,-4 \</span><br><span class="line">  --max_seq_length=128 \</span><br><span class="line">  --batch_size=8</span><br></pre></td></tr></table></figure>
-<p>上面的脚本会创建一个JSON文件（每行输入占一行），JSON文件包含layers指定的每个Transformer层的BERT激活值（-1是Transformer的最后一个隐藏层）。注意这个脚本将生成非常大的输出文件，默认情况下每个输入token 会占据 15kb 左右的空间。</p>
-<p>最后，项目作者表示它们近期会解决GPU显存占用太多的问题，并且会发布多语言版的BERT预训练模型。他们表示只要在维基百科有比较大型的数据，那么他们就能提供预训练模型，因此我们还能期待下次谷歌发布基于中文语料的BERT预训练模型。</p>
+<p>上面的脚本会创建一个 JSON 文件（每行输入占一行），JSON文件包含layers指定的每个 Transformer 层的BERT激活值（-1是 Transformer 的最后一个隐藏层）。注意这个脚本将生成非常大的输出文件，默认情况下每个输入token 会占据 15kb 左右的空间。</p>
+<p>最后，项目作者表示它们近期会解决 GPU 显存占用太多的问题，并且会发布多语言版的 BERT 预训练模型。他们表示只要在维基百科有比较大型的数据，那么他们就能提供预训练模型，因此我们还能期待下次谷歌发布基于中文语料的 BERT 预训练模型。</p>
 
 
 <!-- Tags -->
@@ -244,7 +229,7 @@
 
 
 <div class="tags">
-    <a href="/tags/Transformer/" class="button small">Transformer</a> <a href="/tags/序列建模/" class="button small">序列建模</a>
+    <a href="/tags/序列建模/" class="button small">序列建模</a> <a href="/tags/Transformer/" class="button small">Transformer</a>
 </div>
 
 
