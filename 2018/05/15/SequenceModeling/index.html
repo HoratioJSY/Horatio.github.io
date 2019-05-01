@@ -223,7 +223,7 @@
 <p>上图的更新门 z 将选择隐藏状态 h 是否更新为新的 h tilde。重置门 r 将决定前面的隐藏状态是否需要遗忘。下面我们将具体解释这两个门控与隐藏状态。</p>
 <p>以下将描述第 j 个隐藏单元激活值的计算方式。首先重置门 $r_j$ 的计算式可以表示为：</p>
 <p>$ r _ { j } = \sigma \left( \left[ \mathbf { W } _ { r } \mathbf { x } \right] _ { j } + \left[ \mathbf { U } _ { r } \mathbf { h } _ { ( t - 1) } \right] _ { j } \right) $</p>
-<p>其中 σ 为 Sigmoid 函数，$ \left[\star \right]<em>{j} ​$向量中的第 j 个元素，x 和 $$h</em>{t-1}$ 分别为当前输入和前面层级的隐藏状态，$W_r$ 和 $U_r$ 分别为更新门的权重矩阵。这个门控将当前输入与前面隐藏状态分别执行一个线性变换，再将结果压缩至 0 到 1 以决定到底有多少过去的信息需要遗忘。同样，更新门的计算式可以表示为：</p>
+<p>其中 σ 为 Sigmoid 函数，$ \left[\star \right]<em>{j} $向量中的第 j 个元素，x 和 $h</em>{t-1}$ 分别为当前输入和前面层级的隐藏状态，$W_r$ 和 $U_r$ 分别为更新门的权重矩阵。这个门控将当前输入与前面隐藏状态分别执行一个线性变换，再将结果压缩至 0 到 1 以决定到底有多少过去的信息需要遗忘。同样，更新门的计算式可以表示为：</p>
 <p>$ z _ { j } = \sigma \left( \left[ \mathbf { W } _ { z } \mathbf { x } \right] _ { j } + \left[ \mathbf { U } _ { z } \mathbf { h } _ { ( t - 1) } \right] _ { j } \right) $</p>
 <p>更新门控制了前面时间步的记忆信息和当前时间步所记的信息，并传递到当前时间步最终记忆的信息，这一点在以下两个计算式中有非常明确的展示。</p>
 <p>首先我们需要确定当前时间步需要记忆的信息，即前面隐藏层的信息到底需要保留多少以作为这一步的记忆。如下所示重置门 r 通过 Hadamard 乘积确定需要遗忘的历史信息，如果门控 r 为 0，那么该时间步记忆的内容就仅从输入获取，如果门控 r 为 1，那么就将利用所有的历史信息作为该时间步的记忆。注意我们将 $ \tilde{h}$ 理解为该时间步的记忆，如果我们将它和前面时间步的记忆 $h_{t-1}$ 组合，那么就能得出当前时间步的最终记忆。</p>
@@ -427,7 +427,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax -->
+<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 <!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
@@ -445,7 +445,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- End: Injected MathJax -->
 </body>
 
 </html>
