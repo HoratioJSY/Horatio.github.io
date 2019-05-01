@@ -195,11 +195,11 @@
 <p>相比常见的 ResNet，下面的伪代码就比较新奇了。首先 $f$ 与前面一样定义的是神经网络，不过现在它的参数θ是一个整体，同时 $t$ 作为独立参数也需要馈送到神经网络中，这表明层级之间也是有定义的，它是一种连续的网络。而整个 ODEnet 不需要通过循环搭建离散的层级，它只要通过 ODE solver 求出 $t_1$ 时刻的 $h$ 就行了。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(h, t, θ)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> nnet([h, t], θ)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ODEnet</span><span class="params">(h, θ)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> ODESolver(f, h, t_0, t_1, θ)</span><br></pre></td></tr></table></figure>
 <p>除了计算过程不一样，陈天琦等研究者还在 MNSIT 测试了这两种模型的效果。他们使用带有 6 个残差模块的 ResNet，以及使用一个 ODE Solver 代替这些残差模块的 ODEnet。以下展示了不同网络在 MNSIT 上的效果、参数量、内存占用量和计算复杂度。</p>
-<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_5.png" style="zoom:40%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_5.png" style="zoom:60%"></div>
 
-<p>其中单个隐藏层的 MLP 引用自 LeCun 在 1998 年的研究，其隐藏层只有 300 个神经元，但是 ODEnet 在有相似参数量的情况下能获得显著更好的结果。上表中 $L$ 表示神经网络的层级数，$\tilde{L}$ 表示 ODE Solver 中的评估次数，它可以近似代表 ODEnet 的「层级深度」。值得注意的是，ODEnet 只有常数级的内存占用，这表示不论层级的深度如何增加，它的内存占用基本不会有太大的变化。</p>
+<p>其中单个隐藏层的 MLP 引用自 LeCun 在 1998 年的研究，其隐藏层只有 300 个神经元，但是 ODEnet 在有相似参数量的情况下能获得显著更好的结果。上表中 $L$ 表示神经网络的层级数，$\tilde{L}​$ 表示 ODE Solver 中的评估次数，它可以近似代表 ODEnet 的「层级深度」。值得注意的是，ODEnet 只有常数级的内存占用，这表示不论层级的深度如何增加，它的内存占用基本不会有太大的变化。</p>
 <h3 id="神经常微分方程"><a href="#神经常微分方程" class="headerlink" title="神经常微分方程"></a>神经常微分方程</h3><p>在与 ResNet 的类比中，我们基本上已经了解了 ODEnet 的前向传播过程。首先输入数据 $Z(t_0)$，我们可以通过一个连续的转换函数（神经网络）对输入进行非线性变换，从而得到 $f$。随后 ODESolver 对 $f$ 进行积分，再加上初值就可以得到最后的推断结果。如下所示，残差网络只不过是用一个离散的残差连接代替 ODE Solver。</p>
-<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_6.png" style="zoom:40%"></div>
+<div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_6.png" style="zoom:60%"></div>
 
 <p>在前向传播中，ODEnet 还有几个非常重要的性质，即模型的层级数与模型的误差控制。首先因为是连续模型，其并没有明确的层级数，因此我们只能使用相似的度量确定模型的「深度」，作者在这篇论文中采用 ODE Solver 评估的次数作为深度。</p>
 <p>其次，深度与误差控制有着直接的联系，ODEnet 通过控制误差容忍度能确定模型的深度。因为 ODE Solver 能确保在误差容忍度之内逼近常微分方程的真实解，改变误差容忍度就能改变神经网络的行为。一般而言，降低 ODE Solver 的误差容忍度将增加函数的评估的次数，因此类似于增加了模型的「深度」。调整误差容忍度能允许我们在准确度与计算成本之间做权衡，因此我们在训练时可以采用高准确率而学习更好的神经网络，在推断时可以根据实际计算环境调整为较低的准确度。</p>
