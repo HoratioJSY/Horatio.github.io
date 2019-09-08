@@ -11,8 +11,7 @@
     <!--Description-->
     
         <meta name="description" content="「在2018年上映的4K电影都有哪些啊，都是什么类型的呢？」——机器能理解这样的自然语言，并从表格中检索出答案吗？
-
-什么是 Nature Language To SQL顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自">
+什么是 Nature Language To SQL顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自然">
     
 
     <!--Author-->
@@ -128,15 +127,11 @@
 
 
 <!-- Content -->
-<blockquote>
 <p>「在2018年上映的4K电影都有哪些啊，都是什么类型的呢？」——机器能理解这样的自然语言，并从表格中检索出答案吗？</p>
-</blockquote>
 <h3 id="什么是-Nature-Language-To-SQL"><a href="#什么是-Nature-Language-To-SQL" class="headerlink" title="什么是 Nature Language To SQL"></a>什么是 Nature Language To SQL</h3><p>顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自然语言转化为机器语言，从而执行某些特殊的任务。该任务的重点即能解析自然语言的语义，并将这些语义编码为计算机能理解并执行的语句。</p>
 <p>其实之前也有很多类似的研究，例如将 GUI 界面转化为形式化代码、学会编辑源代码等等。虽然它们有很多差异，但都尝试利用深度网络抽取图像或文本的语义信息，并根据这些语义信息生成对应代码。</p>
 <p>所以不论是自然语言转 Python 还是 C++代码，它们与 NL2SQL 的思想都是相同的，下面我们可以通过简单的案例看看到底 NL2SQL 能干什么。如下我们有一张表，我们可以从中推断出很多信息，例如我们可以算出「不同型号的宝马总共卖了多少辆？」。</p>
-<div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_1.png" style="zoom:45%"></div>
-
-<p>一张表确实容易看出来，但若是数千张表组成的数据库呢，这就需要 SQL 语言来帮忙了。我们可以将如上询问手动写成相应的 SQL 表达式：「SELECT SUM(销量) FROM TABLE WHERE 品牌==”宝马”;」，从而得到答案「8」。但这种方式要求我们会 SQL 语句，且一种查询就要写一条表达式。</p>
+<p><div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_1.png" style="zoom:35%"></div><br>一张表确实容易看出来，但若是数千张表组成的数据库呢，这就需要 SQL 语言来帮忙了。我们可以将如上询问手动写成相应的 SQL 表达式：「SELECT SUM(销量) FROM TABLE WHERE 品牌==”宝马”;」，从而得到答案「8」。但这种方式要求我们会 SQL 语句，且一种查询就要写一条表达式。</p>
 <p>而 NL2SQL 做的，就是希望能自动化这一过程，希望结合用户想要查询的表格，将用户的问句转化为相应的 SQL 语句。</p>
 <h3 id="中文-NL2SQL-挑战赛"><a href="#中文-NL2SQL-挑战赛" class="headerlink" title="中文 NL2SQL 挑战赛"></a>中文 NL2SQL 挑战赛</h3><p>最近<a href="https://tianchi.aliyun.com/competition/entrance/231716/introduction" target="_blank" rel="noopener">天池挑战赛</a>上举行了中文 NL2SQL，赛题组提供了一组标注了的数据，这在当前公开数据集中还是非常少见的。</p>
 <p>其实赛题本身很好理解，即输入中文问题，并期待模型能根据该问题输出对应的 SQL 查询语句。整个赛题使用金融以及通用领域的表格作为数据源，并提供标注的自然语言与 SQL 语句对，选手可以利用数据训练出能自动生成 SQL 语言的模型。</p>
@@ -173,9 +168,7 @@
 <h4 id="基线模型结构"><a href="#基线模型结构" class="headerlink" title="基线模型结构"></a>基线模型结构</h4><p>基线模型是在 17 年 SQLNet 的基础上改进的，该网络也是 WikiSQL 数据集的基线模型。该网络的核心思想即将不同的子句分离开，因为不同子句的顺序有的并没有太大关系，它们间的独立性可能非常强，所以分离开也许是个不错的想法。</p>
 <p>SQLNet 定义了一个模板，它把子句间的依赖性都构建在模板上，因此不同子句填充到该模板就能完成 SQL 语句的构建。现在模型需要单独预测出各个子句的值，即用 6 个神经网络预测选择的列、聚合函数、条件类型和条件值等等。</p>
 <p>下图 (a) 展示了 SQL 表达式的模板，其分为 SELECT 和 WHERE 两部分，WHERE 还可能不止一个条件句。下图 (b) 展示了各个子任务间的依赖性关系，SELECT 和 WHERE 之间是相互独立的，但它们内部之间是有相关性的。例如 WHERE 下的每一个条件句，模型要根据特征列确定特征列的值，也需要根据特征列确定它与值之间的条件类型，最终它们三者组合起来就能确定条目（行）。</p>
-<div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_2.png" style="zoom:45%"></div>
-
-<p><em>图注：选自 SQLNet 原论文，arXiv: 1711.04436。</em></p>
+<p><div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_2.png" style="zoom:45%"></div><br><em>图注：选自 SQLNet 原论文，arXiv: 1711.04436。</em></p>
 <p>这个模板算是比较通用的，而且任何 SQL 语言都可以通过扩展模板囊括进去。在挑战赛的基线模型中，它与 SQLNet 的区别并不大，只不过挑战赛会增加 Select-Number 和 Where-Relationship 两个子任务，这两个字任务能更好地适应中文 NL2SQL 数据集。</p>
 <p>其实模型比较难解决的还是 WHERE 子句，我们发现该子句中确定特征列，及确定特征列的值是最困难的，它们的准确率相对其它子任务都要低一些。所以如何解决这些问题，并构建更强大的整体性能就是我们该思考的。</p>
 <h3 id="模型改进"><a href="#模型改进" class="headerlink" title="模型改进"></a>模型改进</h3><p>前面基线模型展示了一般的解决方案，目前也有很多优秀的 NL2SQL 模型可以借鉴，它们在 WikiSQL 数据集上达到了 SOTA 结果。但这里我们先要理解中文 NL2SQL 数据集与 WikiSQL 数据集之间的差别是什么，这样才能有目的地改进。</p>
