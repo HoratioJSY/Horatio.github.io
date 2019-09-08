@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="「在2018年上映的4K电影都有哪些啊，都是什么类型的呢？」——机器能理解这样的自然语言，并从表格中检索出答案吗？
+
+什么是 Nature Language To SQL顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Horatio">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Nature Language To SQL"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hello Autumn"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Nature Language To SQL - Hello Autumn</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/sass/main.css">
+
+    <!--[if lt IE 8]>
+        <script src="/js/ie/html5shiv.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" href="/sass/ie8.css">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/sass/ie9.css">
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+<link rel="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/favicon.ico" type="image/x-icon"/>
+<link rel="icon" href="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/BrainIcon.png" alt="" /></span><span class="title">Hello Autumn</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/me/">Me</a>
+            </li>
+        
+            <li>
+                <a href="/">Photographer</a>
+            </li>
+        
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+        
+            <li>
+                <a href="/">About</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>Nature Language To SQL</h1>
+
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<blockquote>
+<p>「在2018年上映的4K电影都有哪些啊，都是什么类型的呢？」——机器能理解这样的自然语言，并从表格中检索出答案吗？</p>
+</blockquote>
+<h3 id="什么是-Nature-Language-To-SQL"><a href="#什么是-Nature-Language-To-SQL" class="headerlink" title="什么是 Nature Language To SQL"></a>什么是 Nature Language To SQL</h3><p>顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自然语言转化为机器语言，从而执行某些特殊的任务。该任务的重点即能解析自然语言的语义，并将这些语义编码为计算机能理解并执行的语句。</p>
+<p>其实之前也有很多类似的研究，例如将 GUI 界面转化为形式化代码、学会编辑源代码等等。虽然它们有很多差异，但都尝试利用深度网络抽取图像或文本的语义信息，并根据这些语义信息生成对应代码。</p>
+<p>所以不论是自然语言转 Python 还是 C++代码，它们与 NL2SQL 的思想都是相同的，下面我们可以通过简单的案例看看到底 NL2SQL 能干什么。如下我们有一张表，我们可以从中推断出很多信息，例如我们可以算出「不同型号的宝马总共卖了多少辆？」。</p>
+<div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_1.png" style="zoom:45%"></div>
+
+<p>一张表确实容易看出来，但若是数千张表组成的数据库呢，这就需要 SQL 语言来帮忙了。我们可以将如上询问手动写成相应的 SQL 表达式：「SELECT SUM(销量) FROM TABLE WHERE 品牌==”宝马”;」，从而得到答案「8」。但这种方式要求我们会 SQL 语句，且一种查询就要写一条表达式。</p>
+<p>而 NL2SQL 做的，就是希望能自动化这一过程，希望结合用户想要查询的表格，将用户的问句转化为相应的 SQL 语句。</p>
+<h3 id="中文-NL2SQL-挑战赛"><a href="#中文-NL2SQL-挑战赛" class="headerlink" title="中文 NL2SQL 挑战赛"></a>中文 NL2SQL 挑战赛</h3><p>最近<a href="https://tianchi.aliyun.com/competition/entrance/231716/introduction" target="_blank" rel="noopener">天池挑战赛</a>上举行了中文 NL2SQL，赛题组提供了一组标注了的数据，这在当前公开数据集中还是非常少见的。</p>
+<p>其实赛题本身很好理解，即输入中文问题，并期待模型能根据该问题输出对应的 SQL 查询语句。整个赛题使用金融以及通用领域的表格作为数据源，并提供标注的自然语言与 SQL 语句对，选手可以利用数据训练出能自动生成 SQL 语言的模型。</p>
+<h4 id="训练数据"><a href="#训练数据" class="headerlink" title="训练数据"></a>训练数据</h4><p>本次比赛数据集包含有约 4500 张表格，且基于这些表格提出了 50000 条自然语言问句，以及对应的 SQL 语句。数据都是通过爬取并解析公开数据源中的表格而获得的，然后通过人工标注就能构建提问与对应 SQL 语句。</p>
+<p>具体而言，追一科技搭建了一个标注平台，标注人员可以在平台上看到一张表格。在理解表格内容后，标注人员需要基于表格提出自然语言问句，并通过点击 UI 的方式构建 SQL 语句。标注好的数据会经过人工校验，追一会尽量避免错误标注、歧义等情况。</p>
+<p>本次赛题将提供 4 万条有标签数据作为训练集，1 万条无标签数据作为测试集。其中，5 千条无标注数据作为初赛测试集，选手是可以直接下载并测试的。而另外 5 千条作为复赛测试集，这些数据是不可下载，选手需要提交打包好的代码镜像来运行得出预测结果。</p>
+<p>数据集主要由 3 个文件组成，例如训练集中包括 train.json、train.tables.json 及 train.db。其中 train.json 储存了所有提问与对应的 SQL 表达式，train.tables.json 则储存了所有表格。另外 train.db 为 SQLite 格式的数据库文件，它是为执行模型生成的 SQL 语句而准备的。</p>
+<p>在 train.json 文件中，每一行为一条数据样本，如下给出了数据示例与字段说明。整体而言，模型需要根据”table_id”和”question”预测出完整的 SQL 表达式 “sql”。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  	<span class="attr">"table_id"</span>: <span class="string">"ab5fd9a63b0611e98cdff40f24344a08"</span>, </span><br><span class="line">  	<span class="attr">"question"</span>: <span class="string">"在2018年上映的4K电影都有哪些啊，都是什么类型的呢？"</span>, </span><br><span class="line">  	<span class="attr">"sql"</span>: &#123;</span><br><span class="line">      	# 选择的列相应的聚合函数, '0'代表无</span><br><span class="line">      	"agg": [0, 0],</span><br><span class="line">  			# 条件之间的关系,  '1'代表 and</span><br><span class="line">      	"cond_conn_op": 1, </span><br><span class="line">      	# SQL选择的列</span><br><span class="line">      	"sel": [1, 6],</span><br><span class="line">				# [条件列, 条件类型, 条件值]</span><br><span class="line">      	"conds": [</span><br><span class="line">          	[3, 2, "2018"], </span><br><span class="line">          	[<span class="number">4</span>, <span class="number">2</span>, <span class="string">"4K"</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为一条 SQL 表达式由很多子语句组成，所以 “sql” 中由一系列选项组成，包括选择的列、列操作、选择的条件约束等等。具体而言，SQL 的表达字典如下所示。”agg”选择的是 agg_sql_dict、”cond_conn_op”选择的是 conn_sql_dict、”conds”中条件类型选择的是 op_sql_dict。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">op_sql_dict = &#123;0:"&gt;", 1:"&lt;", 2:"==", 3:"!="&#125;</span><br><span class="line">agg_sql_dict = &#123;0:"", 1:"AVG", 2:"MAX", 3:"MIN", 4:"COUNT", 5:"SUM"&#125;</span><br><span class="line">conn_sql_dict = &#123;0:"", 1:"and", 2:"or"&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，其中”cond_conn_op”表示的是条件之间的关系，即如果表达式包含多个条件，那么它们间的关系到底是 和、或还是 无。后面的”conds”则通过多个三元组具体描述了条件语句，例如 [3, 2, “2018”] 就表示选择第四列等于 “2018” 的条目。</p>
+<p>那么表格又是什么样的呢？在 train.tables.json 文件中，每一行为一张表格数据，下面简要展示了数据样例及字段说明。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>:<span class="string">"ab5fd9a63b0611e98cdff40f24344a08"</span>, </span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"Table_ab5fd9a63b0611e98cdff40f24344a08"</span>,</span><br><span class="line">    <span class="attr">"title"</span>:<span class="string">"表：近年上映电影信息"</span>,</span><br><span class="line">    # 表格所包含的列名</span><br><span class="line">    "header":[</span><br><span class="line">        "影片名称",</span><br><span class="line">        "时间",</span><br><span class="line">        ……</span><br><span class="line">    ],</span><br><span class="line">    # 表格列所相应的类型</span><br><span class="line">    "types":[</span><br><span class="line">        "text",</span><br><span class="line">        "real",</span><br><span class="line">        ……</span><br><span class="line">    ],</span><br><span class="line">    # 表格每一行所存储的值</span><br><span class="line">    "rows":[</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"蝎子王5:灵魂之书/蝎子王5"</span>,</span><br><span class="line">            <span class="number">2018.0</span>,</span><br><span class="line">            ……</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>表格数据比较好理解，确定每一个特征列的名字、数据类型和数据值就行了。</p>
+<p>下面我们可以通过训练集中的具体样本与表格，了解模型到底需要预测些什么。整体而言，首先模型需要根据 table_id 检索对应的表格，然后再根据 question 再对应表格中检索信息，并生成对应的 SQL 表达式。这里不需要根据问题搜索表，也不会产生跨多张表的情况，相当于简化了问题。</p>
+<p>现在重要的是我们需要知道模型怎样才能从问题构建 SQL 表达式。如下所示，在我们看到问题「二零一九年第四周大黄蜂和密室逃生这两部影片的票房总占比是多少呀」时，我们可以找到它们的票房占比分别为 15.6% 和 14.2%，然后加起来就能得出周票房总占比为 29.8%。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"># 训练样本</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"table_id"</span>: <span class="string">"4d29d0513aaa11e9b911f40f24344a08"</span>,</span><br><span class="line">    <span class="attr">"question"</span>: <span class="string">"二零一九年第四周大黄蜂和密室逃生这两部影片的票房总占比是多少呀"</span>,</span><br><span class="line">    <span class="attr">"sql"</span>: &#123;</span><br><span class="line">        <span class="attr">"agg"</span>: [<span class="number">5</span>],</span><br><span class="line">        <span class="attr">"cond_conn_op"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"sel"</span>: [<span class="number">2</span>],</span><br><span class="line">        <span class="attr">"conds"</span>: [</span><br><span class="line">            [<span class="number">0</span>, <span class="number">2</span>, <span class="string">"大黄蜂"</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">2</span>, <span class="string">"密室逃生"</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 对应表格数据</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"rows"</span>: [</span><br><span class="line">        [<span class="string">"死侍2：我爱我家"</span>, <span class="number">10637.3</span>, <span class="number">25.8</span>, <span class="number">5.0</span>],</span><br><span class="line">        [<span class="string">"白蛇：缘起"</span>, <span class="number">10503.8</span>, <span class="number">25.4</span>, <span class="number">7.0</span>],</span><br><span class="line">        [<span class="string">"大黄蜂"</span>, <span class="number">6426.6</span>, <span class="number">15.6</span>, <span class="number">6.0</span>],</span><br><span class="line">        [<span class="string">"密室逃生"</span>, <span class="number">5841.4</span>, <span class="number">14.2</span>, <span class="number">6.0</span>],</span><br><span class="line">        [<span class="string">"“大”人物"</span>, <span class="number">3322.9</span>, <span class="number">8.1</span>, <span class="number">5.0</span>],</span><br><span class="line">        [<span class="string">"家和万事惊"</span>, <span class="number">635.2</span>, <span class="number">1.5</span>, <span class="number">25.0</span>],</span><br><span class="line">        [<span class="string">"钢铁飞龙之奥特曼崛起"</span>, <span class="number">595.5</span>, <span class="number">1.4</span>, <span class="number">3.0</span>],</span><br><span class="line">        [<span class="string">"海王"</span>, <span class="number">500.3</span>, <span class="number">1.2</span>, <span class="number">5.0</span>],</span><br><span class="line">        [<span class="string">"一条狗的回家路"</span>, <span class="number">360.0</span>, <span class="number">0.9</span>, <span class="number">4.0</span>],</span><br><span class="line">        [<span class="string">"掠食城市"</span>, <span class="number">356.6</span>, <span class="number">0.9</span>, <span class="number">3.0</span>]</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Table_4d29d0513aaa11e9b911f40f24344a08"</span>,</span><br><span class="line">    <span class="attr">"title"</span>: <span class="string">"表3：2019年第4周（2019.01.28 - 2019.02.03）全国电影票房TOP10"</span>,</span><br><span class="line">    <span class="attr">"header"</span>: [<span class="string">"影片名称"</span>, <span class="string">"周票房（万）"</span>, <span class="string">"票房占比（%）"</span>, <span class="string">"场均人次"</span>],</span><br><span class="line">    <span class="attr">"common"</span>: <span class="string">"资料来源：艺恩电影智库，光大证券研究所"</span>,</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"4d29d0513aaa11e9b911f40f24344a08"</span>,</span><br><span class="line">    <span class="attr">"types"</span>: [<span class="string">"text"</span>, <span class="string">"real"</span>, <span class="string">"real"</span>, <span class="string">"real"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么模型需要做一些什么呢？它应该通过各种子任务确定 SQL 表达式的各个模块，然后构建完整的语句，并通过它检索到正确答案。</p>
+<p>具体而言，模型应该通过问题中的「票房总占比是多少」确定需要选择第三个特征列「票房占比（%）」，即 “sel”: [2]；以及对应的聚合函数「SUM」，即 “agg”: [5]。通过问题中的「大黄蜂和密室逃生」从影片名称中确定 “大黄蜂” 和 “密室逃生” 两个条件，同时这两个条件间的关系应该为「AND」，即确定 “conds” 和 “cond_conn_op” 分别是什么。</p>
+<p>当这些都能正确预测时，模型就能正确合成 SQL 表达式：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(col_3) <span class="keyword">FROM</span> Table_4d29d0513aaa11e9b911f40f24344a08 <span class="keyword">WHERE</span> (col_1 == <span class="string">'大黄蜂'</span> <span class="keyword">and</span> col_1 == <span class="string">'密室逃生'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果完全正确时，表达式当然没问题，但是只要有一个子句预测错误，整条语句都会有问题。为此，在实际竞赛中，追一科技的基线模型会提供多种度量标准，我们不仅需要知道每个子句的正确情况，还需要知道整体表达式的正确情况。</p>
+<h4 id="基线模型"><a href="#基线模型" class="headerlink" title="基线模型"></a>基线模型</h4><p>这样的问题确实非常具有挑战性，因此挑战赛提供了基线解决方案供参考。只要选手报名了挑战赛，那么就能下载数据集，并放到基线模型上试试效果。我们可以只修改核心的模型部分，就能得出更优秀的结果。</p>
+<ul>
+<li>基线模型地址：<a href="https://github.com/ZhuiyiTechnology/nl2sql_baseline" target="_blank" rel="noopener">https://github.com/ZhuiyiTechnology/nl2sql_baseline</a></li>
+</ul>
+<p>基线模型使用 Python 2.7 和 torch 1.0.1 构建，选手需要在天池赛题页面下载数据集与预训练词嵌入，并按一定结构组织才能最终跑起来。如下所示是我们需要组织的数据集结构，后面会把如下 data_nl2sql 目录的所有内容复制到基线模型下的 data 目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── data_nl2sql</span><br><span class="line">│ ├── train</span><br><span class="line">│ │ ├── train.db</span><br><span class="line">│ │ ├── train.json</span><br><span class="line">│ │ ├── train.tables.json</span><br><span class="line">│ ├── val</span><br><span class="line">│ │ ├── val.db</span><br><span class="line">│ │ ├── val.json</span><br><span class="line">│ │ ├── val.tables.json</span><br><span class="line">│ ├── <span class="built_in">test</span></span><br><span class="line">│ │ ├── test.db</span><br><span class="line">│ │ ├── test.json</span><br><span class="line">│ │ ├── test.tables.json</span><br><span class="line">│ ├── char_embedding</span><br></pre></td></tr></table></figure>
+<p>这里数据集都介绍过了，但还有额外的字符级词向量文件 char_embedding。</p>
+<p>赛题组提供了字符级预训练词嵌入，其会在 10G 大小的百度百科和维基百科语料上采用 Skip-Gram 训练。以字为单位可以避免专有名词带来的 OOV 问题以及分词错误所带来的错误累积。</p>
+<p>理论上，我们也可以采用 BERT 来作为模型的输入表示。BERT 的细粒度分词对数据集很友好，而且目前在 WikiSQL 数据集上的 SOTA 模型 X-SQL 以及 SQLova 都是采用这样的策略。</p>
+<p>最后，基线模型的 GitHub 项目详细介绍了训练及评估过程，选手只要跟着它一步步走就行了。在基线模型默认训练 100 个 Epoch后，验证集上的平均 Logic Form Accuracy 为 27.5%，即 SQL 每一个子句全都预测正确的概率为 27.5%。</p>
+<h4 id="基线模型结构"><a href="#基线模型结构" class="headerlink" title="基线模型结构"></a>基线模型结构</h4><p>基线模型是在 17 年 SQLNet 的基础上改进的，该网络也是 WikiSQL 数据集的基线模型。该网络的核心思想即将不同的子句分离开，因为不同子句的顺序有的并没有太大关系，它们间的独立性可能非常强，所以分离开也许是个不错的想法。</p>
+<p>SQLNet 定义了一个模板，它把子句间的依赖性都构建在模板上，因此不同子句填充到该模板就能完成 SQL 语句的构建。现在模型需要单独预测出各个子句的值，即用 6 个神经网络预测选择的列、聚合函数、条件类型和条件值等等。</p>
+<p>下图 (a) 展示了 SQL 表达式的模板，其分为 SELECT 和 WHERE 两部分，WHERE 还可能不止一个条件句。下图 (b) 展示了各个子任务间的依赖性关系，SELECT 和 WHERE 之间是相互独立的，但它们内部之间是有相关性的。例如 WHERE 下的每一个条件句，模型要根据特征列确定特征列的值，也需要根据特征列确定它与值之间的条件类型，最终它们三者组合起来就能确定条目（行）。</p>
+<div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_2.png" style="zoom:45%"></div>
+
+<p><em>图注：选自 SQLNet 原论文，arXiv: 1711.04436。</em></p>
+<p>这个模板算是比较通用的，而且任何 SQL 语言都可以通过扩展模板囊括进去。在挑战赛的基线模型中，它与 SQLNet 的区别并不大，只不过挑战赛会增加 Select-Number 和 Where-Relationship 两个子任务，这两个字任务能更好地适应中文 NL2SQL 数据集。</p>
+<p>其实模型比较难解决的还是 WHERE 子句，我们发现该子句中确定特征列，及确定特征列的值是最困难的，它们的准确率相对其它子任务都要低一些。所以如何解决这些问题，并构建更强大的整体性能就是我们该思考的。</p>
+<h3 id="模型改进"><a href="#模型改进" class="headerlink" title="模型改进"></a>模型改进</h3><p>前面基线模型展示了一般的解决方案，目前也有很多优秀的 NL2SQL 模型可以借鉴，它们在 WikiSQL 数据集上达到了 SOTA 结果。但这里我们先要理解中文 NL2SQL 数据集与 WikiSQL 数据集之间的差别是什么，这样才能有目的地改进。</p>
+<h4 id="数据集的三大差异"><a href="#数据集的三大差异" class="headerlink" title="数据集的三大差异"></a>数据集的三大差异</h4><p>总体而言，这次的数据集与 WikiSQL 主要有三点差异/难点，它们也是本次比赛中选手需要去解决的核心问题。</p>
+<ol>
+<li>表格内容是可见的，并且问题具有泛化性</li>
+</ol>
+<p>如果在 WikiSQL 中，自然语言问句可能是「腾讯控股的股票今天涨了多少」，相应的 SQL 语句是「SELECT 涨跌幅 FROM TABLE WHERE 股票名称==”苹果”」，所以模型可以简单地从问句抽取一个子字符串来作为条件值。但在挑战赛的数据集中，同样的问句可能会变成「鹅厂今天涨了多少」。这就要求模型不仅能检索问句，同时还要能根据表格内容来生成正确的 SQL，这对以前不使用表格内容的 NL2SQL 方法提出了挑战。</p>
+<ol>
+<li>省略显式的列名信息，更口语化的表达</li>
+</ol>
+<p>在 WikiSQL 中，自然语言问句由于标注方式的原因，更像是基于模板的问句，所以通常会带有比较明显的列名信息。比如「腾讯控股的股票今天涨了多少」就会带有「股票」这个列名信息。在挑战赛的数据集中，问题会变得更加口语化，这样就要求模型首先要把腾讯和表格中的「股票」这一列联系起来，才能正确地生成 SQL。</p>
+<ol>
+<li>数字的单位问题</li>
+</ol>
+<p>中文数据集中的另一问题即数字单位问题。如果我们的问题为：「北京这周成交了多少千平方米？」。但在表格中，单位可能就变成了万平方米，这样在千平方米和万平方米间就存在单位问题。</p>
+<h4 id="提升方案"><a href="#提升方案" class="headerlink" title="提升方案"></a>提升方案</h4><p>前面展示了几种数据集的不同之处，理解它们对改进方案非常重要。此外，我发现目前的 SOTA 模型其实对 SQLNet 的改进并不是很大，主要就是词表征和后处理两大模块，例如 X-SQL 和 SQLova 等。鉴于这些观察，我主要从以下三方面提升模型性能：</p>
+<ol>
+<li>采用预训练的中文 BERT 作为更好的词表征方式</li>
+<li>更合理的模型结构：在预测 WHERE Condition Value 时，同时采用Condition Num、Condition Column、Condition Operation 作为约束。</li>
+<li>将表格数据也结合进模型，不再采用 pointer-generator 的方式来预测 Condition Value。</li>
+</ol>
+<p>简单而言，我会利用 <a href="https://github.com/huggingface/pytorch-transformers" target="_blank" rel="noopener">pytorch-transformer</a> 库，利用预训练的中文 BERT 对每一个中文字符或字母数字进行编码，并将其作为输入的词嵌入向量。这个一个改进大概能将验证准确度从 0.27 提升到 0.5。此外，我发现如果不使用预训练 BERT，而是将 Word2Vec 代码改成 Trainable 字符级词嵌入，那么效果也能达到 0.38 到 0.4。</p>
+<p>后面在引入表格内容做预测时，遇到最大的问题就是单位换算。我最开始想的是利用预测列的表格内容，再加上问题序列，从而预测出 Condition Value，但是发现表格内容、问题与标注的Value差别挺大的。因此最终采用了一种 Proposal 的方式，即根据正则表达式等预处理方法，将所有可能 Value 的值都候选出来，例如数值、名称、表格内容等。模型在预测 Value 的时候只需要根据余弦相似性确定最可能项的索引。</p>
+<p>注意，与 SQLNet 的不同在于，Proposal list 会根据预测的 Condition Operation 确定。例如如果预测为「==」或「!=」，那么候选列表就会直接从表格内容抽取；如果预测为「&gt;」或「&lt;」，那么候选列表就会根据问题和表格出现的「数值型」描述进行确定。</p>
+<p>采用了表格内容后，验证准确度大概能从 0.5 提升到 0.7，但应该还有提升的空间。最后，这里只是简要的思路描述，后面完善了代码后会补充这一部分。</p>
+<p><strong>代码结构</strong></p>
+<p>模型主体都在 sqlnet 目录下，而我们需要理解并修改的代码基本上都在它的子目录 model 下，其它数据加载或处理等函数直接复用就行了。如下简要展示了 model 目录的代码结构，其中 sqlnet 文件负责搭建整体网络框架，modules 目录下的代码则是完成子任务的各个神经网络。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">├── model</span><br><span class="line">│ ├── modules</span><br><span class="line">│ │ ├── aggregator_predict.py</span><br><span class="line">│ │ ├── select_number.py</span><br><span class="line">│ │ ├── selection_predict.py</span><br><span class="line">│ │ ├── bert_embedding.py</span><br><span class="line">│ │ ├── sqlnet_condition_predict.py</span><br><span class="line">│ │ ├── where_relation.py</span><br><span class="line">│ │ ├── word_embedding.py</span><br><span class="line">│ │ ├── net_utils.py</span><br><span class="line">│ ├── sqlnet.py</span><br></pre></td></tr></table></figure>
+<p>这是最核心的代码目录结构，其它地方也会有挺多修改的，例如预处理过程、训练过程、验证测试过程、表格内容编码过程等等。其中比较困难的是候选 Value 的编码，它甚至要在单次训练迭代中加一个小批量的迭代以调用 BERT 抽取中文语义特征。</p>
+<p>代码地址：<a href="https://github.com/HoratioJSY/NL2SQL_CN" target="_blank" rel="noopener">https://github.com/HoratioJSY/NL2SQL_CN</a></p>
+
+
+<!-- Tags -->
+
+
+
+<div class="tags">
+    <a href="/tags/Transformer/" class="button small">Transformer</a> <a href="/tags/序列建模/" class="button small">序列建模</a> <a href="/tags/生成模型/" class="button small">生成模型</a>
+</div>
+
+
+
+<!-- Comments -->
+<div>
+    
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer <li><a style="text-decoration:none;" href="https://coding.net/pages" >Hosted by Coding Pages</a></li> -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                If you are also interesting in Machine Learning, contact me with email：horatio.j.s.y@gmail.com.
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                    <li><a href="https://twitter.com/Horatio_JSY" class="icon style2 fa-twitter" target="_blank" ><span class="label">Twitter</span></a></li>
+                
+                
+                    <li><a href="https://www.facebook.com/horatio.jsy.3" class="icon style2 fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://github.com/HoratioJSY" class="icon style2 fa-github" target="_blank" ><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                    <li><a href="https://500px.com/siyuan" class="icon style2 fa-500px" target="_blank" ><span class="label">500px</span></a></li>
+                
+                
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li>&copy; Siyuan All rights reserved</li>
+            <li>Design: Horatio</li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    <script type="text/javascript"
+color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- skel -->
+<script src="/js/skel.min.js"></script>
+
+<!-- Custom Code -->
+<script src="/js/util.js"></script>
+
+<!--[if lte IE 8]>
+<script src="/js/ie/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom Code -->
+<script src="/js/main.js"></script>
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+
+</html>
