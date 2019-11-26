@@ -1,0 +1,176 @@
+<head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+  <link href="https://media.arxiv-vanity.com/render-output/1657153/index.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/static/css/feedback.66d4b7e27124.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<section class="ltx_section" id="S6">
+<section class="ltx_subsection" id="S6.SS1">
+
+
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Agreement scores between different annotators of the investment document dataset</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Xerox F1</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Inex08 F1</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">tagger 1 &amp; tagger 2</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">89.8%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">77.0%</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">tagger 1 &amp; reviewer</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">92.1%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">82.8%</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">tagger 2 &amp; reviewer</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">90.1%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">79.6%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S5.T5">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 5: </span>Title detection results.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t"></th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;">
+<span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Models</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;">
+<span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Arxiv dataset F1</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;">
+<span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Investment dataset mean F1 (std)</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="4">
+<p class="ltx_p ltx_parbox ltx_align_top" style="width:57.5pt;">
+<span class="ltx_inline-block ltx_transformed_outer" style="width:9.0pt;height:93.75px;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:67.5pt;transform:translate(-29.25pt,3pt) rotate(-90deg) ;-webkit-transform:translate(-29.25pt,3pt) rotate(-90deg) ;-ms-transform:translate(-29.25pt,3pt) rotate(-90deg) ;">
+<span class="ltx_p"><span class="ltx_text ltx_font_italic">baselines</span></span>
+</span></span></p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;">GBT hfs</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;">88.11%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;">94.70% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T5.m1"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">GBT char</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">87.42%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">96.31% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T5.m2"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">GBT combined</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">91.16%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">
+<span class="ltx_text ltx_font_bold ltx_align_center">98.36%</span> (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T5.m3"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">Rahman and Finin</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">75.76%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">95.10% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T5.m4"><mo>±</mo></math> 0.33%)</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t" rowspan="2">
+<p class="ltx_p ltx_parbox ltx_align_top" style="width:4.3pt;">
+<span class="ltx_inline-block ltx_transformed_outer" style="width:9.0pt;height:41.6666666666667px;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:30.0pt;transform:translate(-10.5pt,3pt) rotate(-90deg) ;-webkit-transform:translate(-10.5pt,3pt) rotate(-90deg) ;-ms-transform:translate(-10.5pt,3pt) rotate(-90deg) ;">
+<span class="ltx_p"><span class="ltx_text ltx_font_italic">ours</span></span>
+</span></span></p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;"></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;"></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;"></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:62.6pt;">char-CNN</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:56.9pt;"><span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">93.80%</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:65.4pt;">97.60% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T5.m5"><mo>±</mo></math> 0.06%)</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S5.T6">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 6: </span>Title hierarchization results.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t"></th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;"><span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Model</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;"><span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Arxiv dataset F1</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;"><span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">Investment dataset mean F1 (std)</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="4">
+<p class="ltx_p ltx_parbox ltx_align_top" style="width:57.5pt;">
+<span class="ltx_inline-block ltx_transformed_outer" style="width:9.0pt;height:93.75px;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:67.5pt;transform:translate(-29.25pt,3pt) rotate(-90deg) ;-webkit-transform:translate(-29.25pt,3pt) rotate(-90deg) ;-ms-transform:translate(-29.25pt,3pt) rotate(-90deg) ;">
+<span class="ltx_p"><span class="ltx_text ltx_font_italic">baselines</span></span>
+</span></span></p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;">GBT hfs</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;">61.89%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;">70.62% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T6.m1"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">GBT char</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">60.56%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">71.62% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T6.m2"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">GBT combined</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">64.21%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">74.20% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T6.m3"><mo>±</mo></math> 0%)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:62.6pt;">Rahman and Finin</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:56.9pt;">75.40%</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" style="width:65.4pt;">64.60% (<math alttext="\pm" class="ltx_centering" display="inline" id="S5.T6.m4"><mo>±</mo></math> 1.36%)</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t" rowspan="2">
+<p class="ltx_p ltx_parbox ltx_align_top" style="width:4.3pt;">
+<span class="ltx_inline-block ltx_transformed_outer" style="width:9.0pt;height:31.25px;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:22.5pt;transform:translate(-6.75pt,3pt) rotate(-90deg) ;-webkit-transform:translate(-6.75pt,3pt) rotate(-90deg) ;-ms-transform:translate(-6.75pt,3pt) rotate(-90deg) ;">
+<span class="ltx_p"><span class="ltx_text ltx_font_italic">our</span></span>
+</span></span></p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:62.6pt;"></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:56.9pt;"></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" style="width:65.4pt;"></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:62.6pt;">word-CNN + BiLSTM-CRF</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:56.9pt;"><span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">92.90%</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" style="width:65.4pt;">
+<span class="ltx_text ltx_wrap ltx_font_bold ltx_align_center">84.78% (<math alttext="\pm" class="ltx_Math" display="inline" id="S5.T6.m5"><mo mathvariant="normal">±</mo></math> 0.47%)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+</section>
+</section>
+</article>
+</div>
+</div>
+</body>

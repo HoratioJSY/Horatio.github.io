@@ -1,0 +1,678 @@
+<head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+  <link href="https://media.arxiv-vanity.com/render-output/1657153/index.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/static/css/feedback.66d4b7e27124.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<section class="ltx_section" id="S6">
+<section class="ltx_subsection" id="S6.SS1">
+
+
+<figure class="ltx_table" id="Sx3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Detection results with different settings. “DConv” indiates deformable convolution. “P”, “R”, and “F” indicate precision, recall, and f-measure respectively.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" rowspan="2">Backbone</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_tt" rowspan="2">DConv</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_tt" rowspan="2">DB</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="4">MSRA-TD500</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="4">CTW1500</th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">P</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">R</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">F</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">FPS</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">P</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">R</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">F</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_t">FPS</th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">ResNet-18</th>
+<td class="ltx_td ltx_align_justify ltx_border_t"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m1"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m2"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify ltx_border_t">85.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">70.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">77.4</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">66</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_t">76.3</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">72.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">74.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">59</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ResNet-18</th>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m3"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify">86.8</td>
+<td class="ltx_td ltx_align_justify">72.3</td>
+<td class="ltx_td ltx_align_justify">78.9</td>
+<td class="ltx_td ltx_align_justify">62</td>
+<td class="ltx_td ltx_align_justify">80.9</td>
+<td class="ltx_td ltx_align_justify">75.4</td>
+<td class="ltx_td ltx_align_justify">78.1</td>
+<td class="ltx_td ltx_align_justify">55</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ResNet-18</th>
+<td class="ltx_td ltx_align_justify"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m4"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify">87.3</td>
+<td class="ltx_td ltx_align_justify">75.8</td>
+<td class="ltx_td ltx_align_justify">81.1</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">66</span></td>
+<td class="ltx_td ltx_align_justify">82.4</td>
+<td class="ltx_td ltx_align_justify">76.6</td>
+<td class="ltx_td ltx_align_justify">79.4</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">59</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ResNet-18</th>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">90.4</span></td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">76.3</span></td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">82.8</span></td>
+<td class="ltx_td ltx_align_justify">62</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">84.8</span></td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">77.5</span></td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">81.0</span></td>
+<td class="ltx_td ltx_align_justify">55</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">ResNet-50</th>
+<td class="ltx_td ltx_align_justify ltx_border_t"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m5"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m6"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify ltx_border_t">84.6</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">73.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">78.7</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">40</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_t">81.6</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">72.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">77.0</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">27</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ResNet-50</th>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m7"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify">90.5</td>
+<td class="ltx_td ltx_align_justify">77.9</td>
+<td class="ltx_td ltx_align_justify">83.7</td>
+<td class="ltx_td ltx_align_justify">32</td>
+<td class="ltx_td ltx_align_justify">86.2</td>
+<td class="ltx_td ltx_align_justify">78.0</td>
+<td class="ltx_td ltx_align_justify">81.9</td>
+<td class="ltx_td ltx_align_justify">22</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ResNet-50</th>
+<td class="ltx_td ltx_align_justify"><math alttext="\times" class="ltx_Math" display="inline" id="Sx3.T1.m8"><mo>×</mo></math></td>
+<td class="ltx_td ltx_align_justify">✓</td>
+<td class="ltx_td ltx_align_justify">86.6</td>
+<td class="ltx_td ltx_align_justify">77.7</td>
+<td class="ltx_td ltx_align_justify">81.9</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">40</span></td>
+<td class="ltx_td ltx_align_justify">84.3</td>
+<td class="ltx_td ltx_align_justify">79.1</td>
+<td class="ltx_td ltx_align_justify">81.6</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">27</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">ResNet-50</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb">✓</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">✓</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">91.5</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">79.2</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">84.9</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">32</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">86.9</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">80.2</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">83.4</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">22</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="Sx4.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>Detection results on the Total-Text dataset. The values in the bracket mean the height of the input images. “*” indicates testing with multiple scales. “MTS” and “PSE” are short for Mask TextSpotter and PSENet.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Method</th>
+<td class="ltx_td ltx_align_justify ltx_border_tt">P</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">R</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">F</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">FPS</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">TextSnake <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">long2018textsnake</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">82.7</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">74.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">78.4</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">ATRR <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">atrr</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">80.9</td>
+<td class="ltx_td ltx_align_justify">76.2</td>
+<td class="ltx_td ltx_align_justify">78.5</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">MTS <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lyu2018mask</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">82.5</td>
+<td class="ltx_td ltx_align_justify">75.6</td>
+<td class="ltx_td ltx_align_justify">78.6</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TextField <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2019textfield</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">81.2</td>
+<td class="ltx_td ltx_align_justify">79.9</td>
+<td class="ltx_td ltx_align_justify">80.6</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">LOMO <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lomo</span>]</cite>*</th>
+<td class="ltx_td ltx_align_justify">87.6</td>
+<td class="ltx_td ltx_align_justify">79.3</td>
+<td class="ltx_td ltx_align_justify">83.3</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">CRAFT <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">craft</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">87.6</td>
+<td class="ltx_td ltx_align_justify">79.9</td>
+<td class="ltx_td ltx_align_justify">83.6</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">CSE <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">cse</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">81.4</td>
+<td class="ltx_td ltx_align_justify">79.1</td>
+<td class="ltx_td ltx_align_justify">80.2</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PSE-1s <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2019shape</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">84.0</td>
+<td class="ltx_td ltx_align_justify">78.0</td>
+<td class="ltx_td ltx_align_justify">80.9</td>
+<td class="ltx_td ltx_align_justify">3.9</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">DB-ResNet-18 (800)</th>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">88.3</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_t">77.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">82.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">50</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">DB-ResNet-50 (800)</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb">87.1</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">82.5</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">84.7</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">32</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="Sx4.T4">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>Detection results on CTW1500. The methods with “*” are collected from <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">ctw1500</span>]</cite>. The values in the bracket mean the height of the input images.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Method</th>
+<td class="ltx_td ltx_align_justify ltx_border_tt">P</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">R</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">F</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">FPS</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">CTPN*</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">60.4</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">53.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">56.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">7.14</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">EAST*</th>
+<td class="ltx_td ltx_align_justify">78.7</td>
+<td class="ltx_td ltx_align_justify">49.1</td>
+<td class="ltx_td ltx_align_justify">60.4</td>
+<td class="ltx_td ltx_align_justify">21.2</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SegLink*</th>
+<td class="ltx_td ltx_align_justify">42.3</td>
+<td class="ltx_td ltx_align_justify">40.0</td>
+<td class="ltx_td ltx_align_justify">40.8</td>
+<td class="ltx_td ltx_align_justify">10.7</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TextSnake <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">long2018textsnake</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">67.9</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">85.3</span></td>
+<td class="ltx_td ltx_align_justify">75.6</td>
+<td class="ltx_td ltx_align_justify">1.1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TLOC <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">ctw1500</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">77.4</td>
+<td class="ltx_td ltx_align_justify">69.8</td>
+<td class="ltx_td ltx_align_justify">73.4</td>
+<td class="ltx_td ltx_align_justify">13.3</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PSE-1s <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2019shape</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">84.8</td>
+<td class="ltx_td ltx_align_justify">79.7</td>
+<td class="ltx_td ltx_align_justify">82.2</td>
+<td class="ltx_td ltx_align_justify">3.9</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SAE <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tian2019learning</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">82.7</td>
+<td class="ltx_td ltx_align_justify">77.8</td>
+<td class="ltx_td ltx_align_justify">80.1</td>
+<td class="ltx_td ltx_align_justify">3</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Ours-ResNet18 (1024)</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">84.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">77.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">81.0</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">55</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Ours-ResNet50 (1024)</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">86.9</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">80.2</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">83.4</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">22</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="Sx4.T5">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Detection results on the ICDAR 2015 dataset. The values in the bracket mean the height of the input images. “TB” and “PSE” are short for TextBoxes++ and PSENet.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Method</th>
+<td class="ltx_td ltx_align_justify ltx_border_tt">P</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">R</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">F</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">FPS</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">CTPN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">eccv/TianHHH016</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">74.2</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">51.6</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">60.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">7.1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">EAST <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">east</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">83.6</td>
+<td class="ltx_td ltx_align_justify">73.5</td>
+<td class="ltx_td ltx_align_justify">78.2</td>
+<td class="ltx_td ltx_align_justify">13.2</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SSTD <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">sstd</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">80.2</td>
+<td class="ltx_td ltx_align_justify">73.9</td>
+<td class="ltx_td ltx_align_justify">76.9</td>
+<td class="ltx_td ltx_align_justify">7.7</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">WordSup <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">hu2017wordsup</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">79.3</td>
+<td class="ltx_td ltx_align_justify">77</td>
+<td class="ltx_td ltx_align_justify">78.2</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">Corner <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lyu2018multi</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">94.1</span></td>
+<td class="ltx_td ltx_align_justify">70.7</td>
+<td class="ltx_td ltx_align_justify">80.7</td>
+<td class="ltx_td ltx_align_justify">3.6</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TB <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">TextBoxes++</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">87.2</td>
+<td class="ltx_td ltx_align_justify">76.7</td>
+<td class="ltx_td ltx_align_justify">81.7</td>
+<td class="ltx_td ltx_align_justify">11.6</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">RRD <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liao2018rotation</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">85.6</td>
+<td class="ltx_td ltx_align_justify">79</td>
+<td class="ltx_td ltx_align_justify">82.2</td>
+<td class="ltx_td ltx_align_justify">6.5</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">MCN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">mcn</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">72</td>
+<td class="ltx_td ltx_align_justify">80</td>
+<td class="ltx_td ltx_align_justify">76</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TextSnake <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">long2018textsnake</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">84.9</td>
+<td class="ltx_td ltx_align_justify">80.4</td>
+<td class="ltx_td ltx_align_justify">82.6</td>
+<td class="ltx_td ltx_align_justify">1.1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PSE-1s <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2019shape</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">86.9</td>
+<td class="ltx_td ltx_align_justify">84.5</td>
+<td class="ltx_td ltx_align_justify">85.7</td>
+<td class="ltx_td ltx_align_justify">1.6</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SPCNet <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">spc</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">88.7</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">85.8</span></td>
+<td class="ltx_td ltx_align_justify">87.2</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">LOMO <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lomo</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">91.3</td>
+<td class="ltx_td ltx_align_justify">83.5</td>
+<td class="ltx_td ltx_align_justify">87.2</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">CDAFT <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">craft</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">89.8</td>
+<td class="ltx_td ltx_align_justify">84.3</td>
+<td class="ltx_td ltx_align_justify">86.9</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SAE(720) <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tian2019learning</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">85.1</td>
+<td class="ltx_td ltx_align_justify">84.5</td>
+<td class="ltx_td ltx_align_justify">84.8</td>
+<td class="ltx_td ltx_align_justify">3</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SAE(990) <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tian2019learning</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">88.3</td>
+<td class="ltx_td ltx_align_justify">85.0</td>
+<td class="ltx_td ltx_align_justify">86.6</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">DB-ResNet-18 (736)</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">86.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">78.4</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">82.3</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">48</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">DB-ResNet-50 (736)</th>
+<td class="ltx_td ltx_align_justify">88.2</td>
+<td class="ltx_td ltx_align_justify">82.7</td>
+<td class="ltx_td ltx_align_justify">85.4</td>
+<td class="ltx_td ltx_align_justify">26</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">DB-ResNet-50 (1152)</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb">91.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">83.2</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">87.3</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">12</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="Sx4.T6">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 6: </span>Detection results on the MSRA-TD500 dataset. The values in the bracket mean the height of the input images.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Method</th>
+<td class="ltx_td ltx_align_justify ltx_border_tt">P</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">R</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">F</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">FPS</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">he2016text</span>]</cite></th>
+<td class="ltx_td ltx_align_justify ltx_border_t">71</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">61</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">69</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">DeepReg <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">deepdirect</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">77</td>
+<td class="ltx_td ltx_align_justify">70</td>
+<td class="ltx_td ltx_align_justify">74</td>
+<td class="ltx_td ltx_align_justify">1.1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">RRPN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">rrpn</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">82</td>
+<td class="ltx_td ltx_align_justify">68</td>
+<td class="ltx_td ltx_align_justify">74</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">RRD <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liao2018rotation</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">87</td>
+<td class="ltx_td ltx_align_justify">73</td>
+<td class="ltx_td ltx_align_justify">79</td>
+<td class="ltx_td ltx_align_justify">10</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">MCN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">mcn</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">88</td>
+<td class="ltx_td ltx_align_justify">79</td>
+<td class="ltx_td ltx_align_justify">83</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PixelLink <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">deng2018pixellink</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">83</td>
+<td class="ltx_td ltx_align_justify">73.2</td>
+<td class="ltx_td ltx_align_justify">77.8</td>
+<td class="ltx_td ltx_align_justify">3</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">Corner <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lyu2018multi</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">87.6</td>
+<td class="ltx_td ltx_align_justify">76.2</td>
+<td class="ltx_td ltx_align_justify">81.5</td>
+<td class="ltx_td ltx_align_justify">5.7</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">TextSnake <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">long2018textsnake</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">83.2</td>
+<td class="ltx_td ltx_align_justify">73.9</td>
+<td class="ltx_td ltx_align_justify">78.3</td>
+<td class="ltx_td ltx_align_justify">1.1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row"><cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">xue2018accurate</span>]</cite></th>
+<td class="ltx_td ltx_align_justify">83.0</td>
+<td class="ltx_td ltx_align_justify">77.4</td>
+<td class="ltx_td ltx_align_justify">80.1</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row"><cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">MSR</span>]</cite></th>
+<td class="ltx_td ltx_align_justify">87.4</td>
+<td class="ltx_td ltx_align_justify">76.7</td>
+<td class="ltx_td ltx_align_justify">81.7</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">CRAFT <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">craft</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">88.2</td>
+<td class="ltx_td ltx_align_justify">78.2</td>
+<td class="ltx_td ltx_align_justify">82.9</td>
+<td class="ltx_td ltx_align_justify">8.6</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SAE <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tian2019learning</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">84.2</td>
+<td class="ltx_td ltx_align_justify">81.7</td>
+<td class="ltx_td ltx_align_justify">82.9</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">DB-ResNet-18 (512)</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">85.7</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">73.2</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">79.0</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">82</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">DB-ResNet-18 (736)</th>
+<td class="ltx_td ltx_align_justify">90.4</td>
+<td class="ltx_td ltx_align_justify">76.3</td>
+<td class="ltx_td ltx_align_justify">82.8</td>
+<td class="ltx_td ltx_align_justify">62</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">DB-ResNet-50 (736)</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">91.5</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">79.2</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">84.9</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">32</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="Sx4.T7">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 7: </span>Detection results on the MLT-2017 dataset. Methods with “*” are collected from <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lyu2018multi</span>]</cite>. The images in the MLT-2017 dataset are re-sized to <math alttext="768\times 1024" class="ltx_Math" display="inline" id="Sx4.T7.m2"><mrow><mn>768</mn><mo>×</mo><mn>1024</mn></mrow></math> in our method. “PSE” is short for PSENet.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" style="width:433.6pt;">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Method</th>
+<td class="ltx_td ltx_align_justify ltx_border_tt">P</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">R</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">F</td>
+<td class="ltx_td ltx_align_justify ltx_border_tt">FPS</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">SARI_FDU_RRPN_V1*</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">71.2</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">55.5</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">62.4</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">Sensetime_OCR*</th>
+<td class="ltx_td ltx_align_justify">56.9</td>
+<td class="ltx_td ltx_align_justify"><span class="ltx_text ltx_wrap ltx_font_bold">69.4</span></td>
+<td class="ltx_td ltx_align_justify">62.6</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">SCUT_DLVlab1*</th>
+<td class="ltx_td ltx_align_justify">80.3</td>
+<td class="ltx_td ltx_align_justify">54.5</td>
+<td class="ltx_td ltx_align_justify">65.0</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">e2e_ctc01_multi_scale*</th>
+<td class="ltx_td ltx_align_justify">79.8</td>
+<td class="ltx_td ltx_align_justify">61.2</td>
+<td class="ltx_td ltx_align_justify">69.3</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">Corner <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lyu2018multi</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">83.8</td>
+<td class="ltx_td ltx_align_justify">55.6</td>
+<td class="ltx_td ltx_align_justify">66.8</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PSE <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2019shape</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_justify">73.8</td>
+<td class="ltx_td ltx_align_justify">68.2</td>
+<td class="ltx_td ltx_align_justify">70.9</td>
+<td class="ltx_td ltx_align_justify">-</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">DB-ResNet-18</th>
+<td class="ltx_td ltx_align_justify ltx_border_t">81.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">63.8</td>
+<td class="ltx_td ltx_align_justify ltx_border_t">71.7</td>
+<td class="ltx_td ltx_align_justify ltx_border_t"><span class="ltx_text ltx_wrap ltx_font_bold">41</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">DB-ResNet-50</th>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">83.1</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">67.9</td>
+<td class="ltx_td ltx_align_justify ltx_border_bb"><span class="ltx_text ltx_wrap ltx_font_bold">74.7</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_bb">19</td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+</section>
+</section>
+</article>
+</div>
+</div>
+</body>

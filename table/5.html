@@ -1,0 +1,377 @@
+<head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+  <link href="https://media.arxiv-vanity.com/render-output/1657153/index.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/static/css/feedback.66d4b7e27124.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<section class="ltx_section" id="S6">
+<section class="ltx_subsection" id="S6.SS1">
+
+
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Test accuracy of FDGNN, compared to state-of-the-art results from literature. Performance of single hidden layer versions of FDGNN (<math alttext="L=1" class="ltx_Math" display="inline" id="S3.T1.m2"><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow></math>) are reported as well.
+Results are averaged (and std are computed) on the outer 10 folds. Best results are highlighted in bold for every dataset.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_border_tt"></td>
+<td class="ltx_td ltx_align_left ltx_border_tt">MUTAG</td>
+<td class="ltx_td ltx_align_left ltx_border_tt">PTC</td>
+<td class="ltx_td ltx_align_left ltx_border_tt">COX2</td>
+<td class="ltx_td ltx_align_left ltx_border_tt">PROTEINS</td>
+<td class="ltx_td ltx_align_left ltx_border_tt">NCI1</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">FDGNN</td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{88.51}_{\pm 3.77}" class="ltx_Math" display="inline" id="S3.T1.m3"><msub><mn mathvariant="bold">88.51</mn><mrow><mo>±</mo><mn>3.77</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{63.43}_{\pm 5.35}" class="ltx_Math" display="inline" id="S3.T1.m4"><msub><mn mathvariant="bold">63.43</mn><mrow><mo>±</mo><mn>5.35</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{83.39}_{\pm 2.88}" class="ltx_Math" display="inline" id="S3.T1.m5"><msub><mn mathvariant="bold">83.39</mn><mrow><mo>±</mo><mn>2.88</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{76.77}_{\pm 2.86}" class="ltx_Math" display="inline" id="S3.T1.m6"><msub><mn mathvariant="bold">76.77</mn><mrow><mo>±</mo><mn>2.86</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="77.81_{\pm 1.62}" class="ltx_Math" display="inline" id="S3.T1.m7"><msub><mn>77.81</mn><mrow><mo>±</mo><mn>1.62</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">FDGNN<math alttext="{}_{(L=1)}" class="ltx_Math" display="inline" id="S3.T1.m8"><msub><mi></mi><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msub></math>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="{87.38}_{\pm 6.55}" class="ltx_Math" display="inline" id="S3.T1.m9"><msub><mn>87.38</mn><mrow><mo>±</mo><mn>6.55</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="\mathbf{63.43}_{\pm 5.35}" class="ltx_Math" display="inline" id="S3.T1.m10"><msub><mn mathvariant="bold">63.43</mn><mrow><mo>±</mo><mn>5.35</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="{82.41}_{\pm 2.67}" class="ltx_Math" display="inline" id="S3.T1.m11"><msub><mn>82.41</mn><mrow><mo>±</mo><mn>2.67</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="\mathbf{76.77}_{\pm 2.86}" class="ltx_Math" display="inline" id="S3.T1.m12"><msub><mn mathvariant="bold">76.77</mn><mrow><mo>±</mo><mn>2.86</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="77.11_{\pm 1.52}" class="ltx_Math" display="inline" id="S3.T1.m13"><msub><mn>77.11</mn><mrow><mo>±</mo><mn>1.52</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">GNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">uwents2011neural</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="{80.49}_{\pm 0.81}" class="ltx_Math" display="inline" id="S3.T1.m14"><msub><mn>80.49</mn><mrow><mo>±</mo><mn>0.81</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t">-</td>
+<td class="ltx_td ltx_align_left ltx_border_t">-</td>
+<td class="ltx_td ltx_align_left ltx_border_t">-</td>
+<td class="ltx_td ltx_align_left ltx_border_t">-</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">RelNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">uwents2011neural</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="{87.77}_{\pm 2.48}" class="ltx_Math" display="inline" id="S3.T1.m15"><msub><mn>87.77</mn><mrow><mo>±</mo><mn>2.48</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">DGCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="85.83_{\pm 1.66}" class="ltx_Math" display="inline" id="S3.T1.m16"><msub><mn>85.83</mn><mrow><mo>±</mo><mn>1.66</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="58.59_{\pm 2.47}" class="ltx_Math" display="inline" id="S3.T1.m17"><msub><mn>58.59</mn><mrow><mo>±</mo><mn>2.47</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="75.54_{\pm 0.94}" class="ltx_Math" display="inline" id="S3.T1.m18"><msub><mn>75.54</mn><mrow><mo>±</mo><mn>0.94</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="74.44_{\pm 0.47}" class="ltx_Math" display="inline" id="S3.T1.m19"><msub><mn>74.44</mn><mrow><mo>±</mo><mn>0.47</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">PGC-DGCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tran2018filter</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="87.22_{\pm 1.43}" class="ltx_Math" display="inline" id="S3.T1.m20"><msub><mn>87.22</mn><mrow><mo>±</mo><mn>1.43</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="61.06_{\pm 1.83}" class="ltx_Math" display="inline" id="S3.T1.m21"><msub><mn>61.06</mn><mrow><mo>±</mo><mn>1.83</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="76.45_{\pm 1.02}" class="ltx_Math" display="inline" id="S3.T1.m22"><msub><mn>76.45</mn><mrow><mo>±</mo><mn>1.02</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="76.13_{\pm 0.73}" class="ltx_Math" display="inline" id="S3.T1.m23"><msub><mn>76.13</mn><mrow><mo>±</mo><mn>0.73</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">DCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tran2018filter</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="61.29_{\pm 1.60}" class="ltx_Math" display="inline" id="S3.T1.m24"><msub><mn>61.29</mn><mrow><mo>±</mo><mn>1.60</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="56.61_{\pm 1.04}" class="ltx_Math" display="inline" id="S3.T1.m25"><msub><mn>56.61</mn><mrow><mo>±</mo><mn>1.04</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">PSCN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tran2018filter</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="75.00_{\pm 2.51}" class="ltx_Math" display="inline" id="S3.T1.m26"><msub><mn>75.00</mn><mrow><mo>±</mo><mn>2.51</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="76.34_{\pm 1.68}" class="ltx_Math" display="inline" id="S3.T1.m27"><msub><mn>76.34</mn><mrow><mo>±</mo><mn>1.68</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">GK <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="81.39_{\pm 1.74}" class="ltx_Math" display="inline" id="S3.T1.m28"><msub><mn>81.39</mn><mrow><mo>±</mo><mn>1.74</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="55.65_{\pm 0.46}" class="ltx_Math" display="inline" id="S3.T1.m29"><msub><mn>55.65</mn><mrow><mo>±</mo><mn>0.46</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="71.39_{\pm 0.31}" class="ltx_Math" display="inline" id="S3.T1.m30"><msub><mn>71.39</mn><mrow><mo>±</mo><mn>0.31</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="62.49_{\pm 0.27}" class="ltx_Math" display="inline" id="S3.T1.m31"><msub><mn>62.49</mn><mrow><mo>±</mo><mn>0.27</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">DGK <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yanardag2015deep</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="82.66_{\pm 1.45}" class="ltx_Math" display="inline" id="S3.T1.m32"><msub><mn>82.66</mn><mrow><mo>±</mo><mn>1.45</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="57.32_{\pm 1.13}" class="ltx_Math" display="inline" id="S3.T1.m33"><msub><mn>57.32</mn><mrow><mo>±</mo><mn>1.13</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="71.68_{\pm 0.50}" class="ltx_Math" display="inline" id="S3.T1.m34"><msub><mn>71.68</mn><mrow><mo>±</mo><mn>0.50</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="62.48_{\pm 0.25}" class="ltx_Math" display="inline" id="S3.T1.m35"><msub><mn>62.48</mn><mrow><mo>±</mo><mn>0.25</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">RW <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="79.17_{\pm 2.07}" class="ltx_Math" display="inline" id="S3.T1.m36"><msub><mn>79.17</mn><mrow><mo>±</mo><mn>2.07</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="55.91_{\pm 0.32}" class="ltx_Math" display="inline" id="S3.T1.m37"><msub><mn>55.91</mn><mrow><mo>±</mo><mn>0.32</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="59.57_{\pm 0.09}" class="ltx_Math" display="inline" id="S3.T1.m38"><msub><mn>59.57</mn><mrow><mo>±</mo><mn>0.09</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">PK <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="76.00_{\pm 2.69}" class="ltx_Math" display="inline" id="S3.T1.m39"><msub><mn>76.00</mn><mrow><mo>±</mo><mn>2.69</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="59.50_{\pm 2.44}" class="ltx_Math" display="inline" id="S3.T1.m40"><msub><mn>59.50</mn><mrow><mo>±</mo><mn>2.44</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="81.00_{\pm 0.20}" class="ltx_Math" display="inline" id="S3.T1.m41"><msub><mn>81.00</mn><mrow><mo>±</mo><mn>0.20</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="73.68_{\pm 0.68}" class="ltx_Math" display="inline" id="S3.T1.m42"><msub><mn>73.68</mn><mrow><mo>±</mo><mn>0.68</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="82.54_{\pm 0.47}" class="ltx_Math" display="inline" id="S3.T1.m43"><msub><mn>82.54</mn><mrow><mo>±</mo><mn>0.47</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">WL <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="84.11_{\pm 1.91}" class="ltx_Math" display="inline" id="S3.T1.m44"><msub><mn>84.11</mn><mrow><mo>±</mo><mn>1.91</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="57.97_{\pm 2.49}" class="ltx_Math" display="inline" id="S3.T1.m45"><msub><mn>57.97</mn><mrow><mo>±</mo><mn>2.49</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="83.20_{\pm 0.20}" class="ltx_Math" display="inline" id="S3.T1.m46"><msub><mn>83.20</mn><mrow><mo>±</mo><mn>0.20</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="74.68_{\pm 0.49}" class="ltx_Math" display="inline" id="S3.T1.m47"><msub><mn>74.68</mn><mrow><mo>±</mo><mn>0.49</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="\mathbf{84.46}_{\pm 0.45}" class="ltx_Math" display="inline" id="S3.T1.m48"><msub><mn mathvariant="bold">84.46</mn><mrow><mo>±</mo><mn>0.45</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">KCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">nikolentzos2018kernel</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="62.94_{\pm 1.69}" class="ltx_Math" display="inline" id="S3.T1.m49"><msub><mn>62.94</mn><mrow><mo>±</mo><mn>1.69</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="75.76_{\pm 0.28}" class="ltx_Math" display="inline" id="S3.T1.m50"><msub><mn>75.76</mn><mrow><mo>±</mo><mn>0.28</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="77.21_{\pm 0.22}" class="ltx_Math" display="inline" id="S3.T1.m51"><msub><mn>77.21</mn><mrow><mo>±</mo><mn>0.22</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_bb">CGMM <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">bacciu2018contextual</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="{85.30}" class="ltx_Math" display="inline" id="S3.T1.m52"><mn>85.30</mn></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb">-</td>
+<td class="ltx_td ltx_align_left ltx_border_bb">-</td>
+<td class="ltx_td ltx_align_left ltx_border_bb">-</td>
+<td class="ltx_td ltx_align_left ltx_border_bb">-</td>
+</tr>
+</tbody>
+</table>
+<br class="ltx_break ltx_centering"/>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_border_tt"></td>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">IMDB-b</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">IMDB-m</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">REDDIT</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">COLLAB</th>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">FDGNN</td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{72.36}_{\pm 3.63}" class="ltx_Math" display="inline" id="S3.T1.m53"><msub><mn mathvariant="bold">72.36</mn><mrow><mo>±</mo><mn>3.63</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{50.03}_{\pm 1.25}" class="ltx_Math" display="inline" id="S3.T1.m54"><msub><mn mathvariant="bold">50.03</mn><mrow><mo>±</mo><mn>1.25</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="\mathbf{89.48}_{\pm 1.00}" class="ltx_Math" display="inline" id="S3.T1.m55"><msub><mn mathvariant="bold">89.48</mn><mrow><mo>±</mo><mn>1.00</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="74.44_{\pm 2.02}" class="ltx_Math" display="inline" id="S3.T1.m56"><msub><mn>74.44</mn><mrow><mo>±</mo><mn>2.02</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">FDGNN<math alttext="{}_{(L=1)}" class="ltx_Math" display="inline" id="S3.T1.m57"><msub><mi></mi><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msub></math>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="{71.79}_{\pm 3.37}" class="ltx_Math" display="inline" id="S3.T1.m58"><msub><mn>71.79</mn><mrow><mo>±</mo><mn>3.37</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="{49.34}_{\pm 1.70}" class="ltx_Math" display="inline" id="S3.T1.m59"><msub><mn>49.34</mn><mrow><mo>±</mo><mn>1.70</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="{87.74}_{\pm 1.61}" class="ltx_Math" display="inline" id="S3.T1.m60"><msub><mn>87.74</mn><mrow><mo>±</mo><mn>1.61</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="73.82_{\pm 2.32}" class="ltx_Math" display="inline" id="S3.T1.m61"><msub><mn>73.82</mn><mrow><mo>±</mo><mn>2.32</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">DGCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2018end</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="70.03_{\pm 0.86}" class="ltx_Math" display="inline" id="S3.T1.m62"><msub><mn>70.03</mn><mrow><mo>±</mo><mn>0.86</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="47.83_{\pm 0.85}" class="ltx_Math" display="inline" id="S3.T1.m63"><msub><mn>47.83</mn><mrow><mo>±</mo><mn>0.85</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t">-</td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="73.76_{\pm 0.49}" class="ltx_Math" display="inline" id="S3.T1.m64"><msub><mn>73.76</mn><mrow><mo>±</mo><mn>0.49</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">PGC-DGCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tran2018filter</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="71.62_{\pm 1.22}" class="ltx_Math" display="inline" id="S3.T1.m65"><msub><mn>71.62</mn><mrow><mo>±</mo><mn>1.22</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="47.25_{\pm 1.44}" class="ltx_Math" display="inline" id="S3.T1.m66"><msub><mn>47.25</mn><mrow><mo>±</mo><mn>1.44</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="\mathbf{75.00}_{\pm 0.58}" class="ltx_Math" display="inline" id="S3.T1.m67"><msub><mn mathvariant="bold">75.00</mn><mrow><mo>±</mo><mn>0.58</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">PSCN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tran2018filter</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="71.00_{\pm 2.29}" class="ltx_Math" display="inline" id="S3.T1.m68"><msub><mn>71.00</mn><mrow><mo>±</mo><mn>2.29</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="45.23_{\pm 2.84}" class="ltx_Math" display="inline" id="S3.T1.m69"><msub><mn>45.23</mn><mrow><mo>±</mo><mn>2.84</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left">-</td>
+<td class="ltx_td ltx_align_left"><math alttext="{72.60}_{\pm 2.15}" class="ltx_Math" display="inline" id="S3.T1.m70"><msub><mn>72.60</mn><mrow><mo>±</mo><mn>2.15</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">GK <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yanardag2015deep</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="65.87_{\pm 0.98}" class="ltx_Math" display="inline" id="S3.T1.m71"><msub><mn>65.87</mn><mrow><mo>±</mo><mn>0.98</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="43.89_{\pm 0.38}" class="ltx_Math" display="inline" id="S3.T1.m72"><msub><mn>43.89</mn><mrow><mo>±</mo><mn>0.38</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="77.34_{\pm 0.18}" class="ltx_Math" display="inline" id="S3.T1.m73"><msub><mn>77.34</mn><mrow><mo>±</mo><mn>0.18</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="72.84_{\pm 0.56}" class="ltx_Math" display="inline" id="S3.T1.m74"><msub><mn>72.84</mn><mrow><mo>±</mo><mn>0.56</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">DGK <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yanardag2015deep</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left"><math alttext="66.96_{\pm 0.56}" class="ltx_Math" display="inline" id="S3.T1.m75"><msub><mn>66.96</mn><mrow><mo>±</mo><mn>0.56</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="44.55_{\pm 0.52}" class="ltx_Math" display="inline" id="S3.T1.m76"><msub><mn>44.55</mn><mrow><mo>±</mo><mn>0.52</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="78.04_{\pm 0.39}" class="ltx_Math" display="inline" id="S3.T1.m77"><msub><mn>78.04</mn><mrow><mo>±</mo><mn>0.39</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="73.09_{\pm 0.25}" class="ltx_Math" display="inline" id="S3.T1.m78"><msub><mn>73.09</mn><mrow><mo>±</mo><mn>0.25</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_bb">KCNN <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">nikolentzos2018kernel</span>]</cite>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="71.45_{\pm 0.15}" class="ltx_Math" display="inline" id="S3.T1.m79"><msub><mn>71.45</mn><mrow><mo>±</mo><mn>0.15</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="47.46_{\pm 0.21}" class="ltx_Math" display="inline" id="S3.T1.m80"><msub><mn>47.46</mn><mrow><mo>±</mo><mn>0.21</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="81.85_{\pm 0.12}" class="ltx_Math" display="inline" id="S3.T1.m81"><msub><mn>81.85</mn><mrow><mo>±</mo><mn>0.12</mn></mrow></msub></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="74.93_{\pm 0.14}" class="ltx_Math" display="inline" id="S3.T1.m82"><msub><mn>74.93</mn><mrow><mo>±</mo><mn>0.14</mn></mrow></msub></math></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Depth of FDGNN configurations selected by the nested cross validation process. Results are averaged (and std are computed) on the outer 10 folds.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Task</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"># of layers</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">MUTAG</th>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="3.2_{\pm 1.0}" class="ltx_Math" display="inline" id="S3.T2.m1"><msub><mn>3.2</mn><mrow><mo>±</mo><mn>1.0</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PTC</th>
+<td class="ltx_td ltx_align_left"><math alttext="1.0_{\pm 0.0}" class="ltx_Math" display="inline" id="S3.T2.m2"><msub><mn>1.0</mn><mrow><mo>±</mo><mn>0.0</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">COX2</th>
+<td class="ltx_td ltx_align_left"><math alttext="2.7_{\pm 0.8}" class="ltx_Math" display="inline" id="S3.T2.m3"><msub><mn>2.7</mn><mrow><mo>±</mo><mn>0.8</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PROTEINS</th>
+<td class="ltx_td ltx_align_left"><math alttext="1.0_{\pm 0.0}" class="ltx_Math" display="inline" id="S3.T2.m4"><msub><mn>1.0</mn><mrow><mo>±</mo><mn>0.0</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">NCI1</th>
+<td class="ltx_td ltx_align_left"><math alttext="3.8_{\pm 0.6}" class="ltx_Math" display="inline" id="S3.T2.m5"><msub><mn>3.8</mn><mrow><mo>±</mo><mn>0.6</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">IMDB-b</th>
+<td class="ltx_td ltx_align_left"><math alttext="3.2_{\pm 1.2}" class="ltx_Math" display="inline" id="S3.T2.m6"><msub><mn>3.2</mn><mrow><mo>±</mo><mn>1.2</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">IMDB-m</th>
+<td class="ltx_td ltx_align_left"><math alttext="4.4_{\pm 0.8}" class="ltx_Math" display="inline" id="S3.T2.m7"><msub><mn>4.4</mn><mrow><mo>±</mo><mn>0.8</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">REDDIT</th>
+<td class="ltx_td ltx_align_left"><math alttext="3.0_{\pm 0.0}" class="ltx_Math" display="inline" id="S3.T2.m8"><msub><mn>3.0</mn><mrow><mo>±</mo><mn>0.0</mn></mrow></msub></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">COLLAB</th>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="4.5_{\pm 0.8}" class="ltx_Math" display="inline" id="S3.T2.m9"><msub><mn>4.5</mn><mrow><mo>±</mo><mn>0.8</mn></mrow></msub></math></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S3.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>Running times required by FDGNN (in single core mode, without GPU acceleration). Results are averaged (and std are computed) on the outer 10 folds.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Task</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">Training</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">Test</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">MUTAG</th>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="0.56^{\prime\prime}_{\pm 0.33}" class="ltx_Math" display="inline" id="S3.T3.m1"><msubsup><mn>0.56</mn><mrow><mo>±</mo><mn>0.33</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left ltx_border_t"><math alttext="0.06^{\prime\prime}_{\pm 0.04}" class="ltx_Math" display="inline" id="S3.T3.m2"><msubsup><mn>0.06</mn><mrow><mo>±</mo><mn>0.04</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PTC</th>
+<td class="ltx_td ltx_align_left"><math alttext="0.16^{\prime\prime}_{\pm 0.03}" class="ltx_Math" display="inline" id="S3.T3.m3"><msubsup><mn>0.16</mn><mrow><mo>±</mo><mn>0.03</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="0.02^{\prime\prime}_{\pm 0.00}" class="ltx_Math" display="inline" id="S3.T3.m4"><msubsup><mn>0.02</mn><mrow><mo>±</mo><mn>0.00</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">COX2</th>
+<td class="ltx_td ltx_align_left"><math alttext="1.36^{\prime\prime}_{\pm 0.42}" class="ltx_Math" display="inline" id="S3.T3.m5"><msubsup><mn>1.36</mn><mrow><mo>±</mo><mn>0.42</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="0.15^{\prime\prime}_{\pm 0.05}" class="ltx_Math" display="inline" id="S3.T3.m6"><msubsup><mn>0.15</mn><mrow><mo>±</mo><mn>0.05</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">PROTEINS</th>
+<td class="ltx_td ltx_align_left"><math alttext="2.16^{\prime\prime}_{\pm 0.47}" class="ltx_Math" display="inline" id="S3.T3.m7"><msubsup><mn>2.16</mn><mrow><mo>±</mo><mn>0.47</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="0.24^{\prime\prime}_{\pm 0.04}" class="ltx_Math" display="inline" id="S3.T3.m8"><msubsup><mn>0.24</mn><mrow><mo>±</mo><mn>0.04</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">NCI1</th>
+<td class="ltx_td ltx_align_left"><math alttext="2.00^{\prime}_{\pm 0.45}" class="ltx_Math" display="inline" id="S3.T3.m9"><msubsup><mn>2.00</mn><mrow><mo>±</mo><mn>0.45</mn></mrow><mo>′</mo></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="13.36^{\prime\prime}_{\pm 3.02}" class="ltx_Math" display="inline" id="S3.T3.m10"><msubsup><mn>13.36</mn><mrow><mo>±</mo><mn>3.02</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">IMDB-b</th>
+<td class="ltx_td ltx_align_left"><math alttext="7.46^{\prime\prime}_{\pm 3.14}" class="ltx_Math" display="inline" id="S3.T3.m11"><msubsup><mn>7.46</mn><mrow><mo>±</mo><mn>3.14</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="0.83^{\prime\prime}_{\pm 0.35}" class="ltx_Math" display="inline" id="S3.T3.m12"><msubsup><mn>0.83</mn><mrow><mo>±</mo><mn>0.35</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">IMDB-m</th>
+<td class="ltx_td ltx_align_left"><math alttext="8.68^{\prime\prime}_{\pm 1.73}" class="ltx_Math" display="inline" id="S3.T3.m13"><msubsup><mn>8.68</mn><mrow><mo>±</mo><mn>1.73</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="0.98^{\prime\prime}_{\pm 0.22}" class="ltx_Math" display="inline" id="S3.T3.m14"><msubsup><mn>0.98</mn><mrow><mo>±</mo><mn>0.22</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row">REDDIT</th>
+<td class="ltx_td ltx_align_left"><math alttext="2.47^{\prime}_{\pm 0.01}" class="ltx_Math" display="inline" id="S3.T3.m15"><msubsup><mn>2.47</mn><mrow><mo>±</mo><mn>0.01</mn></mrow><mo>′</mo></msubsup></math></td>
+<td class="ltx_td ltx_align_left"><math alttext="16.49^{\prime\prime}_{\pm 0.28}" class="ltx_Math" display="inline" id="S3.T3.m16"><msubsup><mn>16.49</mn><mrow><mo>±</mo><mn>0.28</mn></mrow><mi>′′</mi></msubsup></math></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">COLLAB</th>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="22.86^{\prime}_{\pm 4.70}" class="ltx_Math" display="inline" id="S3.T3.m17"><msubsup><mn>22.86</mn><mrow><mo>±</mo><mn>4.70</mn></mrow><mo>′</mo></msubsup></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb"><math alttext="2.54^{\prime}_{\pm 0.52}" class="ltx_Math" display="inline" id="S3.T3.m18"><msubsup><mn>2.54</mn><mrow><mo>±</mo><mn>0.52</mn></mrow><mo>′</mo></msubsup></math></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S3.T4">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>Comparison of training times required on MUTAG by FDGNN, GNN, GIN and WL. Results are averaged (and std are computed) on the outer 10 folds.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">FDGNN</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">GNN</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">GIN</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt">WL</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t"><math alttext="\mathbf{0.56^{\prime\prime}}_{\pm 0.33}" class="ltx_Math" display="inline" id="S3.T4.m1"><mmultiscripts><mn mathvariant="bold">0.56</mn><none></none><mi>′′</mi><mrow><mo>±</mo><mn>0.33</mn></mrow><none></none></mmultiscripts></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t"><math alttext="202.28^{\prime\prime}_{\pm 166.87}" class="ltx_Math" display="inline" id="S3.T4.m2"><msubsup><mn>202.28</mn><mrow><mo>±</mo><mn>166.87</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t"><math alttext="499.24^{\prime\prime}_{\pm 2.25}" class="ltx_Math" display="inline" id="S3.T4.m3"><msubsup><mn>499.24</mn><mrow><mo>±</mo><mn>2.25</mn></mrow><mi>′′</mi></msubsup></math></td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t"><math alttext="{1.16^{\prime\prime}}_{\pm 0.03}" class="ltx_Math" display="inline" id="S3.T4.m4"><mmultiscripts><mn>1.16</mn><none></none><mi>′′</mi><mrow><mo>±</mo><mn>0.03</mn></mrow><none></none></mmultiscripts></math></td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+</section>
+</section>
+</article>
+</div>
+</div>
+</body>

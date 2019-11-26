@@ -1,0 +1,456 @@
+<head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+  <link href="https://media.arxiv-vanity.com/render-output/1657153/index.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/static/css/feedback.66d4b7e27124.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<section class="ltx_section" id="S6">
+<section class="ltx_subsection" id="S6.SS1">
+
+
+<figure class="ltx_table" id="S4.T3">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span class="ltx_text" style="font-size:90%;">Dataset</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span class="ltx_text" style="font-size:90%;">#Rel</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span class="ltx_text" style="font-size:90%;">#Ent</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span class="ltx_text" style="font-size:90%;">#Train</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span class="ltx_text" style="font-size:90%;">#Valid</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span class="ltx_text" style="font-size:90%;">#Test</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_t"><span class="ltx_text" style="font-size:90%;">FB15K</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_t"><span class="ltx_text" style="font-size:90%;">1,345</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">14,951</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">483,142</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">50,000</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">59,071</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row"><span class="ltx_text" style="font-size:90%;">FB15K-237</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row"><span class="ltx_text" style="font-size:90%;">237</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">14,541</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">272,115</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">17,535</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">20,466</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row"><span class="ltx_text" style="font-size:90%;">WN18</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row"><span class="ltx_text" style="font-size:90%;">18</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">40,943</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">141,442</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">5,000</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">5,000</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb"><span class="ltx_text" style="font-size:90%;">NELL-995</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb"><span class="ltx_text" style="font-size:90%;">200</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb"><span class="ltx_text" style="font-size:90%;">75,492</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb"><span class="ltx_text" style="font-size:90%;">123,370</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb"><span class="ltx_text" style="font-size:90%;">15,000</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb"><span class="ltx_text" style="font-size:90%;">15,838</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 3: </span>Statistics of datasets used in the experiments. Rel denotes relation and Ent denotes entity.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T5">
+<table class="ltx_tabular ltx_centering ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" rowspan="2"><span class="ltx_text" style="font-size:90%;">Models</span></td>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">MR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span class="ltx_text" style="font-size:90%;">MRR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">Hits@ 10(%)</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">raw</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">filtered</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">filtered</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">raw</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">filtered</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">TransE</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">243</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">125</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">34.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">47.1</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">TransH</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">212</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">87</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">45.7</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">64.4</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">TransR</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">198</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">77</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">48.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">68.7</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">STransE</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">219</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">69</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.543</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">51.6</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">79.7</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">R-GCN+</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.696</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">84.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">KB-LRN</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">44</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">0.794</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">87.5</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">ConvE</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">51</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.657</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">83.1</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">PTransE</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">200</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">54</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.679</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">51.8</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">83.4</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">DPTransE</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">191</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">51</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_font_bold" style="font-size:90%;">58.1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">88.5</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">KALE</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.523</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">76.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">RUGE</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">191</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">71</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.768</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">54.3</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">86.5</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">RPJE</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">186</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">40</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">0.816</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">55.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">90.3</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 5: </span>Link prediction results on FB15K. The missing values indicate the scores not reported in the original work. The best score is in <span class="ltx_text ltx_font_bold">bold</span>, and the second best in <span class="ltx_text ltx_framed_underline">underline</span>.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T6">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_tt" rowspan="2"><span class="ltx_text" style="font-size:90%;">Models</span></th>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_tt" colspan="4"><span class="ltx_text" style="font-size:90%;">Head Entities Prediction (Hits@10)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_tt" colspan="4"><span class="ltx_text" style="font-size:90%;">Tail Entities Prediction (Hits@10)</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">1-1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">1-N</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">N-1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">N-N</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">1-1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">1-N</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">N-1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">N-N</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">TransE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">35.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">62.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">17.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">37.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">34.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">14.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">68.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">41.3</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">TransH</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">66.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">87.6</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">28.7</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">64.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">65.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">39.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">83.3</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">67.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">TransR</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">78.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">89.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">34.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">69.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">79.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">37.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">90.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">72.1</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">STransE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">82.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">94.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">50.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">80.1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">82.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">56.9</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">93.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">83.1</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">TEKE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">78.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">89.3</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">54.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">81.7</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">79.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">59.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">90.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">83.5</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">TransG</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">93.0</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">96.0</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">62.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">86.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">92.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">68.1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">94.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">88.8</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">PTransE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">91.0</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">92.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">60.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">83.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">91.2</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">74.0</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">88.9</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">86.4</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">DPTransE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">92.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">95.0</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">58.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">86.6</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">93.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">71.1</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">93.9</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">88.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">RPJE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">94.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">96.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">70.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">91.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">94.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">83.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">95.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">93.3</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 6: </span>Link prediction results on FB15K by mapping properties of relations (%) with filtered setting.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T7">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" rowspan="2"><span class="ltx_text" style="font-size:90%;">Models</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">MR</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">Hits@1(%)</span></th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">raw</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r"><span class="ltx_text" style="font-size:90%;">filtered</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">raw</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">filtered</span></th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">TransE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">2.79</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">2.43</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">68.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">87.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">PTransE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">1.81</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">1.35</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">69.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">93.6</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">RUGE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">2.47</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">2.22</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">68.8</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">87.0</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">RPJE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">1.68</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">1.24</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">70.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">95.3</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 7: </span>Relation prediction results on FB15K. We use Hits@1 for better comparison because Hits@10 of all the models exceed 95%.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T8">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_tt"><span class="ltx_text" style="font-size:90%;">Models</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_tt"><span class="ltx_text" style="font-size:90%;">MR</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span class="ltx_text" style="font-size:90%;">MRR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt"><span class="ltx_text" style="font-size:90%;">Hits@10(%)</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">TransE</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">347</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.294</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">46.4</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">R-GCN+</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">-</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.249</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">41.7</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">KB-LRN</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">209</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.309</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">49.3</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">ConvE</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">246</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.316</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">41.7</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">PTransE</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">302</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">0.363</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text ltx_framed_underline" style="font-size:90%;">52.6</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">RUGE</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">488</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">0.164</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">34.9</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">RPJE</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">207</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">0.470</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">62.5</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 8: </span>Link prediction results on FB15K-237.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T9">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" rowspan="2"><span class="ltx_text" style="font-size:90%;">Models</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">WN18</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2"><span class="ltx_text" style="font-size:90%;">NELL-995</span></th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">MRR</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r"><span class="ltx_text" style="font-size:90%;">Hits@10(%)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">MRR</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column"><span class="ltx_text" style="font-size:90%;">Hits@10(%)</span></th>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">TransE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.495</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">93.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">0.219</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t"><span class="ltx_text" style="font-size:90%;">35.2</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">PTransE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">0.890</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">94.5</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">0.304</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">43.7</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r"><span class="ltx_text" style="font-size:90%;">RUGE</span></th>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">0.943</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text" style="font-size:90%;">94.4</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">0.318</span></td>
+<td class="ltx_td ltx_align_center"><span class="ltx_text" style="font-size:90%;">43.3</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text" style="font-size:90%;">RPJE</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">0.946</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">95.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">0.361</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t"><span class="ltx_text ltx_font_bold" style="font-size:90%;">50.1</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 9: </span>Link prediction results on WN18 and NELL-995.</figcaption>
+</figure>
+
+
+</section>
+</section>
+</article>
+</div>
+</div>
+</body>

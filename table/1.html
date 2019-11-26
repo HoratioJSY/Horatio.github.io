@@ -13,114 +13,61 @@
 <section class="ltx_subsection" id="S6.SS1">
 
 
-<figure class="ltx_table" id="S4.T2">
-<table class="ltx_tabular ltx_centering ltx_align_middle">
-<tbody class="ltx_tbody">
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Model</td>
-<td class="ltx_td ltx_align_center ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Test PPL</td>
-<td class="ltx_td ltx_align_right ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Hardware</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Sigmoid-RNN-2048 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Ji et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1511.06909/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2015</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">68.3</td>
-<td class="ltx_td ltx_align_right ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">1 CPU</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Interpolated KN 5-Gram <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Chelba et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1312.3005/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2013</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">67.6</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">100 CPUs</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">Sparse Non-Negative Matrix LM <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Shazeer et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1412.1454/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2014</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">52.9</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">-</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">RNN-1024 + MaxEnt 9 Gram Features <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Chelba et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1312.3005/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2013</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">51.3</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">24 GPUs</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">LSTM-2048-512 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Jozefowicz et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1602.02410/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2016</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">43.7</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">32 GPUs</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">2-layer LSTM-8192-1024 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Jozefowicz et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1602.02410/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2016</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">30.6</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">32 GPUs</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">BIG GLSTM-G4 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Kuchaiev &amp; Ginsburg</span>, <a class="ltx_ref ltx_engrafo_tooltip" href="/papers/1703.10722/" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2017</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">23.3<span class="ltx_note ltx_role_footnotemark" id="footnotex1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">1</span></span></span><sup class="ltx_engrafo_note_mark_tooltip ltx_engrafo_tooltip" tabindex="0">1</sup></span>
-</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">8 GPUs</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">LSTM-2048 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Grave et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip engrafo_not_a_link" href="#bib.bib8" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2016a</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">43.9</td>
-<td class="ltx_td ltx_align_right ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">1 GPU</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">2-layer LSTM-2048 <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_text" style="font-size:90%;">Grave et al.</span>, <a class="ltx_ref ltx_engrafo_tooltip engrafo_not_a_link" href="#bib.bib8" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2016a</span></a>)</cite>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">39.8</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">1 GPU</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">GCNN-13</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">38.1</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">1 GPU</td>
-</tr>
-<tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">GCNN-14 <span class="ltx_text" style="font-size:90%;">Bottleneck</span>
-</td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">31.9</td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">8 GPUs</td>
-</tr>
-</tbody>
-</table>
-<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Results on the Google Billion Word test set. The GCNN outperforms the LSTMs with the same output approximation.</figcaption>
-</figure>
-<figure class="ltx_table" id="S5.T3">
+<figure class="ltx_table" id="S4.T1">
 <table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
 <thead class="ltx_thead">
 <tr class="ltx_tr">
-<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">Model</span></th>
-<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">Test PPL</span></th>
-<th class="ltx_td ltx_align_right ltx_th ltx_th_column ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">Hardware</span></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Accuracy</th>
 </tr>
 </thead>
 <tbody class="ltx_tbody">
 <tr class="ltx_tr">
-<td class="ltx_td ltx_align_left ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;">
-<span class="ltx_text" style="font-size:90%;">LSTM-1024 </span><cite class="ltx_cite ltx_citemacro_citep"><span class="ltx_text" style="font-size:90%;">(</span><span class="ltx_text" style="font-size:90%;">Grave et al.</span><span class="ltx_text" style="font-size:90%;">, </span><a class="ltx_ref ltx_engrafo_tooltip engrafo_not_a_link" href="#bib.bib9" target="_blank" title=""><span class="ltx_text" style="font-size:90%;">2016b</span></a><span class="ltx_text" style="font-size:90%;">)</span></cite>
-</td>
-<td class="ltx_td ltx_align_center ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">48.7</span></td>
-<td class="ltx_td ltx_align_right ltx_border_t" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">1 GPU</span></td>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Clean</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">63.1%</td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">GCNN-8</span></td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">44.9</span></td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">1 GPU</span></td>
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Adversarial (style)</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">21.7%</td>
 </tr>
 <tr class="ltx_tr">
-<td class="ltx_td ltx_align_left" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">GCNN-14</span></td>
-<td class="ltx_td ltx_align_center" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">37.2</span></td>
-<td class="ltx_td ltx_align_right" style="padding-top:1.388888888888889px;padding-bottom:1.388888888888889px;"><span class="ltx_text" style="font-size:90%;">4 GPUs</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">Adversarial (noise)</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">37.8%</td>
 </tr>
 </tbody>
 </table>
-<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table 3: </span>Results for single models on the WikiText-103 dataset.</figcaption>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Accuracy of a certified classifier equipped with randomized smoothing on adversarial images.
+</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T2">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Adv. Trained</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Original</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Clean</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">87.6%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">87.7%</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Adversarial (noise)</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">81.2%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">0.0%</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">Adversarial (style)</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">76.9%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">0.0%</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 2: </span>Accuracy of adversarially trained and original classifiers on clean and adversarial test images.
+</figcaption>
 </figure>
 
 
