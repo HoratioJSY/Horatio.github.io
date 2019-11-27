@@ -129,7 +129,7 @@
 <!-- Content -->
 <p>「在2018年上映的4K电影都有哪些啊，都是什么类型的呢？」——机器能理解这样的自然语言，并从表格中检索出答案吗？</p>
 <h3 id="什么是-Nature-Language-To-SQL"><a href="#什么是-Nature-Language-To-SQL" class="headerlink" title="什么是 Nature Language To SQL"></a>什么是 Nature Language To SQL</h3><p>顾名思义，Nature Language To SQL 就是将自然语言转化为 SQL 查询语句，从而检索需要的信息。本质上它是将自然语言转化为机器语言，从而执行某些特殊的任务。该任务的重点即能解析自然语言的语义，并将这些语义编码为计算机能理解并执行的语句。</p>
-<p>其实之前也有很多类似的研究，例如将 GUI 界面转化为形式化代码、学会编辑源代码等等。虽然它们有很多差异，但都尝试利用深度网络抽取图像或文本的语义信息，并根据这些语义信息生成对应代码。</p>
+<p>​    ，例如将 GUI 界面转化为形式化代码、学会编辑源代码等等。虽然它们有很多差异，但都尝试利用深度网络抽取图像或文本的语义信息，并根据这些语义信息生成对应代码。</p>
 <p>所以不论是自然语言转 Python 还是 C++代码，它们与 NL2SQL 的思想都是相同的，下面我们可以通过简单的案例看看到底 NL2SQL 能干什么。如下我们有一张表，我们可以从中推断出很多信息，例如我们可以算出「不同型号的宝马总共卖了多少辆？」。</p>
 <p><div align="center"><img src="https://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Nl2SQL/nl2sql_1.png" style="zoom:35%"></div><br>一张表确实容易看出来，但若是数千张表组成的数据库呢，这就需要 SQL 语言来帮忙了。我们可以将如上询问手动写成相应的 SQL 表达式：「SELECT SUM(销量) FROM TABLE WHERE 品牌==”宝马”;」，从而得到答案「8」。但这种方式要求我们会 SQL 语句，且一种查询就要写一条表达式。</p>
 <p>而 NL2SQL 做的，就是希望能自动化这一过程，希望结合用户想要查询的表格，将用户的问句转化为相应的 SQL 语句。</p>
@@ -207,7 +207,7 @@
 
 
 <div class="tags">
-    <a href="/tags/Transformer/" class="button small">Transformer</a> <a href="/tags/序列建模/" class="button small">序列建模</a> <a href="/tags/生成模型/" class="button small">生成模型</a>
+    <a href="/tags/生成模型/" class="button small">生成模型</a> <a href="/tags/Transformer/" class="button small">Transformer</a> <a href="/tags/序列建模/" class="button small">序列建模</a>
 </div>
 
 
