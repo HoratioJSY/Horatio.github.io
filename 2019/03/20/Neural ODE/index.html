@@ -197,7 +197,7 @@
 <p>除了计算过程不一样，陈天琦等研究者还在 MNSIT 测试了这两种模型的效果。他们使用带有 6 个残差模块的 ResNet，以及使用一个 ODE Solver 代替这些残差模块的 ODEnet。以下展示了不同网络在 MNSIT 上的效果、参数量、内存占用量和计算复杂度。</p>
 <div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_5.png" style="zoom:60%"></div>
 
-<p>其中单个隐藏层的 MLP 引用自 LeCun 在 1998 年的研究，其隐藏层只有 300 个神经元，但是 ODEnet 在有相似参数量的情况下能获得显著更好的结果。上表中 $L$ 表示神经网络的层级数，$\tilde{L}​$ 表示 ODE Solver 中的评估次数，它可以近似代表 ODEnet 的「层级深度」。值得注意的是，ODEnet 只有常数级的内存占用，这表示不论层级的深度如何增加，它的内存占用基本不会有太大的变化。</p>
+<p>其中单个隐藏层的 MLP 引用自 LeCun 在 1998 年的研究，其隐藏层只有 300 个神经元，但是 ODEnet 在有相似参数量的情况下能获得显著更好的结果。上表中 $L$ 表示神经网络的层级数，$\tilde{L}$ 表示 ODE Solver 中的评估次数，它可以近似代表 ODEnet 的「层级深度」。值得注意的是，ODEnet 只有常数级的内存占用，这表示不论层级的深度如何增加，它的内存占用基本不会有太大的变化。</p>
 <h3 id="神经常微分方程"><a href="#神经常微分方程" class="headerlink" title="神经常微分方程"></a>神经常微分方程</h3><p>在与 ResNet 的类比中，我们基本上已经了解了 ODEnet 的前向传播过程。首先输入数据 $Z(t_0)$，我们可以通过一个连续的转换函数（神经网络）对输入进行非线性变换，从而得到 $f$。随后 ODESolver 对 $f$ 进行积分，再加上初值就可以得到最后的推断结果。如下所示，残差网络只不过是用一个离散的残差连接代替 ODE Solver。</p>
 <div align="center"><img src="http://horatio-jsy.oss-cn-beijing.aliyuncs.com/site_img/Neural_ODE/N_ODE_6.png" style="zoom:60%"></div>
 
@@ -255,7 +255,7 @@
 
 
 <div class="tags">
-    <a href="/tags/生成模型/" class="button small">生成模型</a> <a href="/tags/卷积神经网络/" class="button small">卷积神经网络</a>
+    <a href="/tags/卷积神经网络/" class="button small">卷积神经网络</a> <a href="/tags/生成模型/" class="button small">生成模型</a>
 </div>
 
 
@@ -305,8 +305,10 @@
             </ul>
         </section>
         <ul class="copyright">
+            <li>Share with friends' Blog</li>
+            <li><a style="text-decoration:none;" href="https://blog.hangcheers.cn" >Yang Hang's Blog</a></li>
+            <li><a style="text-decoration:none;" href="https://wukong1995.github.io" >Wang Pei Pei's Blog</a></li>
             <li>&copy; Siyuan All rights reserved</li>
-            <li>Design: Horatio</li>
         </ul>
     </div>
 </footer>
@@ -314,7 +316,7 @@
 
     <!-- After footer scripts -->
     <script type="text/javascript"
-color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+color="139,129,80" opacity='0.4' zIndex="-2" count="10" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 
 <!-- jQuery -->
 <script src="/js/jquery.min.js"></script>
@@ -355,7 +357,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax -->
+<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 <!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
@@ -373,7 +375,7 @@ color="139,129,80" opacity='0.4' zIndex="-2" count="20" src="//cdn.bootcss.com/c
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- End: Injected MathJax --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- End: Injected MathJax -->
 </body>
 
 </html>
